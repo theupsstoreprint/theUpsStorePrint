@@ -515,3 +515,388 @@ body.landing .store-hours p {
     padding: 25px;
   }
 }
+
+/* =========================================
+   THE UPS STORE PRINT — CLEAN & CLASSIC
+   Shared color theme for every page
+   ========================================= */
+
+:root {
+  --ink: #351c15;
+  --muted: #756b65;
+  --gold: #ffb500;
+  --line: #e8e0d8;
+  --cream: #faf7f2;
+  --paper: #f7f4ef;
+
+  --brand-brown: #351c15;
+  --brand-yellow: #ffb500;
+  --soft-yellow: #fff4d5;
+}
+
+/* Shared page colors */
+
+body.landing,
+body.collection-page {
+  --ink: #351c15;
+  --muted: #756b65;
+  --gold: #ffb500;
+  --line: #e8e0d8;
+  --cream: #faf7f2;
+  --paper: #f7f4ef;
+
+  background: #ffffff;
+  color: var(--ink);
+}
+
+body.landing h1,
+body.landing h2,
+body.landing h3,
+body.collection-page h1,
+body.collection-page h2,
+body.collection-page h3 {
+  color: var(--ink);
+}
+
+/* Header */
+
+body.landing .site-header,
+body.collection-page .site-header {
+  background: #ffffff;
+  border-bottom: 2px solid var(--brand-yellow);
+}
+
+body.landing .site-header .brand,
+body.collection-page .site-header .brand {
+  color: var(--brand-brown);
+}
+
+body.landing .site-header .brand small,
+body.collection-page .site-header .brand small {
+  color: var(--muted);
+}
+
+/* Navigation */
+
+body.landing .site-nav a,
+body.collection-page .site-nav a {
+  color: var(--brand-brown);
+  border-bottom-color: transparent;
+}
+
+body.landing .site-nav a:hover,
+body.landing .site-nav a[aria-current="page"],
+body.collection-page .site-nav a:hover,
+body.collection-page .site-nav a[aria-current="page"] {
+  color: var(--brand-brown);
+  border-bottom-color: var(--brand-yellow);
+}
+
+body.landing .nav-toggle,
+body.collection-page .nav-toggle {
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: var(--brand-brown);
+}
+
+/* Small headings and design numbers */
+
+body.landing .eyebrow,
+body.collection-page .eyebrow {
+  color: var(--brand-brown);
+}
+
+body.collection-page .code {
+  color: var(--muted);
+}
+
+body.landing .available,
+body.landing .arrow,
+body.collection-page .step b {
+  color: var(--brand-brown);
+}
+
+/* Landing-page hero */
+
+body.landing .hero {
+  background: #ffffff;
+}
+
+body.landing .hero-art {
+  background: #f6f2ea;
+}
+
+body.landing .hero-art::before {
+  background: #ece5d8;
+}
+
+body.landing .hero-caption {
+  color: var(--muted);
+}
+
+/* Main call to action */
+
+body.landing .cta {
+  background: var(--brand-yellow);
+  color: var(--brand-brown);
+  border-radius: 5px;
+  font-weight: 700;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+body.landing .cta:hover {
+  background: #efaa00;
+  transform: translateY(-1px);
+}
+
+/* Category section */
+
+body.landing .section-head {
+  border-top-color: var(--line);
+}
+
+body.landing .collection {
+  color: var(--brand-brown);
+}
+
+body.landing .collection .art {
+  border-radius: 5px;
+}
+
+body.landing .collection:hover .label-row h3 {
+  text-decoration: underline;
+  text-decoration-color: var(--brand-yellow);
+  text-underline-offset: 5px;
+}
+
+/* Neutral category backgrounds.
+   The stationery artwork keeps its own colors. */
+
+body.landing .art-wedding,
+body.landing .art-baby,
+body.landing .art-kids,
+body.landing .art-sweet,
+body.landing .art-sympathy,
+body.landing .art-banners {
+  background: var(--paper);
+}
+
+/* Collection filters */
+
+body.collection-page .toolbar {
+  border-top-color: var(--line);
+}
+
+body.collection-page .filter {
+  background: #ffffff;
+  color: var(--brand-brown);
+  border-color: var(--line);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+body.collection-page .filter:hover {
+  background: var(--soft-yellow);
+  border-color: var(--brand-yellow);
+}
+
+body.collection-page .filter.active,
+body.collection-page .filter[aria-pressed="true"] {
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: var(--brand-brown);
+}
+
+/* Design cards */
+
+body.collection-page .image-button {
+  background: var(--paper);
+  border-radius: 5px;
+}
+
+body.collection-page .zoom {
+  background: #ffffff;
+  color: var(--brand-brown);
+  box-shadow: 0 2px 12px #351c1512;
+}
+
+body.collection-page .image-button:hover .zoom {
+  background: var(--brand-yellow);
+}
+
+body.collection-page .view {
+  color: var(--brand-brown);
+  border-bottom-color: var(--brand-yellow);
+}
+
+body.collection-page .view:hover {
+  border-bottom-width: 2px;
+}
+
+/* Pricing */
+
+body.collection-page .pricing {
+  border-top-color: var(--line);
+}
+
+body.collection-page .pricing-heading,
+body.collection-page .poster-price {
+  color: var(--brand-brown);
+}
+
+body.collection-page .price-tiers th,
+body.collection-page .price-tiers td {
+  border-bottom-color: var(--line);
+}
+
+body.collection-page .size-option {
+  background: #ffffff;
+  border-color: #d8cbbd;
+  color: var(--brand-brown);
+}
+
+body.collection-page .size-option:hover {
+  background: var(--soft-yellow);
+  border-color: var(--brand-yellow);
+}
+
+body.collection-page .size-option[aria-pressed="true"] {
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: var(--brand-brown);
+}
+
+/* Ordering instructions */
+
+body.landing .how,
+body.collection-page .order {
+  background: var(--cream);
+  border-top: 2px solid var(--brand-yellow);
+}
+
+body.landing .steps small,
+body.collection-page .step b {
+  color: var(--brand-brown);
+}
+
+/* Store information */
+
+body.landing .store-info {
+  border-top-color: var(--brand-yellow);
+}
+
+body.landing .store-contact a {
+  color: var(--brand-brown);
+  text-decoration-color: var(--brand-yellow);
+}
+
+body.landing .store-hours {
+  background: var(--cream);
+  border-top: 3px solid var(--brand-yellow);
+  border-radius: 5px;
+}
+
+body.landing .store-hours dl > div {
+  border-bottom-color: var(--line);
+}
+
+body.landing .store-button {
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: var(--brand-brown);
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+body.landing .store-button:hover {
+  background: #efaa00;
+  border-color: #efaa00;
+  opacity: 1;
+}
+
+body.landing .store-button-outline {
+  background: #ffffff;
+  border-color: var(--brand-brown);
+  color: var(--brand-brown);
+}
+
+body.landing .store-button-outline:hover {
+  background: var(--cream);
+  border-color: var(--brand-brown);
+}
+
+/* Expanded previews */
+
+body.collection-page dialog {
+  background: #ffffff;
+  color: var(--brand-brown);
+  border-radius: 6px;
+}
+
+body.collection-page dialog::backdrop {
+  background: #351c1599;
+}
+
+body.collection-page .modal-head {
+  border-bottom: 1px solid var(--line);
+}
+
+body.collection-page .modal-body img {
+  background: var(--paper);
+}
+
+body.collection-page .close {
+  background: #ffffff;
+  border-color: var(--line);
+  color: var(--brand-brown);
+}
+
+body.collection-page .close:hover {
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+}
+
+body.collection-page .badge {
+  background: var(--cream);
+  border-color: var(--line);
+  color: var(--brand-brown);
+}
+
+/* Footer */
+
+body.landing footer,
+body.collection-page footer {
+  background: #ffffff;
+  border-top: 2px solid var(--brand-yellow);
+  color: var(--muted);
+}
+
+/* Keyboard accessibility */
+
+body.landing :focus-visible,
+body.collection-page :focus-visible {
+  outline: 3px solid var(--brand-brown);
+  outline-offset: 4px;
+}
+
+/* Mobile navigation */
+
+@media (max-width: 1100px) {
+  body.landing .site-nav,
+  body.collection-page .site-nav {
+    border-top-color: var(--line);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.landing .cta {
+    transition: none;
+  }
+
+  body.landing .cta:hover {
+    transform: none;
+  }
+}
