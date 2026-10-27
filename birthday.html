@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Birthday Collection | The UPS Store Print</title>
+
+  <meta
+    name="description"
+    content="Explore birthday invitations and matching welcome signs for kids, adults and milestone celebrations."
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="collection-page">
+
+  <header>
+    <a
+      class="brand"
+      href="index.html"
+      style="color: inherit; text-decoration: none;"
+    >
+      THE UPS STORE PRINT
+      <span>INVITATIONS & EVENT PRINTING</span>
+    </a>
+
+    <a
+      class="header-note"
+      href="index.html"
+      style="color: inherit; text-decoration: none;"
+    >
+      ← All collections
+    </a>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <div>
+        <div class="eyebrow">Birthday collection</div>
+
+        <h1>Another year.<br>Entirely you.</h1>
+
+        <p>
+          Big adventures, elegant evenings and milestone moments.
+          Find invitations and welcome signs for their kind of party.
+        </p>
+      </div>
+
+      <div class="count" id="count" aria-live="polite"></div>
+    </section>
+
+    <!-- Birthday categories -->
+    <nav class="toolbar" aria-label="Filter birthday designs">
+      <button
+        class="filter active"
+        type="button"
+        data-filter="all"
+        aria-pressed="true"
+      >
+        All birthdays
+      </button>
+
+      <button
+        class="filter"
+        type="button"
+        data-filter="kids"
+        aria-pressed="false"
+      >
+        Kids
+      </button>
+
+      <button
+        class="filter"
+        type="button"
+        data-filter="adults"
+        aria-pressed="false"
+      >
+        Adults
+      </button>
+
+      <button
+        class="filter"
+        type="button"
+        data-filter="milestones"
+        aria-pressed="false"
+      >
+        Milestones
+      </button>
+    </nav>
+
+    <!-- Cards are added by JavaScript below -->
+    <section
+      class="grid"
+      id="birthday-grid"
+      aria-label="Birthday designs"
+    ></section>
+
+    <section class="order">
+      <div>
+        <div class="eyebrow">Made personal, in store</div>
+        <h2>Their day.<br>Their details.</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <b>01 / BROWSE</b>
+          <h3>Find their style</h3>
+          <p>
+            Explore the collection and open a design for a closer look.
+          </p>
+        </div>
+
+        <div class="step">
+          <b>02 / SAVE</b>
+          <h3>Note the number</h3>
+          <p>
+            Save the design number or screenshot your favorite.
+          </p>
+        </div>
+
+        <div class="step">
+          <b>03 / VISIT</b>
+          <h3>Make it personal</h3>
+          <p>
+            Ask in store about names, ages, wording, sizes and pricing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>THE UPS STORE PRINT</span>
+    <span>Illustrative collection · Order in store</span>
+  </footer>
+
+  <!-- Larger design preview -->
+  <dialog id="detail" aria-labelledby="modal-title">
+    <div class="modal-head">
+      <span class="eyebrow">A closer look</span>
+
+      <button
+        class="close"
+        type="button"
+        aria-label="Close design preview"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <img id="modal-image" alt="">
+
+      <div class="modal-info">
+        <div class="code" id="modal-code"></div>
+
+        <h2 id="modal-title"></h2>
+
+        <p id="modal-description"></p>
+
+        <span class="badge">
+          Invitation + matching welcome sign
+        </span>
+
+        <h3>Make it their own</h3>
+
+        <ul>
+          <li>Birthday name and age</li>
+          <li>Party date, time and location</li>
+          <li>Your wording and RSVP details</li>
+          <li>Ask in store about sizes and pricing</li>
+        </ul>
+
+        <h3 id="modal-order"></h3>
+
+        <p>
+          Show this design number to the store team
+          to discuss your order.
+        </p>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+
+  <script>
+    /*
+      Add birthday designs to this list.
+
+      Categories can include more than one filter:
+      categories: ["adults", "milestones"]
+
+      To use your own image, add:
+      image: "images/your-design.jpg"
+    */
+
+    const birthdayDesigns = [
+      {
+        name: "Wild Adventure",
+        code: "B01",
+        categories: ["kids"],
+        description:
+          "Earthy greens and playful lettering for a little explorer.",
+        background: "#e4e8dc",
+        paper: "#fffcf0",
+        ink: "#526347",
+        accent: "#a5b18b",
+        headline: ["A WILD", "PARTY!"],
+        signHeadline: ["WELCOME TO", "THE ADVENTURE"],
+        sampleName: "OLIVER IS FIVE",
+        theme: "wild"
+      },
+      {
+        name: "Make a Wish",
+        code: "B02",
+        categories: ["kids"],
+        description:
+          "Soft blush, lavender and little stars for a magical celebration.",
+        background: "#eee3e8",
+        paper: "#fff9fc",
+        ink: "#88677e",
+        accent: "#c6a5be",
+        headline: ["Make", "a wish"],
+        signHeadline: ["A LITTLE", "BIRTHDAY MAGIC"],
+        sampleName: "SOPHIA TURNS SIX",
+        theme: "stars"
+      },
+      {
+        name: "Garden Gathering",
+        code: "B03",
+        categories: ["adults"],
+        description:
+          "Quiet botanical details for an elegant birthday gathering.",
+        background: "#e7e9e1",
+        paper: "#fffef9",
+        ink: "#526355",
+        accent: "#9da98d",
+        headline: ["Let's", "celebrate"],
+        signHeadline: ["WELCOME", "LET'S CELEBRATE"],
+        sampleName: "A BIRTHDAY FOR EMMA",
+        theme: "botanical"
+      },
+      {
+        name: "Golden Years",
+        code: "B04",
+        categories: ["adults", "milestones"],
+        description:
+          "Rich charcoal and warm gold for a birthday worth celebrating.",
+        background: "#e8e3d9",
+        paper: "#292724",
+        ink: "#d8bd83",
+        accent: "#b69960",
+        headline: ["CHEERS", "TO 50"],
+        signHeadline: ["FIFTY &", "FABULOUS"],
+        sampleName: "CELEBRATING JAMES",
+        theme: "gold"
+      }
+    ];
+
+    const grid = document.querySelector("#birthday-grid");
+    const counter = document.querySelector("#count");
+    const previewDialog = document.querySelector("#detail");
+
+    // Escape text before inserting it into an SVG.
+    function escapeText(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&apos;"
+      }[character]));
+    }
+
+    // Decorative artwork used for the sample previews.
+    function decoration(design) {
+      if (design.theme === "stars") {
+        return `
+          <g fill="${design.accent}">
+            <path d="M35 32 L39 43 L50 47 L39 51
+                     L35 62 L31 51 L20 47 L31 43 Z"/>
+            <path d="M158 185 L161 193 L169 196 L161 199
+                     L158 207 L155 199 L147 196 L155 193 Z"/>
+            <circle cx="156" cy="42" r="3"/>
+            <circle cx="38" cy="190" r="3"/>
+          </g>
+        `;
+      }
+
+      if (
+        design.theme === "botanical" ||
+        design.theme === "wild"
+      ) {
+        return `
+          <g
+            fill="${design.accent}"
+            stroke="${design.ink}"
+            stroke-width="1"
+          >
+            <path d="M20 85 Q25 47 60 24" fill="none"/>
+            <ellipse cx="29" cy="64" rx="7" ry="15"
+                     transform="rotate(-30 29 64)"/>
+            <ellipse cx="42" cy="43" rx="7" ry="15"
+                     transform="rotate(35 42 43)"/>
+            <path d="M178 168 Q170 204 142 222" fill="none"/>
+            <ellipse cx="168" cy="188" rx="7" ry="15"
+                     transform="rotate(30 168 188)"/>
+            <ellipse cx="152" cy="209" rx="7" ry="15"
+                     transform="rotate(-35 152 209)"/>
+          </g>
+        `;
+      }
+
+      return `
+        <g fill="${design.accent}">
+          <circle cx="31" cy="33" r="2"/>
+          <circle cx="165" cy="44" r="2"/>
+          <circle cx="40" cy="209" r="2"/>
+          <circle cx="169" cy="195" r="2"/>
+        </g>
+      `;
+    }
+
+    // Draw one sample invitation or welcome sign.
+    function stationery(design, isSign) {
+      const lines = isSign
+        ? design.signHeadline
+        : design.headline;
+
+      const firstLabel = isSign
+        ? "LET'S CELEBRATE"
+        : "YOU'RE INVITED";
+
+      return `
+        <rect width="200" height="250"
+              fill="${design.paper}"/>
+
+        <rect x="10" y="10" width="180" height="230"
+              fill="none" stroke="${design.accent}"
+              stroke-width="0.8"/>
+
+        ${decoration(design)}
+
+        <g fill="${design.ink}" text-anchor="middle">
+          <text x="100" y="72"
+                font-family="Arial, sans-serif"
+                font-size="7" letter-spacing="1.8">
+            ${firstLabel}
+          </text>
+
+          <text x="100" y="112"
+                font-family="Georgia, serif"
+                font-size="${isSign ? 20 : 27}">
+            ${escapeText(lines[0])}
+          </text>
+
+          <text x="100" y="145"
+                font-family="Georgia, serif"
+                font-size="${isSign ? 20 : 27}">
+            ${escapeText(lines[1])}
+          </text>
+
+          <text x="100" y="177"
+                font-family="Arial, sans-serif"
+                font-size="7" letter-spacing="1">
+            ${escapeText(design.sampleName)}
+          </text>
+
+          <line x1="78" y1="194" x2="122" y2="194"
+                stroke="${design.accent}"/>
+
+          <text x="100" y="213"
+                font-family="Arial, sans-serif"
+                font-size="6" letter-spacing="1">
+            A DAY TO REMEMBER
+          </text>
+        </g>
+      `;
+    }
+
+    // Create a complete preview without external image files.
+    function makePreview(design) {
+      if (design.image) return design.image;
+
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="900" height="620"
+             viewBox="0 0 900 620">
+
+          <rect width="900" height="620"
+                fill="${design.background}"/>
+
+          <ellipse cx="450" cy="547" rx="330" ry="22"
+                   fill="#000000" opacity="0.05"/>
+
+          <!-- Welcome sign -->
+          <path d="M568 130 L485 560 M568 130 L681 560"
+                fill="none" stroke="${design.accent}"
+                stroke-width="8" stroke-linecap="round"/>
+
+          <rect x="403" y="77" width="310" height="388"
+                fill="#000000" opacity="0.07"/>
+
+          <g transform="translate(395 68) scale(1.55)">
+            ${stationery(design, true)}
+          </g>
+
+          <!-- Invitation -->
+          <g transform="translate(157 225) rotate(-6 100 125)">
+            <rect x="8" y="10" width="200" height="250"
+                  fill="#000000" opacity="0.08"/>
+            ${stationery(design, false)}
+          </g>
+
+        </svg>
+      `;
+
+      return "data:image/svg+xml;charset=utf-8," +
+        encodeURIComponent(svg);
+    }
+
+    // Build the design cards.
+    birthdayDesigns.forEach((design, index) => {
+      design.preview = makePreview(design);
+
+      const card = document.createElement("article");
+      card.className = "card";
+      card.dataset.categories = design.categories.join(" ");
+
+      card.innerHTML = `
+        <button
+          class="image-button"
+          type="button"
+          data-design-index="${index}"
+          aria-label="View ${design.name}, design ${design.code}"
+        >
+          <img
+            src="${design.preview}"
+            alt="${design.name} sample invitation and matching welcome sign"
+            ${index > 1 ? 'loading="lazy"' : ""}
+          >
+          <span class="zoom" aria-hidden="true">+</span>
+        </button>
+
+        <div class="details">
+          <div>
+            <h2>${design.name}</h2>
+
+            <div class="code">
+              Design ${design.code} · Invitation & welcome sign
+            </div>
+
+            <p class="description">${design.description}</p>
+          </div>
+
+          <button
+            class="view"
+            type="button"
+            data-design-index="${index}"
+            aria-label="View ${design.name} details"
+          >
+            View design ↗
+          </button>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    function updateCount(number) {
+      counter.textContent =
+        String(number).padStart(2, "0") +
+        " coordinated design" +
+        (number === 1 ? "" : "s");
+    }
+
+    updateCount(birthdayDesigns.length);
+
+    // Filter by age group or milestone.
+    const filters = document.querySelectorAll("[data-filter]");
+
+    filters.forEach(button => {
+      button.addEventListener("click", () => {
+        const category = button.dataset.filter;
+        let visibleCount = 0;
+
+        filters.forEach(filter => {
+          const selected = filter === button;
+
+          filter.classList.toggle("active", selected);
+          filter.setAttribute("aria-pressed", String(selected));
+        });
+
+        grid.querySelectorAll(".card").forEach(card => {
+          const categories = card.dataset.categories.split(" ");
+
+          const matches =
+            category === "all" ||
+            categories.includes(category);
+
+          card.hidden = !matches;
+
+          if (matches) visibleCount++;
+        });
+
+        updateCount(visibleCount);
+      });
+    });
+
+    // Open larger previews.
+    grid.addEventListener("click", event => {
+      const button = event.target.closest("[data-design-index]");
+
+      if (!button) return;
+
+      const design = birthdayDesigns[button.dataset.designIndex];
+
+      document.querySelector("#modal-title").textContent =
+        design.name;
+
+      document.querySelector("#modal-code").textContent =
+        "DESIGN " + design.code;
+
+      document.querySelector("#modal-description").textContent =
+        design.description;
+
+      document.querySelector("#modal-order").textContent =
+        "Ask for " + design.code + " in store";
+
+      const image = document.querySelector("#modal-image");
+
+      image.src = design.preview;
+      image.alt =
+        design.name + " invitation and matching welcome sign";
+
+      previewDialog.showModal();
+    });
+
+    previewDialog.querySelector(".close").addEventListener(
+      "click",
+      () => previewDialog.close()
+    );
+
+    previewDialog.addEventListener("click", event => {
+      if (event.target !== previewDialog) return;
+
+      const bounds = previewDialog.getBoundingClientRect();
+
+      const clickedOutside =
+        event.clientX < bounds.left ||
+        event.clientX > bounds.right ||
+        event.clientY < bounds.top ||
+        event.clientY > bounds.bottom;
+
+      if (clickedOutside) previewDialog.close();
+    });
+  </script>
+
+</body>
+</html>
