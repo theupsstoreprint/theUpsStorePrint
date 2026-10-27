@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sweet 16 Collection | The UPS Store Print</title>
+
+  <meta
+    name="description"
+    content="Explore Sweet 16 invitations and matching welcome signs."
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="collection-page">
+
+  <!-- Shared navigation -->
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      THE UPS STORE PRINT
+      <small>INVITATIONS & EVENT PRINTING</small>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-navigation"
+    >
+      Menu ☰
+    </button>
+
+    <nav
+      class="site-nav"
+      id="site-navigation"
+      aria-label="Main navigation"
+    >
+      <a href="index.html">Home</a>
+      <a href="wedding.html">Wedding</a>
+      <a href="baby-shower.html">Baby Shower & Gender Reveal</a>
+      <a href="birthday.html">Birthday</a>
+      <a href="sweet-16.html" aria-current="page">Sweet 16</a>
+      <a href="sympathy.html">Sympathy</a>
+      <a href="banners.html">Banners</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <div>
+        <div class="eyebrow">Sweet 16 collection</div>
+
+        <h1>Sixteen.<br>Unforgettably you.</h1>
+
+        <p>
+          Celebrate a milestone with invitations and welcome
+          signs that match the mood of your night.
+        </p>
+      </div>
+
+      <div class="count" id="count" aria-live="polite"></div>
+    </section>
+
+    <!-- Style filters -->
+    <nav class="toolbar" aria-label="Filter Sweet 16 designs">
+      <button
+        class="filter active"
+        type="button"
+        data-filter="all"
+        aria-pressed="true"
+      >
+        All designs
+      </button>
+
+      <button
+        class="filter"
+        type="button"
+        data-filter="soft"
+        aria-pressed="false"
+      >
+        Soft & Romantic
+      </button>
+
+      <button
+        class="filter"
+        type="button"
+        data-filter="glam"
+        aria-pressed="false"
+      >
+        Glam & Elegant
+      </button>
+
+      <button
+        class="filter"
+        type="button"
+        data-filter="modern"
+        aria-pressed="false"
+      >
+        Modern
+      </button>
+    </nav>
+
+    <!-- Design cards -->
+    <section
+      class="grid"
+      id="sweet-grid"
+      aria-label="Sweet 16 designs"
+    ></section>
+
+    <!-- Ordering information -->
+    <section class="order">
+      <div>
+        <div class="eyebrow">Made personal, in store</div>
+        <h2>Your night.<br>Your signature style.</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <b>01 / BROWSE</b>
+          <h3>Find your look</h3>
+          <p>
+            Explore the collection and open a design for a closer look.
+          </p>
+        </div>
+
+        <div class="step">
+          <b>02 / SAVE</b>
+          <h3>Note the number</h3>
+          <p>
+            Save the design number or screenshot your favorite.
+          </p>
+        </div>
+
+        <div class="step">
+          <b>03 / VISIT</b>
+          <h3>Make it yours</h3>
+          <p>
+            Ask in store about personalization, sizes and pricing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>THE UPS STORE PRINT</span>
+    <span>Illustrative collection · Order in store</span>
+  </footer>
+
+  <!-- Expanded design preview -->
+  <dialog id="detail" aria-labelledby="modal-title">
+    <div class="modal-head">
+      <span class="eyebrow">A closer look</span>
+
+      <button
+        class="close"
+        type="button"
+        aria-label="Close design preview"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <img id="modal-image" alt="">
+
+      <div class="modal-info">
+        <div class="code" id="modal-code"></div>
+
+        <h2 id="modal-title"></h2>
+
+        <p id="modal-description"></p>
+
+        <span class="badge">
+          Invitation + matching welcome sign
+        </span>
+
+        <h3>Make it your own</h3>
+
+        <ul>
+          <li>Birthday name and celebration wording</li>
+          <li>Event date, time and location</li>
+          <li>Dress code and RSVP details</li>
+          <li>Ask in store about sizes and pricing</li>
+        </ul>
+
+        <h3 id="modal-order"></h3>
+
+        <p>
+          Show this design number to the store team
+          to discuss your order.
+        </p>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+
+  <script>
+    (() => {
+      /*
+        These are illustrative sample previews.
+
+        To use finished artwork, add an image property:
+        image: "images/blush-butterfly.jpg"
+      */
+
+      const designs = [
+        {
+          name: "Blush Butterfly",
+          code: "S01",
+          categories: ["soft"],
+          description:
+            "Muted blush and delicate butterflies for a soft, romantic celebration.",
+          background: "#eee2e5",
+          paper: "#fff9fa",
+          ink: "#946e7c",
+          accent: "#c6a1af",
+          theme: "butterfly",
+          sampleName: "ISABELLA"
+        },
+        {
+          name: "Blue Elegance",
+          code: "S02",
+          categories: ["glam"],
+          description:
+            "Dusty blue and fine gold details for an elegant evening.",
+          background: "#e1e6ed",
+          paper: "#f8faff",
+          ink: "#536b88",
+          accent: "#b6a174",
+          theme: "elegant",
+          sampleName: "SOPHIA"
+        },
+        {
+          name: "Moonlight Wishes",
+          code: "S03",
+          categories: ["soft", "glam"],
+          description:
+            "A deep midnight palette with a crescent moon and scattered stars.",
+          background: "#e4e2eb",
+          paper: "#302d43",
+          ink: "#e1d5bc",
+          accent: "#b9a67f",
+          theme: "moon",
+          sampleName: "AMELIA"
+        },
+        {
+          name: "Modern Muse",
+          code: "S04",
+          categories: ["modern"],
+          description:
+            "Bold lettering and a clean black-and-ivory palette.",
+          background: "#e9e5df",
+          paper: "#fffdf7",
+          ink: "#2e2b29",
+          accent: "#a79885",
+          theme: "modern",
+          sampleName: "AVA"
+        }
+      ];
+
+      const grid = document.querySelector("#sweet-grid");
+      const counter = document.querySelector("#count");
+      const dialog = document.querySelector("#detail");
+
+      function escapeText(value) {
+        return String(value).replace(/[&<>"']/g, character => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&apos;"
+        }[character]));
+      }
+
+      function decorations(design) {
+        if (design.theme === "butterfly") {
+          return `
+            <g
+              fill="${design.accent}"
+              stroke="${design.ink}"
+              stroke-width="0.6"
+            >
+              <g transform="translate(32 35) rotate(-20)">
+                <ellipse cx="-7" cy="-3" rx="8" ry="12"/>
+                <ellipse cx="7" cy="-3" rx="8" ry="12"/>
+                <ellipse cx="-5" cy="9" rx="6" ry="7"/>
+                <ellipse cx="5" cy="9" rx="6" ry="7"/>
+                <path d="M0 -10 L0 16" fill="none"/>
+              </g>
+
+              <g transform="translate(166 208) rotate(25)">
+                <ellipse cx="-7" cy="-3" rx="8" ry="12"/>
+                <ellipse cx="7" cy="-3" rx="8" ry="12"/>
+                <ellipse cx="-5" cy="9" rx="6" ry="7"/>
+                <ellipse cx="5" cy="9" rx="6" ry="7"/>
+                <path d="M0 -10 L0 16" fill="none"/>
+              </g>
+            </g>
+          `;
+        }
+
+        if (design.theme === "moon") {
+          return `
+            <circle
+              cx="100" cy="38" r="15"
+              fill="${design.accent}"
+            />
+
+            <circle
+              cx="107" cy="33" r="13"
+              fill="${design.paper}"
+            />
+
+            <g fill="${design.accent}">
+              <path d="M31 50 L34 58 L42 61 L34 64
+                       L31 72 L28 64 L20 61 L28 58 Z"/>
+
+              <path d="M169 183 L172 191 L180 194 L172 197
+                       L169 205 L166 197 L158 194 L166 191 Z"/>
+
+              <circle cx="157" cy="39" r="2"/>
+              <circle cx="40" cy="200" r="2"/>
+              <circle cx="175" cy="93" r="1.5"/>
+              <circle cx="23" cy="155" r="1.5"/>
+            </g>
+          `;
+        }
+
+        if (design.theme === "elegant") {
+          return `
+            <rect
+              x="15" y="15" width="170" height="220"
+              fill="none"
+              stroke="${design.accent}"
+              stroke-width="0.5"
+            />
+
+            <path
+              d="M88 39 L100 29 L112 39 L100 49 Z"
+              fill="none"
+              stroke="${design.accent}"
+              stroke-width="0.8"
+            />
+
+            <line
+              x1="76" y1="207" x2="124" y2="207"
+              stroke="${design.accent}"
+              stroke-width="0.8"
+            />
+          `;
+        }
+
+        return `
+          <line
+            x1="25" y1="35" x2="175" y2="35"
+            stroke="${design.ink}"
+            stroke-width="1"
+          />
+
+          <line
+            x1="25" y1="218" x2="175" y2="218"
+            stroke="${design.ink}"
+            stroke-width="1"
+          />
+        `;
+      }
+
+      function stationery(design, isSign) {
+        const modern = design.theme === "modern";
+
+        return `
+          <rect
+            width="200"
+            height="250"
+            fill="${design.paper}"
+          />
+
+          <rect
+            x="10" y="10" width="180" height="230"
+            fill="none"
+            stroke="${design.accent}"
+            stroke-width="0.7"
+            opacity="${modern ? 0 : 0.65}"
+          />
+
+          ${decorations(design)}
+
+          <g fill="${design.ink}" text-anchor="middle">
+
+            <text
+              x="100" y="73"
+              font-family="Arial, sans-serif"
+              font-size="6.5"
+              letter-spacing="1.8"
+            >
+              ${isSign ? "WELCOME TO" : "YOU'RE INVITED"}
+            </text>
+
+            <text
+              x="100" y="100"
+              font-family="Georgia, serif"
+              font-size="${modern ? 21 : 18}"
+              font-style="${modern ? "normal" : "italic"}"
+            >
+              ${escapeText(design.sampleName)}
+            </text>
+
+            <text
+              x="100" y="166"
+              font-family="Georgia, serif"
+              font-size="65"
+            >
+              16
+            </text>
+
+            <text
+              x="100" y="188"
+              font-family="Arial, sans-serif"
+              font-size="7"
+              letter-spacing="2"
+            >
+              SWEET SIXTEEN
+            </text>
+
+            <text
+              x="100" y="229"
+              font-family="Arial, sans-serif"
+              font-size="5"
+              letter-spacing="0.9"
+            >
+              A NIGHT TO REMEMBER
+            </text>
+
+          </g>
+        `;
+      }
+
+      function makePreview(design) {
+        if (design.image) return design.image;
+
+        const svg = `
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="900"
+            height="620"
+            viewBox="0 0 900 620"
+          >
+            <rect
+              width="900"
+              height="620"
+              fill="${design.background}"
+            />
+
+            <ellipse
+              cx="450" cy="548" rx="330" ry="22"
+              fill="#000000"
+              opacity="0.05"
+            />
+
+            <!-- Welcome sign easel -->
+            <path
+              d="M568 130 L485 560 M568 130 L681 560"
+              fill="none"
+              stroke="${design.accent}"
+              stroke-width="8"
+              stroke-linecap="round"
+            />
+
+            <!-- Welcome sign shadow -->
+            <rect
+              x="403" y="77" width="310" height="388"
+              fill="#000000"
+              opacity="0.07"
+            />
+
+            <!-- Welcome sign -->
+            <g transform="translate(395 68) scale(1.55)">
+              ${stationery(design, true)}
+            </g>
+
+            <!-- Invitation -->
+            <g transform="translate(157 225) rotate(-6 100 125)">
+              <rect
+                x="8" y="10" width="200" height="250"
+                fill="#000000"
+                opacity="0.08"
+              />
+
+              ${stationery(design, false)}
+            </g>
+          </svg>
+        `;
+
+        return "data:image/svg+xml;charset=utf-8," +
+          encodeURIComponent(svg);
+      }
+
+      // Build the design cards.
+      designs.forEach((design, index) => {
+        design.preview = makePreview(design);
+
+        const card = document.createElement("article");
+        card.className = "card";
+        card.dataset.categories = design.categories.join(" ");
+
+        card.innerHTML = `
+          <button
+            class="image-button"
+            type="button"
+            data-design-index="${index}"
+            aria-label="View ${escapeText(design.name)}, design ${design.code}"
+          >
+            <img
+              src="${design.preview}"
+              alt="${escapeText(design.name)} sample invitation and matching welcome sign"
+              ${index > 1 ? 'loading="lazy"' : ""}
+            >
+
+            <span class="zoom" aria-hidden="true">+</span>
+          </button>
+
+          <div class="details">
+            <div>
+              <h2>${escapeText(design.name)}</h2>
+
+              <div class="code">
+                Design ${design.code} · Invitation & welcome sign
+              </div>
+
+              <p class="description">
+                ${escapeText(design.description)}
+              </p>
+            </div>
+
+            <button
+              class="view"
+              type="button"
+              data-design-index="${index}"
+              aria-label="View ${escapeText(design.name)} details"
+            >
+              View design ↗
+            </button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      function updateCount(number) {
+        counter.textContent =
+          String(number).padStart(2, "0") +
+          " coordinated design" +
+          (number === 1 ? "" : "s");
+      }
+
+      updateCount(designs.length);
+
+      // Filter the designs.
+      const filters = document.querySelectorAll("[data-filter]");
+
+      filters.forEach(button => {
+        button.addEventListener("click", () => {
+          const category = button.dataset.filter;
+          let visibleCount = 0;
+
+          filters.forEach(filter => {
+            const selected = filter === button;
+
+            filter.classList.toggle("active", selected);
+            filter.setAttribute("aria-pressed", String(selected));
+          });
+
+          grid.querySelectorAll(".card").forEach(card => {
+            const categories = card.dataset.categories.split(" ");
+
+            const matches =
+              category === "all" ||
+              categories.includes(category);
+
+            card.hidden = !matches;
+
+            if (matches) visibleCount++;
+          });
+
+          updateCount(visibleCount);
+        });
+      });
+
+      // Open a larger preview.
+      grid.addEventListener("click", event => {
+        const button = event.target.closest("[data-design-index]");
+
+        if (!button) return;
+
+        const design = designs[button.dataset.designIndex];
+
+        document.querySelector("#modal-title").textContent =
+          design.name;
+
+        document.querySelector("#modal-code").textContent =
+          "DESIGN " + design.code;
+
+        document.querySelector("#modal-description").textContent =
+          design.description;
+
+        document.querySelector("#modal-order").textContent =
+          "Ask for " + design.code + " in store";
+
+        const image = document.querySelector("#modal-image");
+
+        image.src = design.preview;
+        image.alt =
+          design.name + " invitation and matching welcome sign";
+
+        dialog.showModal();
+      });
+
+      // Close the preview.
+      dialog.querySelector(".close").addEventListener(
+        "click",
+        () => dialog.close()
+      );
+
+      dialog.addEventListener("click", event => {
+        if (event.target !== dialog) return;
+
+        const bounds = dialog.getBoundingClientRect();
+
+        const clickedOutside =
+          event.clientX < bounds.left ||
+          event.clientX > bounds.right ||
+          event.clientY < bounds.top ||
+          event.clientY > bounds.bottom;
+
+        if (clickedOutside) dialog.close();
+      });
+    })();
+  </script>
+
+</body>
+</html>
