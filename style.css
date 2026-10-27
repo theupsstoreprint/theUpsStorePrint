@@ -294,3 +294,100 @@ body .nav-toggle {
     padding: 12px 0;
   }
 }
+
+
+
+/* Shared pricing layout for all collections */
+
+body.collection-page .pricing {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line, #e5dfd5);
+}
+
+body.collection-page .pricing-heading {
+  margin: 0 0 6px;
+  font: normal 20px/1.3 Georgia, serif;
+}
+
+body.collection-page .price-note {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+body.collection-page .price-tiers {
+  width: 100%;
+  margin-bottom: 22px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+body.collection-page .price-tiers th,
+body.collection-page .price-tiers td {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line, #e5dfd5);
+  text-align: left;
+}
+
+body.collection-page .price-tiers th {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: normal;
+}
+
+body.collection-page .price-tiers th:last-child,
+body.collection-page .price-tiers td:last-child {
+  text-align: right;
+}
+
+body.collection-page .poster-price {
+  margin: 4px 0 12px;
+  font: normal 31px/1.2 Georgia, serif;
+}
+
+body.collection-page .size-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+body.collection-page .size-option {
+  padding: 11px 8px;
+  border: 1px solid #cabb9f;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+  font: 12px/1.4 Arial, sans-serif;
+  cursor: pointer;
+}
+
+body.collection-page .size-option:hover {
+  background: var(--paper, #f7f5f0);
+}
+
+body.collection-page .size-option[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+body.collection-page .selected-size {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+body.collection-page .details .view {
+  flex-shrink: 0;
+}
+
+@media (max-width: 420px) {
+  body.collection-page .details {
+    flex-wrap: wrap;
+  }
+
+  body.collection-page .details .view {
+    margin-top: 5px;
+  }
+}
