@@ -196,3 +196,101 @@ body.collection-page .toolbar { overflow:auto }
 body.collection-page .filter { white-space:nowrap }
 body.collection-page footer { gap:20px }
 body.collection-page h1 { letter-spacing:-1px }}
+
+/* Shared navigation for every page */
+
+body .site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  height: auto;
+  padding: 22px 5vw;
+  background: #fff;
+  border-bottom: 1px solid var(--line, #e5dfd5);
+}
+
+body .site-header .brand {
+  flex-shrink: 0;
+  color: var(--ink, #392c23);
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+body .site-header .brand small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted, #81796f);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+body .site-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+}
+
+body .site-nav a {
+  padding: 7px 0;
+  border-bottom: 2px solid transparent;
+  color: var(--muted, #81796f);
+  font: 12px/1.5 Arial, sans-serif;
+  text-decoration: none;
+}
+
+body .site-nav a:hover,
+body .site-nav a[aria-current="page"] {
+  color: var(--ink, #392c23);
+  border-bottom-color: var(--gold, #a5854d);
+}
+
+body .nav-toggle {
+  display: none;
+  padding: 9px 13px;
+  border: 1px solid var(--line, #e5dfd5);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink, #392c23);
+  font: 12px Arial, sans-serif;
+  cursor: pointer;
+}
+
+@media (max-width: 1100px) {
+  body .site-header {
+    gap: 0;
+  }
+
+  body .site-header.nav-ready .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  body .site-nav {
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line, #e5dfd5);
+  }
+
+  body .site-header.nav-ready .site-nav {
+    display: none;
+  }
+
+  body .site-header.nav-ready .site-nav.is-open {
+    display: flex;
+  }
+
+  body .site-nav a {
+    padding: 12px 0;
+  }
+}
