@@ -1,0 +1,198 @@
+/* Shared stylesheet for the full event printing catalog.
+   Each page uses a body class to distinguish its layout.
+   Collection pages all use class="collection-page". */
+:root { --ink:#392c23; --muted:#81796f; --gold:#a5854d; --line:#e5dfd5; --cream:#f5f2ec; --paper:#f7f5f0; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; background:#fff; color:var(--ink); font:14px/1.7 Arial,sans-serif; }
+:focus-visible { outline:3px solid var(--gold); outline-offset:5px; }
+
+/* Landing page */
+body.landing { margin:0;background:#fff;color:var(--ink);font:14px/1.7 Arial,sans-serif }
+body.landing a { color:inherit;text-decoration:none }
+body.landing button { font:inherit;cursor:pointer }
+body.landing header { padding:25px 5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line) }
+body.landing .brand { font-weight:800;font-size:17px;letter-spacing:2px }
+body.landing .brand small { display:block;font-size:8px;font-weight:400;letter-spacing:2.8px;color:var(--muted) }
+body.landing .toplink { font-size:12px;border-bottom:1px solid var(--gold) }
+body.landing main { max-width:1440px;margin:auto;padding:0 5vw }
+body.landing .eyebrow { font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:bold }
+body.landing .hero { display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:56px 0 60px }
+body.landing .hero h1 { font:normal clamp(43px,5vw,72px)/1.09 Georgia,serif;letter-spacing:-2px;margin:17px 0 23px;max-width:600px }
+body.landing .hero p { max-width:390px;color:var(--muted);font-size:14px }
+body.landing .cta { display:inline-flex;align-items:center;gap:35px;background:var(--ink);color:white;padding:13px 22px;font-size:12px;margin-top:15px }
+body.landing .hero-art { height:430px;position:relative;background:#eeeae1;overflow:hidden;display:flex;align-items:center;justify-content:center }
+body.landing .hero-art:before { content:'';position:absolute;background:#e4dfd2;width:85%;height:120%;border-radius:50% 50% 0 0;transform:translate(18%,20%) }
+body.landing .paper { position:absolute;background:#fffdf8;box-shadow:5px 12px 18px #35291f16;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#51402a;line-height:1.3 }
+body.landing .paper small { font:8px/1.5 Arial;letter-spacing:1.6px }
+body.landing .paper em { font:italic 30px/1.1 Georgia;margin:12px 0 }
+body.landing .paper b { font:normal 20px Georgia }
+body.landing .p1 { width:205px;height:285px;left:14%;top:70px;transform:rotate(-12deg);border:1px solid #bba673;outline:8px solid #fffdf8 }
+body.landing .p1:before { content:'✧';font:35px Georgia;color:#ac915c;margin-bottom:10px }
+body.landing .p2 { width:190px;height:265px;right:9%;top:120px;transform:rotate(11deg);background:#e9d6cd }
+body.landing .p2 em { font-size:45px }
+body.landing .p2 small { font-size:7px }
+body.landing .hero-caption { position:absolute;bottom:13px;left:0;right:0;text-align:center;font-size:9px;letter-spacing:1px;color:#81705d }
+body.landing .section-head { display:flex;justify-content:space-between;align-items:end;border-top:1px solid var(--line);padding-top:33px;margin-bottom:28px }
+body.landing h2 { font:normal 36px/1.2 Georgia;margin:9px 0 }
+body.landing .section-head p { font-size:12px;color:var(--muted);margin:0 }
+body.landing .category-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:32px 24px;margin-bottom:60px }
+body.landing .collection { display:block;width:100%;text-align:left;border:0;padding:0;background:transparent;color:var(--ink) }
+body.landing .art { height:260px;position:relative;overflow:hidden;display:flex;justify-content:center;align-items:center;transition:filter .25s }
+body.landing .collection:hover .art { filter:brightness(.97) }
+body.landing .mini { width:140px;height:195px;position:relative;background:white;box-shadow:5px 9px 18px #35291f18;transform:rotate(-7deg);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;line-height:1.25;padding:16px }
+body.landing .mini small { font:6px/1.6 Arial;letter-spacing:1px }
+body.landing .mini em { font:italic 23px/1.15 Georgia;margin:13px 0 }
+body.landing .mini span { font:normal 13px Georgia }
+body.landing .mini:after { content:'';position:absolute;inset:9px;border:1px solid currentColor;opacity:.4 }
+body.landing .art-wedding { background:#efeee7 }
+body.landing .art-wedding .mini { color:#9b834c }
+body.landing .art-night { background:#e7e3dc }
+body.landing .art-night .mini { background:#342c2b;color:#c7ac74;transform:rotate(7deg) }
+body.landing .art-baby { background:#eee1d9 }
+body.landing .art-baby .mini { color:#9a7263;background:#fffaf3 }
+body.landing .art-baby .mini em { font-size:29px }
+body.landing .art-kids { background:#e4e8df }
+body.landing .art-kids .mini { background:#fcf9e6;color:#61715c;transform:rotate(7deg) }
+body.landing .art-kids .mini em { font-weight:bold;font-style:normal;font-size:28px }
+body.landing .art-sweet { background:#e9e1e8 }
+body.landing .art-sweet .mini { background:#fbf8fb;color:#917a97 }
+body.landing .art-sweet .mini em { font-size:52px }
+body.landing .art-sympathy { background:#e5e8e5 }
+body.landing .art-sympathy .mini { background:#fafbf8;color:#65766a;transform:rotate(7deg) }
+body.landing .art-banners { background:#e8e4dc }
+body.landing .banner { width:85%;padding:26px 15px;background:#263a43;color:#ede3c9;text-align:center;transform:rotate(-5deg);box-shadow:4px 8px 13px #0002;position:relative }
+body.landing .banner small { font:7px Arial;letter-spacing:2px }
+body.landing .banner b { display:block;font:25px Georgia;margin:7px 0 }
+body.landing .banner:before,
+body.landing .banner:after { content:'○';position:absolute;top:5px;font-size:8px;color:white }
+body.landing .banner:before { left:7px }
+body.landing .banner:after { right:7px }
+body.landing .label-row { display:flex;align-items:center;justify-content:space-between;margin-top:15px;gap:10px }
+body.landing .label-row h3 { font:normal 23px Georgia;margin:0 }
+body.landing .arrow { font-size:20px;color:var(--gold) }
+body.landing .status { font-size:9px;color:#8b8175;letter-spacing:.5px;white-space:nowrap }
+body.landing .collection p { font-size:12px;color:var(--muted);margin:6px 0 0 }
+body.landing .available { color:#7a784e }
+body.landing .how { background:var(--cream);padding:36px 38px;display:grid;grid-template-columns:1fr 2fr;gap:50px;margin-bottom:60px;scroll-margin-top:20px }
+body.landing .how h2 { font-size:31px }
+body.landing .steps { display:grid;grid-template-columns:repeat(3,1fr);gap:25px }
+body.landing .steps small { font-size:10px;color:var(--gold) }
+body.landing .steps h3 { font:normal 19px Georgia;margin:13px 0 9px }
+body.landing .steps p { font-size:12px;color:var(--muted);margin:0 }
+body.landing footer { padding:25px 5vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:10px }
+body.landing dialog { color:var(--ink);border:0;padding:35px;max-width:440px;width:90vw }
+body.landing dialog::backdrop { background:#241c1680 }
+body.landing dialog h2 { font-size:32px }
+body.landing dialog p { color:var(--muted) }
+body.landing .close { background:var(--ink);color:white;border:0;padding:10px 22px;margin-top:10px }
+body.landing :focus-visible { outline:3px solid #a5854d;outline-offset:5px }
+html { scroll-behavior:smooth }
+@media(max-width:900px){body.landing .hero { gap:25px }
+body.landing .hero-art { height:350px }
+body.landing .p1 { left:10%;width:160px;height:230px }
+body.landing .p2 { right:6%;width:150px;height:215px }
+body.landing .category-grid { grid-template-columns:repeat(2,1fr) }
+body.landing .how { grid-template-columns:1fr;gap:22px }}
+@media(max-width:580px){body.landing header { padding:20px 6vw }
+body.landing .brand { font-size:14px }
+body.landing .brand small { font-size:7px }
+body.landing .toplink { font-size:10px }
+body.landing main { padding:0 6vw }
+body.landing .hero { grid-template-columns:1fr;padding:35px 0 40px;gap:30px }
+body.landing .hero h1 { font-size:49px;letter-spacing:-1.5px }
+body.landing .hero p { font-size:13px }
+body.landing .hero-art { height:330px }
+body.landing .p1 { left:17%;top:35px }
+body.landing .p2 { right:12%;top:85px }
+body.landing .section-head { display:block }
+body.landing .section-head p { margin-top:12px }
+body.landing .section-head h2 { font-size:32px }
+body.landing .category-grid { gap:25px 14px }
+body.landing .art { height:205px }
+body.landing .mini { width:110px;height:155px;padding:10px }
+body.landing .mini em { font-size:18px }
+body.landing .mini small { font-size:5px }
+body.landing .mini span { font-size:10px }
+body.landing .art-baby .mini em { font-size:23px }
+body.landing .art-kids .mini em { font-size:22px }
+body.landing .art-sweet .mini em { font-size:40px }
+body.landing .label-row { align-items:start;flex-wrap:wrap;gap:5px }
+body.landing .label-row h3 { font-size:20px }
+body.landing .status { font-size:8px }
+body.landing .collection p { font-size:11px }
+body.landing .banner b { font-size:18px }
+body.landing .banner small { font-size:6px }
+body.landing .how { padding:25px 22px }
+body.landing .steps { grid-template-columns:1fr;gap:22px }
+body.landing .steps h3 { margin:5px 0 }
+body.landing .how h2 br { display:none }
+body.landing footer { font-size:9px }
+body.landing .arrow { font-size:17px }}
+
+/* All collection pages */
+body.collection-page { margin:0;color:var(--ink);background:#fff;font:15px/1.6 Arial,sans-serif }
+body.collection-page button,
+body.collection-page a { -webkit-tap-highlight-color:transparent }
+body.collection-page button { cursor:pointer }
+body.collection-page header { height:88px;padding:0 5vw;border-bottom:1px solid #e8e3da;display:flex;align-items:center;justify-content:space-between }
+body.collection-page .brand { font-size:17px;font-weight:800;letter-spacing:2px }
+body.collection-page .brand span { display:block;font-size:9px;font-weight:400;letter-spacing:3px;color:var(--muted) }
+body.collection-page .header-note { font-size:12px;color:var(--muted) }
+body.collection-page main { max-width:1440px;margin:auto;padding:0 5vw }
+body.collection-page .intro { padding:64px 0 42px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px }
+body.collection-page .eyebrow { text-transform:uppercase;letter-spacing:2.5px;font-size:10px;color:var(--gold);font-weight:bold }
+body.collection-page h1 { font:normal clamp(44px,5vw,76px)/1.08 Georgia,serif;margin:14px 0 18px;letter-spacing:-2px }
+body.collection-page .intro p { color:var(--muted);max-width:430px;margin:0 }
+body.collection-page .count { font-size:12px;white-space:nowrap;color:var(--muted);padding-bottom:4px }
+body.collection-page .toolbar { border-top:1px solid #e8e3da;padding:20px 0;display:flex;gap:8px;align-items:center }
+body.collection-page .filter { border:1px solid #ddd5c9;border-radius:24px;background:white;padding:9px 19px;color:var(--ink);font-size:12px }
+body.collection-page .filter.active { background:var(--ink);color:white;border-color:var(--ink) }
+body.collection-page .grid { display:grid;grid-template-columns:1fr 1fr;gap:34px;margin:7px 0 60px }
+body.collection-page .card { min-width:0 }
+body.collection-page .image-button { border:0;background:var(--paper);width:100%;display:block;position:relative;padding:0;overflow:hidden }
+body.collection-page .image-button img { display:block;width:100%;aspect-ratio:1.45;object-fit:contain;transition:transform .4s }
+body.collection-page .image-button:hover img { transform:scale(1.035) }
+body.collection-page .zoom { position:absolute;bottom:17px;right:17px;border-radius:50%;background:#ffffffed;width:35px;height:35px;display:grid;place-items:center;font-size:22px }
+body.collection-page .details { display:flex;align-items:flex-start;justify-content:space-between;padding-top:20px;gap:12px }
+body.collection-page h2 { font:normal 29px/1.2 Georgia,serif;margin:5px 0 8px }
+body.collection-page .code { font-size:10px;letter-spacing:1.6px;color:var(--gold);text-transform:uppercase }
+body.collection-page .details .code { letter-spacing:.3px;text-transform:none;margin-bottom:9px }
+body.collection-page .description { font-size:12px;color:var(--muted);margin:0 }
+body.collection-page .view { border:0;border-bottom:1px solid #baa781;background:none;color:var(--ink);padding:3px 0;white-space:nowrap;font-size:12px;margin-top:23px }
+body.collection-page .order { background:var(--paper);padding:40px 45px;margin-bottom:60px;display:grid;grid-template-columns:1fr 1.5fr;gap:45px }
+body.collection-page .order h2 { font-size:33px;margin:8px 0 }
+body.collection-page .steps { display:grid;grid-template-columns:repeat(3,1fr);gap:24px }
+body.collection-page .step b { font-size:10px;color:var(--gold);letter-spacing:1px }
+body.collection-page .step h3 { font:normal 18px Georgia,serif;margin:10px 0 }
+body.collection-page .step p { font-size:12px;color:var(--muted);margin:0 }
+body.collection-page footer { border-top:1px solid #e8e3da;padding:24px 5vw;display:flex;justify-content:space-between;font-size:10px;color:var(--muted) }
+body.collection-page dialog { border:0;padding:0;max-width:1000px;width:92vw;max-height:90vh;color:var(--ink);overflow:auto;background:white }
+body.collection-page dialog::backdrop { background:#221a13a8 }
+body.collection-page .modal-head { display:flex;justify-content:space-between;align-items:center;padding:20px 28px }
+body.collection-page .close { border:1px solid #ddd5c9;border-radius:50%;width:35px;height:35px;background:white;font-size:23px }
+body.collection-page .modal-body { display:grid;grid-template-columns:1.4fr 1fr }
+body.collection-page .modal-body img { width:100%;height:100%;object-fit:contain;background:var(--paper) }
+body.collection-page .modal-info { padding:35px 28px }
+body.collection-page .modal-info p { color:var(--muted);font-size:13px }
+body.collection-page .badge { display:inline-block;border:1px solid #e1d6c5;padding:7px 12px;font-size:11px;margin-top:15px }
+body.collection-page .modal-info ul { padding-left:18px;font-size:13px;color:var(--muted) }
+body.collection-page .modal-info h3 { font:normal 20px Georgia,serif;margin-top:30px }
+body.collection-page [hidden] { display:none!important }
+@media(max-width:700px){body.collection-page header { height:74px }
+body.collection-page .header-note { font-size:10px }
+body.collection-page .intro { padding:40px 0 30px;display:block }
+body.collection-page .intro p { font-size:13px }
+body.collection-page .count { margin-top:18px }
+body.collection-page .grid { grid-template-columns:1fr;gap:35px;margin-bottom:38px }
+body.collection-page .image-button img { aspect-ratio:1.45 }
+body.collection-page .order { padding:28px 22px;grid-template-columns:1fr;gap:20px;margin-bottom:35px }
+body.collection-page .steps { gap:15px }
+body.collection-page .step h3 { font-size:16px }
+body.collection-page .modal-body { grid-template-columns:1fr }
+body.collection-page .modal-info { padding:22px }
+body.collection-page .modal-body img { max-height:45vh }
+body.collection-page .toolbar { overflow:auto }
+body.collection-page .filter { white-space:nowrap }
+body.collection-page footer { gap:20px }
+body.collection-page h1 { letter-spacing:-1px }}
