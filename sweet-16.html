@@ -4,32 +4,332 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Sweet 16 Collection | The UPS Store Print</title>
+  <title>Sweet 16 | The UPS Store Print</title>
 
-  <meta
-    name="description"
-    content="Explore Sweet 16 invitations and matching welcome signs."
-  >
+  <link rel="stylesheet" href="style.css?v=8">
 
-  <link rel="stylesheet" href="style.css?v=6">
+  <style>
+    /* Sweet 16 gallery */
+    .sweet-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 56px 32px;
+      margin: 36px 0 72px;
+    }
+
+    .sweet-photo-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f7f4ef;
+      cursor: pointer;
+    }
+
+    .sweet-photo-button img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      transition: transform .3s ease;
+    }
+
+    @media (hover: hover) {
+      .sweet-photo-button:hover img {
+        transform: scale(1.025);
+      }
+    }
+
+    .sweet-plus {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: white;
+      color: #351c15;
+      font: 30px Arial, sans-serif;
+      box-shadow: 0 3px 15px #351c1515;
+    }
+
+    .sweet-card-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .sweet-card h2 {
+      margin: 0;
+      color: #351c15;
+      font-family: Georgia, serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .sweet-view {
+      flex-shrink: 0;
+      padding: 6px 0;
+      border: 0;
+      border-bottom: 1px solid #b68b42;
+      background: transparent;
+      color: #351c15;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .sweet-code {
+      margin: 12px 0;
+      color: #756b65;
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+
+    .sweet-description {
+      margin: 0;
+      color: #756b65;
+      line-height: 1.7;
+    }
+
+    .sweet-count {
+      margin-top: 24px;
+      color: #756b65;
+      font-size: 14px;
+    }
+
+    /* Design popup */
+    .sweet-dialog {
+      width: min(1080px, calc(100% - 32px));
+      max-width: none;
+      max-height: 90dvh;
+      padding: 0;
+      border: 0;
+      border-radius: 12px;
+      background: white;
+      color: #351c15;
+      overflow: auto;
+    }
+
+    .sweet-dialog::backdrop {
+      background: rgb(30 20 15 / 65%);
+    }
+
+    body.sweet-modal-open {
+      overflow: hidden;
+    }
+
+    .sweet-modal-top {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8e0d8;
+    }
+
+    .sweet-close {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #faf7f2;
+      color: #351c15;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .sweet-modal-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+    }
+
+    .sweet-modal-photo {
+      display: flex;
+      align-items: center;
+      background: #f7f4ef;
+    }
+
+    .sweet-modal-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .sweet-modal-info {
+      padding: 28px;
+    }
+
+    .sweet-modal-code {
+      margin: 0 0 12px;
+      color: #8c6b35;
+      font-size: 12px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .sweet-modal-info h2 {
+      margin: 0 0 14px;
+      font-family: Georgia, serif;
+      font-size: 38px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .sweet-modal-description {
+      color: #756b65;
+      line-height: 1.6;
+    }
+
+    .sweet-pricing {
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid #e8e0d8;
+    }
+
+    .sweet-pricing h3 {
+      margin: 0 0 14px;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    .sweet-sizes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .sweet-size {
+      padding: 12px 8px;
+      border: 1px solid #e8e0d8;
+      border-radius: 6px;
+      background: white;
+      color: #351c15;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .sweet-size[aria-pressed="true"] {
+      border-color: #ffb500;
+      background: #fff5d9;
+    }
+
+    .sweet-price {
+      margin: 18px 0 5px;
+      font-family: Georgia, serif;
+      font-size: 34px;
+    }
+
+    .sweet-selected-size {
+      margin: 0;
+      color: #756b65;
+      font-size: 13px;
+    }
+
+    .sweet-personalize {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid #e8e0d8;
+      color: #756b65;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .sweet-personalize strong {
+      color: #351c15;
+    }
+
+    .sweet-order-link {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 12px 20px;
+      border-radius: 6px;
+      background: #ffb500;
+      color: #351c15;
+      text-decoration: none;
+    }
+
+    .sweet-photo-note {
+      margin: 12px 0 0;
+      color: #756b65;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .sweet-photo-button:focus-visible,
+    .sweet-view:focus-visible,
+    .sweet-close:focus-visible,
+    .sweet-size:focus-visible,
+    .sweet-order-link:focus-visible {
+      outline: 3px solid #351c15;
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 700px) {
+      .sweet-gallery {
+        grid-template-columns: 1fr;
+        gap: 42px;
+      }
+
+      .sweet-card-heading {
+        align-items: flex-start;
+      }
+
+      .sweet-view {
+        font-size: 14px;
+      }
+
+      .sweet-modal-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sweet-modal-photo img {
+        max-height: 35dvh;
+        object-fit: contain;
+      }
+
+      .sweet-modal-info {
+        padding: 22px;
+      }
+
+      .sweet-modal-info h2 {
+        font-size: 32px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sweet-photo-button img {
+        transition: none;
+      }
+    }
+  </style>
 </head>
 
 <body class="collection-page">
 
-  <!-- Shared navigation -->
   <header class="site-header">
     <a class="brand" href="index.html">
       THE UPS STORE PRINT
-      <small>INVITATIONS & EVENT PRINTING</small>
+      <small>INVITATIONS &amp; EVENT PRINTING</small>
     </a>
 
     <button
       class="nav-toggle"
       type="button"
+      aria-label="Open menu"
       aria-expanded="false"
       aria-controls="site-navigation"
     >
-      Menu ☰
+      ☰
     </button>
 
     <nav
@@ -39,7 +339,7 @@
     >
       <a href="index.html">Home</a>
       <a href="wedding.html">Wedding</a>
-      <a href="baby-shower.html">Baby Shower & Gender Reveal</a>
+      <a href="baby-shower.html">Baby Shower &amp; Gender Reveal</a>
       <a href="birthday.html">Birthday</a>
       <a href="sweet-16.html" aria-current="page">Sweet 16</a>
       <a href="sympathy.html">Sympathy</a>
@@ -47,588 +347,376 @@
     </nav>
   </header>
 
-  <main>
+  <main class="page">
 
     <section class="intro">
-      <div>
-        <div class="eyebrow">Sweet 16 collection</div>
+      <p class="eyebrow">SWEET 16 COLLECTION</p>
 
-        <h1>Sixteen.<br>Unforgettably you.</h1>
+      <h1>A moment to shine.</h1>
 
-        <p>
-          Celebrate a milestone with invitations and welcome
-          signs that match the mood of your night.
-        </p>
-      </div>
+      <p class="intro-text">
+        Invitations and welcome signs for a celebration
+        that feels like you. Find your favorite look,
+        then make it personal.
+      </p>
 
-      <div class="count" id="count" aria-live="polite"></div>
+      <p class="sweet-count" id="sweet-count"></p>
     </section>
 
-    <!-- Style filters -->
-    <nav class="toolbar" aria-label="Filter Sweet 16 designs">
-      <button
-        class="filter active"
-        type="button"
-        data-filter="all"
-        aria-pressed="true"
-      >
-        All designs
-      </button>
-
-      <button
-        class="filter"
-        type="button"
-        data-filter="soft"
-        aria-pressed="false"
-      >
-        Soft & Romantic
-      </button>
-
-      <button
-        class="filter"
-        type="button"
-        data-filter="glam"
-        aria-pressed="false"
-      >
-        Glam & Elegant
-      </button>
-
-      <button
-        class="filter"
-        type="button"
-        data-filter="modern"
-        aria-pressed="false"
-      >
-        Modern
-      </button>
-    </nav>
-
-    <!-- Design cards -->
     <section
-      class="grid"
-      id="sweet-grid"
+      class="sweet-gallery"
+      id="sweet-gallery"
       aria-label="Sweet 16 designs"
     ></section>
 
-    <!-- Ordering information -->
-    <section class="order">
+    <noscript>
+      <p>Please enable JavaScript to browse the Sweet 16 designs.</p>
+    </noscript>
+
+    <section class="order-section" id="how-to-order">
       <div>
-        <div class="eyebrow">Made personal, in store</div>
-        <h2>Your night.<br>Your signature style.</h2>
+        <p class="eyebrow">MADE PERSONAL, IN STORE</p>
+        <h2>Your celebration. Your style.</h2>
       </div>
 
-      <div class="steps">
-        <div class="step">
-          <b>01 / BROWSE</b>
-          <h3>Find your look</h3>
-          <p>
-            Explore the collection and open a design for a closer look.
-          </p>
-        </div>
+      <div class="order-step">
+        <p class="step-number">01 / BROWSE</p>
+        <h3>Find your favorite</h3>
+        <p>
+          Explore the designs and open your favorites
+          for a closer look.
+        </p>
+      </div>
 
-        <div class="step">
-          <b>02 / SAVE</b>
-          <h3>Note the number</h3>
-          <p>
-            Save the design number or screenshot your favorite.
-          </p>
-        </div>
+      <div class="order-step">
+        <p class="step-number">02 / CHOOSE</p>
+        <h3>Plan your prints</h3>
+        <p>
+          Note your design number, invitation quantity
+          and poster size.
+        </p>
+      </div>
 
-        <div class="step">
-          <b>03 / VISIT</b>
-          <h3>Make it yours</h3>
-          <p>
-            Ask in store about personalization, sizes and pricing.
-          </p>
-        </div>
+      <div class="order-step">
+        <p class="step-number">03 / VISIT</p>
+        <h3>Make it yours</h3>
+        <p>
+          Bring your photo, name and celebration details
+          to the store.
+        </p>
       </div>
     </section>
 
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <span>THE UPS STORE PRINT</span>
-    <span>Illustrative collection · Order in store</span>
+    <span>Personalized for your celebration.</span>
   </footer>
 
-  <!-- Expanded design preview -->
-  <dialog id="detail" aria-labelledby="modal-title">
-    <div class="modal-head">
-      <span class="eyebrow">A closer look</span>
-
+  <dialog
+    class="sweet-dialog"
+    id="sweet-detail"
+    aria-labelledby="sweet-modal-title"
+  >
+    <div class="sweet-modal-top">
       <button
-        class="close"
+        class="sweet-close"
+        id="sweet-close"
         type="button"
-        aria-label="Close design preview"
+        aria-label="Close design"
       >
         ×
       </button>
     </div>
 
-    <div class="modal-body">
-      <img id="modal-image" alt="">
+    <div class="sweet-modal-layout">
+      <div class="sweet-modal-photo">
+        <img id="sweet-modal-image" alt="">
+      </div>
 
-      <div class="modal-info">
-        <div class="code" id="modal-code"></div>
+      <div class="sweet-modal-info">
+        <p class="sweet-modal-code" id="sweet-modal-code"></p>
 
-        <h2 id="modal-title"></h2>
+        <h2 id="sweet-modal-title"></h2>
 
-        <p id="modal-description"></p>
+        <p
+          class="sweet-modal-description"
+          id="sweet-modal-description"
+        ></p>
 
-        <span class="badge">
-          Invitation + matching welcome sign
-        </span>
+        <section
+          class="sweet-pricing"
+          aria-label="Poster board pricing"
+        >
+          <h3>Poster board</h3>
 
-        <h3>Make it your own</h3>
+          <div
+            class="sweet-sizes"
+            id="sweet-sizes"
+            role="group"
+            aria-label="Choose poster board size"
+          ></div>
 
-        <ul>
-          <li>Birthday name and celebration wording</li>
-          <li>Event date, time and location</li>
-          <li>Dress code and RSVP details</li>
-          <li>Ask in store about sizes and pricing</li>
-        </ul>
+          <p
+            class="sweet-price"
+            id="sweet-price"
+            aria-live="polite"
+          ></p>
 
-        <h3 id="modal-order"></h3>
+          <p
+            class="sweet-selected-size"
+            id="sweet-selected-size"
+          ></p>
+        </section>
 
-        <p>
-          Show this design number to the store team
-          to discuss your order.
+        <p class="sweet-personalize">
+          <strong>Make it your own</strong><br>
+          Personalized with your photo, name and event details.
+          Matching 5×7 invitations are available.
         </p>
+
+        <p class="sweet-photo-note">
+          Display props, including the easel, are not included.
+        </p>
+
+        <a
+          class="sweet-order-link"
+          id="sweet-order-link"
+          href="#how-to-order"
+        >
+          How to order
+        </a>
       </div>
     </div>
   </dialog>
 
-<script src="script.js?v=6"></script>
+  <!-- Shared website navigation -->
+  <script src="script.js?v=8"></script>
 
+  <!-- Sweet 16 designs and popup -->
   <script>
     (() => {
+      "use strict";
+
       /*
-        These are illustrative sample previews.
-
-        To use finished artwork, add an image property:
-        image: "images/blush-butterfly.jpg"
-      */
-
+       * SWEET 16 DESIGNS
+       * Image names must match the files in your images folder.
+       */
       const designs = [
         {
+          code: "S1601",
           name: "Blush Butterfly",
-          code: "S01",
-          categories: ["soft"],
           description:
-            "Muted blush and delicate butterflies for a soft, romantic celebration.",
-          background: "#eee2e5",
-          paper: "#fff9fa",
-          ink: "#946e7c",
-          accent: "#c6a1af",
-          theme: "butterfly",
-          sampleName: "ISABELLA"
+            "Blush roses, delicate butterflies and touches of gold.",
+          image: "images/sweet16-blush-butterfly.png"
         },
         {
+          code: "S1602",
+          name: "Moonlit Wishes",
+          description:
+            "A starry midnight sky, lavender florals and a silver crescent moon.",
+          image: "images/sweet16-moonlit-wishes.png"
+        },
+        {
+          code: "S1603",
           name: "Blue Elegance",
-          code: "S02",
-          categories: ["glam"],
           description:
-            "Dusty blue and fine gold details for an elegant evening.",
-          background: "#e1e6ed",
-          paper: "#f8faff",
-          ink: "#536b88",
-          accent: "#b6a174",
-          theme: "elegant",
-          sampleName: "SOPHIA"
+            "Soft blue hydrangeas, flowing ribbon and delicate gold details.",
+          image: "images/sweet16-blue-elegance.png"
         },
         {
-          name: "Moonlight Wishes",
-          code: "S03",
-          categories: ["soft", "glam"],
+          code: "S1604",
+          name: "Champagne Glow",
           description:
-            "A deep midnight palette with a crescent moon and scattered stars.",
-          background: "#e4e2eb",
-          paper: "#302d43",
-          ink: "#e1d5bc",
-          accent: "#b9a67f",
-          theme: "moon",
-          sampleName: "AMELIA"
-        },
-        {
-          name: "Modern Muse",
-          code: "S04",
-          categories: ["modern"],
-          description:
-            "Bold lettering and a clean black-and-ivory palette.",
-          background: "#e9e5df",
-          paper: "#fffdf7",
-          ink: "#2e2b29",
-          accent: "#a79885",
-          theme: "modern",
-          sampleName: "AVA"
+            "Champagne tones, pearl accents and a graceful satin bow.",
+          image: "images/sweet16-champagne-glow.png"
         }
       ];
 
-      const grid = document.querySelector("#sweet-grid");
-      const counter = document.querySelector("#count");
-      const dialog = document.querySelector("#detail");
+      const posterSizes = [
+        { label: "16×20", price: 18.50 },
+        { label: "18×24", price: 25.50 },
+        { label: "20×24", price: 28.50 },
+        { label: "24×36", price: 46.00 }
+      ];
 
-      function escapeText(value) {
+      const gallery = document.getElementById("sweet-gallery");
+      const count = document.getElementById("sweet-count");
+
+      const dialog = document.getElementById("sweet-detail");
+      const closeButton = document.getElementById("sweet-close");
+
+      const modalImage = document.getElementById("sweet-modal-image");
+      const modalCode = document.getElementById("sweet-modal-code");
+      const modalTitle = document.getElementById("sweet-modal-title");
+      const modalDescription = document.getElementById(
+        "sweet-modal-description"
+      );
+
+      const sizesContainer = document.getElementById("sweet-sizes");
+      const priceElement = document.getElementById("sweet-price");
+      const sizeElement = document.getElementById(
+        "sweet-selected-size"
+      );
+
+      const savedSizes = new Map();
+
+      let activeDesign = null;
+      let previousFocus = null;
+
+      const currency = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+      });
+
+      function escapeHTML(value) {
         return String(value).replace(/[&<>"']/g, character => ({
           "&": "&amp;",
           "<": "&lt;",
           ">": "&gt;",
           '"': "&quot;",
-          "'": "&apos;"
-        }[character]));
+          "'": "&#39;"
+        })[character]);
       }
 
-      function decorations(design) {
-        if (design.theme === "butterfly") {
-          return `
-            <g
-              fill="${design.accent}"
-              stroke="${design.ink}"
-              stroke-width="0.6"
-            >
-              <g transform="translate(32 35) rotate(-20)">
-                <ellipse cx="-7" cy="-3" rx="8" ry="12"/>
-                <ellipse cx="7" cy="-3" rx="8" ry="12"/>
-                <ellipse cx="-5" cy="9" rx="6" ry="7"/>
-                <ellipse cx="5" cy="9" rx="6" ry="7"/>
-                <path d="M0 -10 L0 16" fill="none"/>
-              </g>
-
-              <g transform="translate(166 208) rotate(25)">
-                <ellipse cx="-7" cy="-3" rx="8" ry="12"/>
-                <ellipse cx="7" cy="-3" rx="8" ry="12"/>
-                <ellipse cx="-5" cy="9" rx="6" ry="7"/>
-                <ellipse cx="5" cy="9" rx="6" ry="7"/>
-                <path d="M0 -10 L0 16" fill="none"/>
-              </g>
-            </g>
-          `;
-        }
-
-        if (design.theme === "moon") {
-          return `
-            <circle
-              cx="100" cy="38" r="15"
-              fill="${design.accent}"
-            />
-
-            <circle
-              cx="107" cy="33" r="13"
-              fill="${design.paper}"
-            />
-
-            <g fill="${design.accent}">
-              <path d="M31 50 L34 58 L42 61 L34 64
-                       L31 72 L28 64 L20 61 L28 58 Z"/>
-
-              <path d="M169 183 L172 191 L180 194 L172 197
-                       L169 205 L166 197 L158 194 L166 191 Z"/>
-
-              <circle cx="157" cy="39" r="2"/>
-              <circle cx="40" cy="200" r="2"/>
-              <circle cx="175" cy="93" r="1.5"/>
-              <circle cx="23" cy="155" r="1.5"/>
-            </g>
-          `;
-        }
-
-        if (design.theme === "elegant") {
-          return `
-            <rect
-              x="15" y="15" width="170" height="220"
-              fill="none"
-              stroke="${design.accent}"
-              stroke-width="0.5"
-            />
-
-            <path
-              d="M88 39 L100 29 L112 39 L100 49 Z"
-              fill="none"
-              stroke="${design.accent}"
-              stroke-width="0.8"
-            />
-
-            <line
-              x1="76" y1="207" x2="124" y2="207"
-              stroke="${design.accent}"
-              stroke-width="0.8"
-            />
-          `;
-        }
-
-        return `
-          <line
-            x1="25" y1="35" x2="175" y2="35"
-            stroke="${design.ink}"
-            stroke-width="1"
-          />
-
-          <line
-            x1="25" y1="218" x2="175" y2="218"
-            stroke="${design.ink}"
-            stroke-width="1"
-          />
-        `;
-      }
-
-      function stationery(design, isSign) {
-        const modern = design.theme === "modern";
-
-        return `
-          <rect
-            width="200"
-            height="250"
-            fill="${design.paper}"
-          />
-
-          <rect
-            x="10" y="10" width="180" height="230"
-            fill="none"
-            stroke="${design.accent}"
-            stroke-width="0.7"
-            opacity="${modern ? 0 : 0.65}"
-          />
-
-          ${decorations(design)}
-
-          <g fill="${design.ink}" text-anchor="middle">
-
-            <text
-              x="100" y="73"
-              font-family="Arial, sans-serif"
-              font-size="6.5"
-              letter-spacing="1.8"
-            >
-              ${isSign ? "WELCOME TO" : "YOU'RE INVITED"}
-            </text>
-
-            <text
-              x="100" y="100"
-              font-family="Georgia, serif"
-              font-size="${modern ? 21 : 18}"
-              font-style="${modern ? "normal" : "italic"}"
-            >
-              ${escapeText(design.sampleName)}
-            </text>
-
-            <text
-              x="100" y="166"
-              font-family="Georgia, serif"
-              font-size="65"
-            >
-              16
-            </text>
-
-            <text
-              x="100" y="188"
-              font-family="Arial, sans-serif"
-              font-size="7"
-              letter-spacing="2"
-            >
-              SWEET SIXTEEN
-            </text>
-
-            <text
-              x="100" y="229"
-              font-family="Arial, sans-serif"
-              font-size="5"
-              letter-spacing="0.9"
-            >
-              A NIGHT TO REMEMBER
-            </text>
-
-          </g>
-        `;
-      }
-
-      function makePreview(design) {
-        if (design.image) return design.image;
-
-        const svg = `
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="900"
-            height="620"
-            viewBox="0 0 900 620"
-          >
-            <rect
-              width="900"
-              height="620"
-              fill="${design.background}"
-            />
-
-            <ellipse
-              cx="450" cy="548" rx="330" ry="22"
-              fill="#000000"
-              opacity="0.05"
-            />
-
-            <!-- Welcome sign easel -->
-            <path
-              d="M568 130 L485 560 M568 130 L681 560"
-              fill="none"
-              stroke="${design.accent}"
-              stroke-width="8"
-              stroke-linecap="round"
-            />
-
-            <!-- Welcome sign shadow -->
-            <rect
-              x="403" y="77" width="310" height="388"
-              fill="#000000"
-              opacity="0.07"
-            />
-
-            <!-- Welcome sign -->
-            <g transform="translate(395 68) scale(1.55)">
-              ${stationery(design, true)}
-            </g>
-
-            <!-- Invitation -->
-            <g transform="translate(157 225) rotate(-6 100 125)">
-              <rect
-                x="8" y="10" width="200" height="250"
-                fill="#000000"
-                opacity="0.08"
-              />
-
-              ${stationery(design, false)}
-            </g>
-          </svg>
-        `;
-
-        return "data:image/svg+xml;charset=utf-8," +
-          encodeURIComponent(svg);
-      }
-
-      // Build the design cards.
-      designs.forEach((design, index) => {
-        design.preview = makePreview(design);
-
-        const card = document.createElement("article");
-        card.className = "card";
-        card.dataset.categories = design.categories.join(" ");
-
-        card.innerHTML = `
-          <button
-            class="image-button"
-            type="button"
-            data-design-index="${index}"
-            aria-label="View ${escapeText(design.name)}, design ${design.code}"
-          >
-            <img
-              src="${design.preview}"
-              alt="${escapeText(design.name)} sample invitation and matching welcome sign"
-              ${index > 1 ? 'loading="lazy"' : ""}
-            >
-
-            <span class="zoom" aria-hidden="true">+</span>
-          </button>
-
-          <div class="details">
-            <div>
-              <h2>${escapeText(design.name)}</h2>
-
-              <div class="code">
-                Design ${design.code} · Invitation & welcome sign
-              </div>
-
-              <p class="description">
-                ${escapeText(design.description)}
-              </p>
-            </div>
-
+      function buildGallery() {
+        gallery.innerHTML = designs.map((design, index) => `
+          <article class="sweet-card">
             <button
-              class="view"
+              class="sweet-photo-button"
               type="button"
               data-design-index="${index}"
-              aria-label="View ${escapeText(design.name)} details"
+              aria-label="View ${escapeHTML(design.name)}"
             >
-              View design ↗
+              <img
+                src="${escapeHTML(design.image)}"
+                alt="${escapeHTML(design.name)} Sweet 16 invitation and welcome sign"
+                loading="lazy"
+                width="1536"
+                height="1024"
+              >
+
+              <span class="sweet-plus" aria-hidden="true">+</span>
             </button>
-          </div>
-        `;
 
-        grid.appendChild(card);
-      });
+            <div class="sweet-card-heading">
+              <h2>${escapeHTML(design.name)}</h2>
 
-      function updateCount(number) {
-        counter.textContent =
-          String(number).padStart(2, "0") +
-          " coordinated design" +
-          (number === 1 ? "" : "s");
+              <button
+                class="sweet-view"
+                type="button"
+                data-design-index="${index}"
+                aria-label="View ${escapeHTML(design.name)} details"
+              >
+                View design ↗
+              </button>
+            </div>
+
+            <p class="sweet-code">
+              Design ${escapeHTML(design.code)}
+              · Invitation &amp; welcome sign
+            </p>
+
+            <p class="sweet-description">
+              ${escapeHTML(design.description)}
+            </p>
+          </article>
+        `).join("");
+
+        count.textContent =
+          `${String(designs.length).padStart(2, "0")} coordinated designs`;
       }
 
-      updateCount(designs.length);
+      function selectSize(index) {
+        const size = posterSizes[index];
 
-      // Filter the designs.
-      const filters = document.querySelectorAll("[data-filter]");
+        if (!activeDesign || !size) {
+          return;
+        }
 
-      filters.forEach(button => {
-        button.addEventListener("click", () => {
-          const category = button.dataset.filter;
-          let visibleCount = 0;
+        savedSizes.set(activeDesign.code, index);
 
-          filters.forEach(filter => {
-            const selected = filter === button;
-
-            filter.classList.toggle("active", selected);
-            filter.setAttribute("aria-pressed", String(selected));
-          });
-
-          grid.querySelectorAll(".card").forEach(card => {
-            const categories = card.dataset.categories.split(" ");
-
-            const matches =
-              category === "all" ||
-              categories.includes(category);
-
-            card.hidden = !matches;
-
-            if (matches) visibleCount++;
-          });
-
-          updateCount(visibleCount);
+        sizesContainer.querySelectorAll("button").forEach(button => {
+          button.setAttribute(
+            "aria-pressed",
+            String(Number(button.dataset.sizeIndex) === index)
+          );
         });
-      });
 
-      // Open a larger preview.
-      grid.addEventListener("click", event => {
-        const button = event.target.closest("[data-design-index]");
+        priceElement.textContent = currency.format(size.price);
+        sizeElement.textContent = `${size.label} inch poster board`;
+      }
 
-        if (!button) return;
+      function openDesign(index, trigger) {
+        const design = designs[index];
 
-        const design = designs[button.dataset.designIndex];
+        if (!design) {
+          return;
+        }
 
-        document.querySelector("#modal-title").textContent =
-          design.name;
+        activeDesign = design;
+        previousFocus = trigger;
 
-        document.querySelector("#modal-code").textContent =
-          "DESIGN " + design.code;
+        modalImage.src = design.image;
+        modalImage.alt =
+          `${design.name} Sweet 16 invitation and welcome sign`;
 
-        document.querySelector("#modal-description").textContent =
-          design.description;
+        modalCode.textContent = `DESIGN ${design.code}`;
+        modalTitle.textContent = design.name;
+        modalDescription.textContent = design.description;
 
-        document.querySelector("#modal-order").textContent =
-          "Ask for " + design.code + " in store";
+        sizesContainer.innerHTML = posterSizes.map((size, index) => `
+          <button
+            class="sweet-size"
+            type="button"
+            data-size-index="${index}"
+            aria-pressed="false"
+          >
+            ${size.label}
+          </button>
+        `).join("");
 
-        const image = document.querySelector("#modal-image");
-
-        image.src = design.preview;
-        image.alt =
-          design.name + " invitation and matching welcome sign";
+        selectSize(savedSizes.get(design.code) ?? 0);
 
         dialog.showModal();
+        document.body.classList.add("sweet-modal-open");
+        closeButton.focus();
+      }
+
+      function closeDesign() {
+        dialog.close();
+      }
+
+      gallery.addEventListener("click", event => {
+        const trigger = event.target.closest("[data-design-index]");
+
+        if (!trigger) {
+          return;
+        }
+
+        openDesign(Number(trigger.dataset.designIndex), trigger);
       });
 
-      // Close the preview.
-      dialog.querySelector(".close").addEventListener(
-        "click",
-        () => dialog.close()
-      );
+      sizesContainer.addEventListener("click", event => {
+        const button = event.target.closest("[data-size-index]");
+
+        if (!button) {
+          return;
+        }
+
+        selectSize(Number(button.dataset.sizeIndex));
+      });
+
+      closeButton.addEventListener("click", closeDesign);
+
+      document.getElementById("sweet-order-link")
+        .addEventListener("click", closeDesign);
 
       dialog.addEventListener("click", event => {
-        if (event.target !== dialog) return;
+        if (event.target !== dialog) {
+          return;
+        }
 
         const bounds = dialog.getBoundingClientRect();
 
@@ -638,8 +726,20 @@
           event.clientY < bounds.top ||
           event.clientY > bounds.bottom;
 
-        if (clickedOutside) dialog.close();
+        if (clickedOutside) {
+          closeDesign();
+        }
       });
+
+      dialog.addEventListener("close", () => {
+        document.body.classList.remove("sweet-modal-open");
+
+        if (previousFocus) {
+          previousFocus.focus();
+        }
+      });
+
+      buildGallery();
     })();
   </script>
 
