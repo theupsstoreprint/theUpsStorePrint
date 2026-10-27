@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Graduation & Sports Banners | The UPS Store Print</title>
+
+  <meta
+    name="description"
+    content="Explore personalized graduation and sports banner designs."
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="collection-page">
+
+  <!-- Shared navigation -->
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      THE UPS STORE PRINT
+      <small>INVITATIONS & EVENT PRINTING</small>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-navigation"
+    >
+      Menu ☰
+    </button>
+
+    <nav
+      class="site-nav"
+      id="site-navigation"
+      aria-label="Main navigation"
+    >
+      <a href="index.html">Home</a>
+      <a href="wedding.html">Wedding</a>
+      <a href="baby-shower.html">Baby Shower & Gender Reveal</a>
+      <a href="birthday.html">Birthday</a>
+      <a href="sweet-16.html">Sweet 16</a>
+      <a href="sympathy.html">Sympathy</a>
+      <a href="banners.html" aria-current="page">Banners</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <div>
+        <div class="eyebrow">Graduation & sports banners</div>
+
+        <h1>Big moments.<br>Bigger celebrations.</h1>
+
+        <p>
+          Celebrate your graduate, recognize a senior athlete,
+          or show your team spirit with a personalized banner.
+        </p>
+      </div>
+
+      <div class="count" id="count" aria-live="polite"></div>
+    </section>
+
+    <!-- Category filters -->
+    <nav class="toolbar" aria-label="Filter banner designs">
+      <button
+        class="filter active"
+        type="button"
+        data-filter="all"
+        aria-pressed="true"
+      >
+        All banners
+      </button>
+
+      <button
+        class="filter"
+        type="button"
+        data-filter="graduation"
+        aria-pressed="false"
+      >
+        Graduation
+      </button>
+
+      <button
+        class="filter"
+        type="button"
+        data-filter="sports"
+        aria-pressed="false"
+      >
+        Sports
+      </button>
+    </nav>
+
+    <section
+      class="grid"
+      id="banner-grid"
+      aria-label="Graduation and sports banner designs"
+    ></section>
+
+    <!-- Ordering information -->
+    <section class="order">
+      <div>
+        <div class="eyebrow">Made personal, in store</div>
+        <h2>Their achievement.<br>A standout display.</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <b>01 / BROWSE</b>
+          <h3>Choose your style</h3>
+          <p>
+            Explore graduation and sports designs.
+          </p>
+        </div>
+
+        <div class="step">
+          <b>02 / PERSONALIZE</b>
+          <h3>Gather the details</h3>
+          <p>
+            Have your names, wording, colors and any photos ready.
+          </p>
+        </div>
+
+        <div class="step">
+          <b>03 / VISIT</b>
+          <h3>Discuss your order</h3>
+          <p>
+            Ask in store about sizes, materials, finishing and pricing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>THE UPS STORE PRINT</span>
+    <span>Illustrative collection · Order in store</span>
+  </footer>
+
+  <!-- Expanded banner preview -->
+  <dialog id="detail" aria-labelledby="modal-title">
+    <div class="modal-head">
+      <span class="eyebrow">A closer look</span>
+
+      <button
+        class="close"
+        type="button"
+        aria-label="Close banner preview"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <img id="modal-image" alt="">
+
+      <div class="modal-info">
+        <div class="code" id="modal-code"></div>
+
+        <h2 id="modal-title"></h2>
+
+        <p id="modal-description"></p>
+
+        <span class="badge" id="modal-badge"></span>
+
+        <h3>Make it your own</h3>
+
+        <ul id="modal-options"></ul>
+
+        <h3 id="modal-order"></h3>
+
+        <p>
+          Show this design number to the store team
+          to discuss your order.
+        </p>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+
+  <script>
+    (() => {
+      /*
+        These are illustrative sample previews.
+
+        To replace a preview with finished artwork, add:
+        image: "images/your-banner.jpg"
+
+        Category values:
+        graduation
+        sports
+      */
+
+      const designs = [
+        {
+          name: "The Next Chapter",
+          code: "G01",
+          category: "graduation",
+          description:
+            "Classic navy and gold typography with a bold graduation year.",
+          background: "#e7e5df",
+          bannerColor: "#243544",
+          ink: "#fffaf0",
+          accent: "#c5ad78",
+          theme: "classic",
+          sampleName: "ALEX MORGAN",
+          year: "2027"
+        },
+        {
+          name: "Picture the Future",
+          code: "G02",
+          category: "graduation",
+          description:
+            "A photo-focused graduation banner with clean, modern lettering.",
+          background: "#e9e4dc",
+          bannerColor: "#fffaf0",
+          ink: "#37332d",
+          accent: "#a38a60",
+          theme: "photo",
+          sampleName: "JORDAN",
+          year: "2027"
+        },
+        {
+          name: "Senior Spotlight",
+          code: "SPT01",
+          category: "sports",
+          description:
+            "A portrait-style senior athlete banner with space for a photo and number.",
+          background: "#e3e6e7",
+          bannerColor: "#263a43",
+          ink: "#ffffff",
+          accent: "#b6c4c2",
+          theme: "senior",
+          sampleName: "TAYLOR",
+          number: "12",
+          year: "2027"
+        },
+        {
+          name: "Team Pride",
+          code: "SPT02",
+          category: "sports",
+          description:
+            "A bold team banner with strong lettering and customizable colors.",
+          background: "#e6e5df",
+          bannerColor: "#394b3c",
+          ink: "#fffdf3",
+          accent: "#c3b989",
+          theme: "team",
+          sampleName: "WILDCATS",
+          sport: "SOCCER",
+          year: "2027"
+        }
+      ];
+
+      const grid = document.querySelector("#banner-grid");
+      const counter = document.querySelector("#count");
+      const dialog = document.querySelector("#detail");
+
+      function escapeText(value) {
+        return String(value).replace(/[&<>"']/g, character => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&apos;"
+        }[character]));
+      }
+
+      function grommets(width, height, color) {
+        return `
+          <g fill="${color}" stroke="#9a9993" stroke-width="1">
+            <circle cx="13" cy="13" r="4"/>
+            <circle cx="${width - 13}" cy="13" r="4"/>
+            <circle cx="13" cy="${height - 13}" r="4"/>
+            <circle
+              cx="${width - 13}"
+              cy="${height - 13}"
+              r="4"
+            />
+          </g>
+        `;
+      }
+
+      function portraitPlaceholder(x, y, width, height, design) {
+        const centerX = x + width / 2;
+        const headY = y + height * 0.3;
+        const radius = width * 0.16;
+
+        return `
+          <rect
+            x="${x}" y="${y}"
+            width="${width}" height="${height}"
+            fill="${design.accent}"
+            opacity="0.2"
+          />
+
+          <circle
+            cx="${centerX}"
+            cy="${headY}"
+            r="${radius}"
+            fill="${design.accent}"
+            opacity="0.55"
+          />
+
+          <path
+            d="
+              M ${x + width * 0.16} ${y + height * 0.77}
+              Q ${x + width * 0.2} ${y + height * 0.48}
+                ${centerX} ${y + height * 0.48}
+              Q ${x + width * 0.8} ${y + height * 0.48}
+                ${x + width * 0.84} ${y + height * 0.77}
+              Z
+            "
+            fill="${design.accent}"
+            opacity="0.55"
+          />
+
+          <text
+            x="${centerX}"
+            y="${y + height * 0.92}"
+            text-anchor="middle"
+            font-family="Arial, sans-serif"
+            font-size="9"
+            letter-spacing="1.4"
+            fill="${design.ink}"
+          >
+            YOUR PHOTO
+          </text>
+        `;
+      }
+
+      function graduationArtwork(design) {
+        if (design.theme === "photo") {
+          return `
+            <rect width="640" height="260"
+                  fill="${design.bannerColor}"/>
+
+            <rect x="8" y="8" width="624" height="244"
+                  fill="none" stroke="${design.accent}"
+                  stroke-width="1"/>
+
+            ${portraitPlaceholder(28, 25, 170, 210, design)}
+
+            <g fill="${design.ink}" text-anchor="middle">
+              <text x="420" y="67"
+                    font-family="Arial, sans-serif"
+                    font-size="12" letter-spacing="3">
+                THE FUTURE IS YOURS
+              </text>
+
+              <text x="420" y="125"
+                    font-family="Georgia, serif"
+                    font-size="45">
+                ${escapeText(design.sampleName)}
+              </text>
+
+              <text x="420" y="171"
+                    font-family="Arial, sans-serif"
+                    font-size="18" letter-spacing="4">
+                CLASS OF ${design.year}
+              </text>
+
+              <text x="420" y="213"
+                    font-family="Arial, sans-serif"
+                    font-size="10" letter-spacing="2">
+                CONGRATULATIONS, GRADUATE
+              </text>
+            </g>
+
+            ${grommets(640, 260, "#dedbd4")}
+          `;
+        }
+
+        return `
+          <rect width="640" height="260"
+                fill="${design.bannerColor}"/>
+
+          <rect x="22" y="22" width="596" height="216"
+                fill="none" stroke="${design.accent}"
+                stroke-width="1"/>
+
+          <g fill="${design.ink}" text-anchor="middle">
+            <text x="320" y="61"
+                  font-family="Arial, sans-serif"
+                  font-size="11" letter-spacing="3">
+              HERE'S TO YOUR NEXT CHAPTER
+            </text>
+
+            <text x="320" y="112"
+                  font-family="Georgia, serif"
+                  font-size="34">
+              ${escapeText(design.sampleName)}
+            </text>
+
+            <text x="320" y="185"
+                  font-family="Georgia, serif"
+                  font-size="68" fill="${design.accent}">
+              ${design.year}
+            </text>
+
+            <text x="320" y="218"
+                  font-family="Arial, sans-serif"
+                  font-size="10" letter-spacing="3">
+              CONGRATULATIONS, GRADUATE
+            </text>
+          </g>
+
+          ${grommets(640, 260, "#dedbd4")}
+        `;
+      }
+
+      function seniorArtwork(design) {
+        return `
+          <rect width="280" height="430"
+                fill="${design.bannerColor}"/>
+
+          <path d="M0 0 L280 0 L280 85 L0 160 Z"
+                fill="${design.accent}" opacity="0.12"/>
+
+          <text x="140" y="42"
+                text-anchor="middle"
+                font-family="Arial, sans-serif"
+                font-size="13" letter-spacing="4"
+                fill="${design.ink}">
+            SENIOR ${design.year}
+          </text>
+
+          ${portraitPlaceholder(38, 63, 204, 236, design)}
+
+          <g fill="${design.ink}" text-anchor="middle">
+            <text x="140" y="344"
+                  font-family="Arial, sans-serif"
+                  font-weight="bold"
+                  font-size="33">
+              ${escapeText(design.sampleName)}
+            </text>
+
+            <text x="140" y="391"
+                  font-family="Georgia, serif"
+                  font-size="43" fill="${design.accent}">
+              #${design.number}
+            </text>
+          </g>
+
+          ${grommets(280, 430, "#dedbd4")}
+        `;
+      }
+
+      function teamArtwork(design) {
+        return `
+          <rect width="640" height="260"
+                fill="${design.bannerColor}"/>
+
+          <path d="M0 0 L170 0 L65 260 L0 260 Z"
+                fill="${design.accent}" opacity="0.2"/>
+
+          <path d="M640 0 L570 0 L465 260 L640 260 Z"
+                fill="${design.accent}" opacity="0.15"/>
+
+          <g fill="${design.ink}" text-anchor="middle">
+            <text x="320" y="65"
+                  font-family="Arial, sans-serif"
+                  font-size="12" letter-spacing="4">
+              ONE TEAM. ONE GOAL.
+            </text>
+
+            <text x="320" y="139"
+                  font-family="Arial, sans-serif"
+                  font-weight="bold"
+                  font-style="italic"
+                  font-size="57">
+              ${escapeText(design.sampleName)}
+            </text>
+
+            <text x="320" y="185"
+                  font-family="Arial, sans-serif"
+                  font-size="19" letter-spacing="5"
+                  fill="${design.accent}">
+              ${escapeText(design.sport)}
+            </text>
+
+            <text x="320" y="220"
+                  font-family="Arial, sans-serif"
+                  font-size="10" letter-spacing="3">
+              SEASON ${design.year}
+            </text>
+          </g>
+
+          ${grommets(640, 260, "#dedbd4")}
+        `;
+      }
+
+      function makePreview(design) {
+        if (design.image) return design.image;
+
+        const isSenior = design.theme === "senior";
+
+        let artwork;
+
+        if (isSenior) {
+          artwork = seniorArtwork(design);
+        } else if (design.theme === "team") {
+          artwork = teamArtwork(design);
+        } else {
+          artwork = graduationArtwork(design);
+        }
+
+        const shadow = isSenior
+          ? `
+            <rect x="318" y="83" width="280" height="430"
+                  fill="#000000" opacity="0.09"/>
+          `
+          : `
+            <rect x="138" y="188" width="640" height="260"
+                  fill="#000000" opacity="0.09"/>
+          `;
+
+        const position = isSenior
+          ? "translate(310 75)"
+          : "translate(130 180)";
+
+        const svg = `
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="900"
+            height="620"
+            viewBox="0 0 900 620"
+          >
+            <rect width="900" height="620"
+                  fill="${design.background}"/>
+
+            ${shadow}
+
+            <g transform="${position}">
+              ${artwork}
+            </g>
+
+            <text
+              x="450" y="573"
+              text-anchor="middle"
+              font-family="Arial, sans-serif"
+              font-size="10" letter-spacing="2"
+              fill="#81796f"
+            >
+              ILLUSTRATIVE BANNER PREVIEW
+            </text>
+          </svg>
+        `;
+
+        return "data:image/svg+xml;charset=utf-8," +
+          encodeURIComponent(svg);
+      }
+
+      // Build the design cards.
+      designs.forEach((design, index) => {
+        design.preview = makePreview(design);
+
+        const card = document.createElement("article");
+        card.className = "card";
+        card.dataset.category = design.category;
+
+        card.innerHTML = `
+          <button
+            class="image-button"
+            type="button"
+            data-design-index="${index}"
+            aria-label="View ${escapeText(design.name)}, design ${design.code}"
+          >
+            <img
+              src="${design.preview}"
+              alt="${escapeText(design.name)} sample personalized banner"
+              ${index > 1 ? 'loading="lazy"' : ""}
+            >
+
+            <span class="zoom" aria-hidden="true">+</span>
+          </button>
+
+          <div class="details">
+            <div>
+              <h2>${escapeText(design.name)}</h2>
+
+              <div class="code">
+                Design ${design.code} ·
+                ${design.category === "graduation"
+                  ? "Graduation banner"
+                  : "Sports banner"}
+              </div>
+
+              <p class="description">
+                ${escapeText(design.description)}
+              </p>
+            </div>
+
+            <button
+              class="view"
+              type="button"
+              data-design-index="${index}"
+              aria-label="View ${escapeText(design.name)} details"
+            >
+              View design ↗
+            </button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      function updateCount(number) {
+        counter.textContent =
+          String(number).padStart(2, "0") +
+          " banner design" +
+          (number === 1 ? "" : "s");
+      }
+
+      updateCount(designs.length);
+
+      // Filter graduation and sports banners.
+      const filters = document.querySelectorAll("[data-filter]");
+
+      filters.forEach(button => {
+        button.addEventListener("click", () => {
+          const category = button.dataset.filter;
+          let visibleCount = 0;
+
+          filters.forEach(filter => {
+            const selected = filter === button;
+
+            filter.classList.toggle("active", selected);
+            filter.setAttribute("aria-pressed", String(selected));
+          });
+
+          grid.querySelectorAll(".card").forEach(card => {
+            const matches =
+              category === "all" ||
+              card.dataset.category === category;
+
+            card.hidden = !matches;
+
+            if (matches) visibleCount++;
+          });
+
+          updateCount(visibleCount);
+        });
+      });
+
+      // Open the larger preview.
+      grid.addEventListener("click", event => {
+        const button = event.target.closest("[data-design-index]");
+
+        if (!button) return;
+
+        const design = designs[button.dataset.designIndex];
+
+        document.querySelector("#modal-title").textContent =
+          design.name;
+
+        document.querySelector("#modal-code").textContent =
+          "DESIGN " + design.code;
+
+        document.querySelector("#modal-description").textContent =
+          design.description;
+
+        document.querySelector("#modal-badge").textContent =
+          design.category === "graduation"
+            ? "Personalized graduation banner"
+            : "Personalized sports banner";
+
+        document.querySelector("#modal-order").textContent =
+          "Ask for " + design.code + " in store";
+
+        const image = document.querySelector("#modal-image");
+
+        image.src = design.preview;
+        image.alt = design.name + " sample personalized banner";
+
+        const options = design.category === "graduation"
+          ? [
+              "Graduate's name and graduation year",
+              "School name and preferred colors",
+              "Your congratulations message",
+              "Your photo for photo-based designs",
+              "Ask about sizes, materials, finishing and pricing"
+            ]
+          : [
+              "Athlete or team name",
+              "Jersey number, sport and season",
+              "Team colors and your supplied logo",
+              "Your athlete photo for photo-based designs",
+              "Ask about sizes, materials, finishing and pricing"
+            ];
+
+        const optionsList = document.querySelector("#modal-options");
+        optionsList.replaceChildren();
+
+        options.forEach(text => {
+          const item = document.createElement("li");
+          item.textContent = text;
+          optionsList.appendChild(item);
+        });
+
+        dialog.showModal();
+      });
+
+      // Close the preview.
+      dialog.querySelector(".close").addEventListener(
+        "click",
+        () => dialog.close()
+      );
+
+      dialog.addEventListener("click", event => {
+        if (event.target !== dialog) return;
+
+        const bounds = dialog.getBoundingClientRect();
+
+        const clickedOutside =
+          event.clientX < bounds.left ||
+          event.clientX > bounds.right ||
+          event.clientY < bounds.top ||
+          event.clientY > bounds.bottom;
+
+        if (clickedOutside) dialog.close();
+      });
+    })();
+  </script>
+
+</body>
+</html>
