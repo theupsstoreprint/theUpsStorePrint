@@ -1,32 +1,82 @@
-// Coming-soon messages on the landing page
-const comingSoonDialog = document.querySelector("#coming-soon");
+// Shared navigation for every page
+(() => {
+  function setupNavigation() {
+    const header = document.querySelector(".site-header");
 
-if (comingSoonDialog) {
-  const dialogTitle = comingSoonDialog.querySelector("#soon-title");
-  const closeButton = comingSoonDialog.querySelector(".close");
+    if (!header) return;
 
-  document.querySelectorAll("[data-category]").forEach(button => {
-    button.addEventListener("click", () => {
-      dialogTitle.textContent = button.dataset.category;
-      comingSoonDialog.showModal();
+    const button = header.querySelector(".nav-toggle");
+    const navigation = header.querySelector(".site-nav");
+
+    if (!button || !navigation) return;
+
+    // Use the hamburger icon on every page.
+    button.textContent = "☰";
+    button.setAttribute("aria-label", "Open navigation menu");
+    button.setAttribute("aria-expanded", "false");
+
+    header.classList.add("nav-ready");
+
+    const currentPage =
+      window.location.pathname.split("/").pop() || "index.html";
+
+    navigation.querySelectorAll("a").forEach(link => {
+      const linkedPage =
+        new URL(link.href).pathname.split("/").pop();
+
+      if (linkedPage === currentPage) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
     });
-  });
 
-  closeButton.addEventListener("click", () => {
-    comingSoonDialog.close();
-  });
+    function setMenu(open) {
+      navigation.classList.toggle("is-open", open);
 
-  comingSoonDialog.addEventListener("click", event => {
-    if (event.target !== comingSoonDialog) return;
+      button.setAttribute("aria-expanded", String(open));
 
-    const bounds = comingSoonDialog.getBoundingClientRect();
+      button.setAttribute(
+        "aria-label",
+        open ? "Close navigation menu" : "Open navigation menu"
+      );
 
-    const clickedOutside =
-      event.clientX < bounds.left ||
-      event.clientX > bounds.right ||
-      event.clientY < bounds.top ||
-      event.clientY > bounds.bottom;
+      button.textContent = open ? "×" : "☰";
+    }
 
-    if (clickedOutside) comingSoonDialog.close();
-  });
-}
+    button.addEventListener("click", () => {
+      const open = button.getAttribute("aria-expanded") === "true";
+      setMenu(!open);
+    });
+
+    navigation.addEventListener("click", event => {
+      if (event.target.closest("a")) setMenu(false);
+    });
+
+    header.addEventListener("keydown", event => {
+      if (
+        event.key === "Escape" &&
+        button.getAttribute("aria-expanded") === "true"
+      ) {
+        setMenu(false);
+        button.focus();
+      }
+    });
+
+    document.addEventListener("click", event => {
+      if (!header.contains(event.target)) setMenu(false);
+    });
+
+    const mobileLayout = window.matchMedia("(max-width: 1100px)");
+
+    mobileLayout.addEventListener("change", () => {
+      setMenu(false);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupNavigation);
+  } else {
+    setupNavigation();
+  }
+})();
