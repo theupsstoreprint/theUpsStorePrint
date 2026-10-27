@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Browse matching wedding invitations and welcome signs."
+    content="Explore wedding invitations, welcome signs and rehearsal dinner designs."
   >
 
   <link rel="stylesheet" href="style.css">
@@ -44,17 +44,15 @@
         <h1>A beautiful beginning.</h1>
 
         <p>
-          Invitations that set the tone. Welcome signs that bring
-          it all together. Explore a matching look for your day.
+          Wedding invitations, welcome signs & rehearsal dinners.
+          Find a coordinated look for your celebration.
         </p>
       </div>
 
-      <div class="count" id="count" aria-live="polite">
-        02 coordinated designs
-      </div>
+      <div class="count" id="count" aria-live="polite"></div>
     </section>
 
-    <!-- Style filters -->
+    <!-- Occasion filters -->
     <nav class="toolbar" aria-label="Filter wedding designs">
       <button
         class="filter active"
@@ -68,110 +66,30 @@
       <button
         class="filter"
         type="button"
-        data-filter="floral"
+        data-filter="wedding"
         aria-pressed="false"
       >
-        Romantic & floral
+        Wedding
       </button>
 
       <button
         class="filter"
         type="button"
-        data-filter="modern"
+        data-filter="night-before"
         aria-pressed="false"
       >
-        Modern & minimal
+        The Night Before
       </button>
     </nav>
 
-    <!-- Design collection -->
-    <section class="grid" aria-label="Wedding designs">
+    <!-- Design cards -->
+    <section
+      class="grid"
+      id="wedding-grid"
+      aria-label="Wedding and rehearsal dinner designs"
+    ></section>
 
-      <!-- Design W01 -->
-      <article class="card" data-style="floral">
-        <button
-          class="image-button"
-          type="button"
-          data-design="ivory"
-          aria-label="View Ivory Romance, design W01"
-        >
-          <img
-            src="images/ivory-romance.jpg"
-            alt="Ivory floral wedding invitation and matching welcome sign"
-            fetchpriority="high"
-          >
-
-          <span class="zoom" aria-hidden="true">+</span>
-        </button>
-
-        <div class="details">
-          <div>
-            <h2>Ivory Romance</h2>
-
-            <div class="code">
-              Design W01 · Invitation & welcome sign
-            </div>
-
-            <p class="description">
-              Soft florals, sage greenery & a touch of gold.
-            </p>
-          </div>
-
-          <button
-            class="view"
-            type="button"
-            data-design="ivory"
-            aria-label="View Ivory Romance details"
-          >
-            View design ↗
-          </button>
-        </div>
-      </article>
-
-      <!-- Design W02 -->
-      <article class="card" data-style="modern">
-        <button
-          class="image-button"
-          type="button"
-          data-design="modern"
-          aria-label="View Modern Vows, design W02"
-        >
-          <img
-            src="images/modern-vows.jpg"
-            alt="Black and white wedding invitation and matching welcome sign"
-            loading="lazy"
-          >
-
-          <span class="zoom" aria-hidden="true">+</span>
-        </button>
-
-        <div class="details">
-          <div>
-            <h2>Modern Vows</h2>
-
-            <div class="code">
-              Design W02 · Invitation & welcome sign
-            </div>
-
-            <p class="description">
-              Bold typography. Clean lines. Timeless simplicity.
-            </p>
-          </div>
-
-          <button
-            class="view"
-            type="button"
-            data-design="modern"
-            aria-label="View Modern Vows details"
-          >
-            View design ↗
-          </button>
-        </div>
-      </article>
-
-    </section>
-
-    <!-- Ordering instructions -->
+    <!-- Ordering information -->
     <section class="order">
       <div>
         <div class="eyebrow">Made personal, in store</div>
@@ -183,7 +101,7 @@
           <b>01 / BROWSE</b>
           <h3>Find your style</h3>
           <p>
-            Explore the collection and open a design for a closer look.
+            Explore wedding and rehearsal dinner designs.
           </p>
         </div>
 
@@ -191,7 +109,7 @@
           <b>02 / SAVE</b>
           <h3>Note the number</h3>
           <p>
-            Keep the design number handy or screenshot your favorite.
+            Save the design number or screenshot your favorite.
           </p>
         </div>
 
@@ -244,7 +162,8 @@
 
         <ul>
           <li>Your names and celebration date</li>
-          <li>Your wording and event details</li>
+          <li>Event time and location</li>
+          <li>Your wording and RSVP details</li>
           <li>Ask in store about sizes and pricing</li>
         </ul>
 
@@ -258,71 +177,449 @@
     </div>
   </dialog>
 
-  <!-- Shared website JavaScript -->
   <script src="script.js"></script>
 
-  <!-- Wedding filters and previews -->
   <script>
-    const weddingDesigns = {
-      ivory: {
-        title: "Ivory Romance",
+    /*
+      Replace sample previews with finished artwork by adding:
+
+      image: "images/your-design.jpg"
+
+      Wedding designs use category: "wedding"
+      Rehearsal dinner designs use category: "night-before"
+    */
+
+    const weddingDesigns = [
+      {
+        name: "Ivory Romance",
         code: "W01",
-        image: "images/ivory-romance.jpg",
+        category: "wedding",
         description:
-          "A romantic pairing of ivory florals, muted sage greenery " +
-          "and delicate gold accents."
+          "Soft botanical details, ivory paper and delicate gold accents.",
+        background: "#eae9e1",
+        paper: "#fffdf6",
+        ink: "#8d7448",
+        accent: "#b9a171",
+        theme: "botanical",
+        names: ["Rachel", "& James"],
+        date: "JUNE 14, 2027"
       },
-
-      modern: {
-        title: "Modern Vows",
+      {
+        name: "Modern Vows",
         code: "W02",
-        image: "images/modern-vows.jpg",
+        category: "wedding",
         description:
-          "A striking black-and-white suite with oversized serif " +
-          "lettering and a clean, contemporary layout."
+          "Bold black-and-white typography for a clean, modern celebration.",
+        background: "#e9e8e5",
+        paper: "#ffffff",
+        ink: "#252525",
+        accent: "#aaa59c",
+        theme: "modern",
+        names: ["OLIVIA", "& ETHAN"],
+        date: "SEPTEMBER 18, 2027"
+      },
+      {
+        name: "An Evening in Gold",
+        code: "NB01",
+        category: "night-before",
+        description:
+          "Rich charcoal and warm gold for an elegant rehearsal dinner.",
+        background: "#e8e2d8",
+        paper: "#332b28",
+        ink: "#dbc18a",
+        accent: "#ad8e54",
+        theme: "classic",
+        names: ["Rachel", "& James"],
+        date: "JUNE 13, 2027"
+      },
+      {
+        name: "Gathered Together",
+        code: "NB02",
+        category: "night-before",
+        description:
+          "Warm ivory and soft greenery for an intimate evening together.",
+        background: "#e6e8df",
+        paper: "#fffdf4",
+        ink: "#59624e",
+        accent: "#a3ad91",
+        theme: "botanical",
+        names: ["Olivia", "& Ethan"],
+        date: "SEPTEMBER 17, 2027"
       }
-    };
+    ];
 
-    const designDialog = document.querySelector("#detail");
+    const grid = document.querySelector("#wedding-grid");
+    const counter = document.querySelector("#count");
+    const previewDialog = document.querySelector("#detail");
 
-    // Open a larger design preview.
-    document.querySelectorAll("[data-design]").forEach(button => {
+    function escapeText(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&apos;"
+      }[character]));
+    }
+
+    function decoration(design) {
+      if (design.theme === "modern") {
+        return `
+          <line
+            x1="81" y1="45" x2="119" y2="45"
+            stroke="${design.ink}"
+            stroke-width="1"
+          />
+
+          <line
+            x1="81" y1="206" x2="119" y2="206"
+            stroke="${design.ink}"
+            stroke-width="1"
+          />
+        `;
+      }
+
+      if (design.theme === "classic") {
+        return `
+          <rect
+            x="14" y="14" width="172" height="222"
+            fill="none"
+            stroke="${design.accent}"
+            stroke-width="0.5"
+          />
+
+          <path
+            d="M88 43 L100 34 L112 43 L100 52 Z"
+            fill="none"
+            stroke="${design.accent}"
+            stroke-width="0.8"
+          />
+        `;
+      }
+
+      return `
+        <g fill="${design.accent}">
+          <path
+            d="M20 85 Q25 44 65 22"
+            fill="none"
+            stroke="${design.ink}"
+            stroke-width="1"
+          />
+
+          <ellipse
+            cx="28" cy="64" rx="7" ry="15"
+            transform="rotate(-30 28 64)"
+          />
+
+          <ellipse
+            cx="43" cy="42" rx="7" ry="15"
+            transform="rotate(35 43 42)"
+          />
+
+          <path
+            d="M180 165 Q175 206 138 228"
+            fill="none"
+            stroke="${design.ink}"
+            stroke-width="1"
+          />
+
+          <ellipse
+            cx="171" cy="187" rx="7" ry="15"
+            transform="rotate(30 171 187)"
+          />
+
+          <ellipse
+            cx="153" cy="209" rx="7" ry="15"
+            transform="rotate(-35 153 209)"
+          />
+        </g>
+      `;
+    }
+
+    function stationery(design, isSign) {
+      const isRehearsal = design.category === "night-before";
+      const isModern = design.theme === "modern";
+
+      const topLine = isSign
+        ? "WELCOME"
+        : "YOU'RE INVITED";
+
+      const occasion = isRehearsal
+        ? "THE NIGHT BEFORE"
+        : "TO THE WEDDING OF";
+
+      const bottomLine = isRehearsal
+        ? "DINNER · DRINKS · CELEBRATION"
+        : "TOGETHER WITH THEIR FAMILIES";
+
+      const nameSize = isModern ? 24 : 27;
+      const nameStyle = isModern ? "normal" : "italic";
+
+      return `
+        <rect
+          width="200"
+          height="250"
+          fill="${design.paper}"
+        />
+
+        <rect
+          x="10" y="10" width="180" height="230"
+          fill="none"
+          stroke="${design.accent}"
+          stroke-width="0.7"
+          opacity="${isModern ? 0 : 0.7}"
+        />
+
+        ${decoration(design)}
+
+        <g fill="${design.ink}" text-anchor="middle">
+
+          <text
+            x="100" y="68"
+            font-family="Arial, sans-serif"
+            font-size="7"
+            letter-spacing="2"
+          >
+            ${topLine}
+          </text>
+
+          <text
+            x="100" y="88"
+            font-family="Arial, sans-serif"
+            font-size="6.5"
+            letter-spacing="1"
+          >
+            ${occasion}
+          </text>
+
+          <text
+            x="100" y="126"
+            font-family="Georgia, serif"
+            font-size="${nameSize}"
+            font-style="${nameStyle}"
+          >
+            ${escapeText(design.names[0])}
+          </text>
+
+          <text
+            x="100" y="158"
+            font-family="Georgia, serif"
+            font-size="${nameSize}"
+            font-style="${nameStyle}"
+          >
+            ${escapeText(design.names[1])}
+          </text>
+
+          <text
+            x="100" y="187"
+            font-family="Arial, sans-serif"
+            font-size="6.5"
+            letter-spacing="1"
+          >
+            ${escapeText(design.date)}
+          </text>
+
+          <text
+            x="100" y="222"
+            font-family="Arial, sans-serif"
+            font-size="5"
+            letter-spacing="0.7"
+          >
+            ${bottomLine}
+          </text>
+
+        </g>
+      `;
+    }
+
+    function makePreview(design) {
+      if (design.image) return design.image;
+
+      const svg = `
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="900"
+          height="620"
+          viewBox="0 0 900 620"
+        >
+          <rect
+            width="900"
+            height="620"
+            fill="${design.background}"
+          />
+
+          <ellipse
+            cx="450" cy="548" rx="330" ry="22"
+            fill="#000000"
+            opacity="0.05"
+          />
+
+          <!-- Welcome sign easel -->
+          <path
+            d="M568 130 L485 560 M568 130 L681 560"
+            fill="none"
+            stroke="${design.accent}"
+            stroke-width="8"
+            stroke-linecap="round"
+          />
+
+          <!-- Welcome sign shadow -->
+          <rect
+            x="403" y="77" width="310" height="388"
+            fill="#000000"
+            opacity="0.07"
+          />
+
+          <!-- Welcome sign -->
+          <g transform="translate(395 68) scale(1.55)">
+            ${stationery(design, true)}
+          </g>
+
+          <!-- Matching invitation -->
+          <g transform="translate(157 225) rotate(-6 100 125)">
+            <rect
+              x="8" y="10" width="200" height="250"
+              fill="#000000"
+              opacity="0.08"
+            />
+
+            ${stationery(design, false)}
+          </g>
+        </svg>
+      `;
+
+      return "data:image/svg+xml;charset=utf-8," +
+        encodeURIComponent(svg);
+    }
+
+    // Build the design cards.
+    weddingDesigns.forEach((design, index) => {
+      design.preview = makePreview(design);
+
+      const card = document.createElement("article");
+      card.className = "card";
+      card.dataset.category = design.category;
+
+      card.innerHTML = `
+        <button
+          class="image-button"
+          type="button"
+          data-design-index="${index}"
+          aria-label="View ${design.name}, design ${design.code}"
+        >
+          <img
+            src="${design.preview}"
+            alt="${design.name} sample invitation and matching welcome sign"
+            ${index > 1 ? 'loading="lazy"' : ""}
+          >
+
+          <span class="zoom" aria-hidden="true">+</span>
+        </button>
+
+        <div class="details">
+          <div>
+            <h2>${design.name}</h2>
+
+            <div class="code">
+              Design ${design.code} · Invitation & welcome sign
+            </div>
+
+            <p class="description">
+              ${design.description}
+            </p>
+          </div>
+
+          <button
+            class="view"
+            type="button"
+            data-design-index="${index}"
+            aria-label="View ${design.name} details"
+          >
+            View design ↗
+          </button>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    function updateCount(number) {
+      counter.textContent =
+        String(number).padStart(2, "0") +
+        " coordinated design" +
+        (number === 1 ? "" : "s");
+    }
+
+    updateCount(weddingDesigns.length);
+
+    // Filter by Wedding or The Night Before.
+    const filters = document.querySelectorAll("[data-filter]");
+
+    filters.forEach(button => {
       button.addEventListener("click", () => {
-        const design = weddingDesigns[button.dataset.design];
+        const category = button.dataset.filter;
+        let visibleCount = 0;
 
-        document.querySelector("#modal-title").textContent =
-          design.title;
+        filters.forEach(filter => {
+          const selected = filter === button;
 
-        document.querySelector("#modal-code").textContent =
-          "DESIGN " + design.code;
+          filter.classList.toggle("active", selected);
+          filter.setAttribute("aria-pressed", String(selected));
+        });
 
-        document.querySelector("#modal-description").textContent =
-          design.description;
+        grid.querySelectorAll(".card").forEach(card => {
+          const matches =
+            category === "all" ||
+            card.dataset.category === category;
 
-        document.querySelector("#modal-order").textContent =
-          "Ask for " + design.code + " in store";
+          card.hidden = !matches;
 
-        const image = document.querySelector("#modal-image");
+          if (matches) visibleCount++;
+        });
 
-        image.src = design.image;
-        image.alt =
-          design.title + " invitation and matching welcome sign";
-
-        designDialog.showModal();
+        updateCount(visibleCount);
       });
     });
 
-    // Close using the X button.
-    designDialog.querySelector(".close").addEventListener(
+    // Open a larger design preview.
+    grid.addEventListener("click", event => {
+      const button = event.target.closest("[data-design-index]");
+
+      if (!button) return;
+
+      const design = weddingDesigns[button.dataset.designIndex];
+
+      document.querySelector("#modal-title").textContent =
+        design.name;
+
+      document.querySelector("#modal-code").textContent =
+        "DESIGN " + design.code;
+
+      document.querySelector("#modal-description").textContent =
+        design.description;
+
+      document.querySelector("#modal-order").textContent =
+        "Ask for " + design.code + " in store";
+
+      const image = document.querySelector("#modal-image");
+
+      image.src = design.preview;
+      image.alt =
+        design.name + " invitation and matching welcome sign";
+
+      previewDialog.showModal();
+    });
+
+    // Close the preview.
+    previewDialog.querySelector(".close").addEventListener(
       "click",
-      () => designDialog.close()
+      () => previewDialog.close()
     );
 
-    // Close when clicking outside the dialog.
-    designDialog.addEventListener("click", event => {
-      if (event.target !== designDialog) return;
+    previewDialog.addEventListener("click", event => {
+      if (event.target !== previewDialog) return;
 
-      const bounds = designDialog.getBoundingClientRect();
+      const bounds = previewDialog.getBoundingClientRect();
 
       const clickedOutside =
         event.clientX < bounds.left ||
@@ -330,40 +627,7 @@
         event.clientY < bounds.top ||
         event.clientY > bounds.bottom;
 
-      if (clickedOutside) designDialog.close();
-    });
-
-    // Filter the design cards.
-    const filters = document.querySelectorAll("[data-filter]");
-    const cards = document.querySelectorAll(".card[data-style]");
-
-    filters.forEach(button => {
-      button.addEventListener("click", () => {
-        const selectedStyle = button.dataset.filter;
-        let visibleCount = 0;
-
-        filters.forEach(filter => {
-          const isSelected = filter === button;
-
-          filter.classList.toggle("active", isSelected);
-          filter.setAttribute("aria-pressed", String(isSelected));
-        });
-
-        cards.forEach(card => {
-          const matches =
-            selectedStyle === "all" ||
-            card.dataset.style === selectedStyle;
-
-          card.hidden = !matches;
-
-          if (matches) visibleCount++;
-        });
-
-        document.querySelector("#count").textContent =
-          String(visibleCount).padStart(2, "0") +
-          " coordinated design" +
-          (visibleCount === 1 ? "" : "s");
-      });
+      if (clickedOutside) previewDialog.close();
     });
   </script>
 
