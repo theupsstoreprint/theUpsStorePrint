@@ -6,7 +6,7 @@
 
   <title>Baby Shower | The UPS Store Print</title>
 
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
 
   <style>
     .baby-gallery {
@@ -105,8 +105,9 @@
       font-size: 14px;
     }
 
+    /* Popup */
     .baby-dialog {
-      width: min(1080px, calc(100% - 32px));
+      width: min(1180px, calc(100% - 32px));
       max-width: none;
       max-height: 90dvh;
       padding: 0;
@@ -127,14 +128,25 @@
 
     .baby-modal-top {
       display: flex;
-      justify-content: flex-end;
-      padding: 10px 14px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 16px;
       border-bottom: 1px solid #e8e0d8;
+    }
+
+    .baby-modal-top-label {
+      margin: 0;
+      color: #756b65;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
     .baby-close {
       display: grid;
       place-items: center;
+      flex-shrink: 0;
       width: 40px;
       height: 40px;
       padding: 0;
@@ -148,19 +160,23 @@
 
     .baby-modal-layout {
       display: grid;
-      grid-template-columns: 1.25fr 1fr;
+      grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
     }
 
     .baby-modal-photo {
       display: flex;
       align-items: center;
-      background: #f7f4ef;
+      justify-content: center;
+      min-width: 0;
+      padding: 12px;
+      background: #faf8f4;
     }
 
     .baby-modal-photo img {
       display: block;
       width: 100%;
       height: auto;
+      object-fit: contain;
     }
 
     .baby-modal-info {
@@ -247,16 +263,9 @@
       color: #351c15;
     }
 
-    .baby-prop-note {
-      margin: 12px 0 0;
-      color: #756b65;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
     .baby-order-link {
       display: inline-block;
-      margin-top: 16px;
+      margin-top: 12px;
       padding: 12px 20px;
       border-radius: 6px;
       background: #ffb500;
@@ -273,6 +282,24 @@
       outline-offset: 4px;
     }
 
+    @media (max-width: 800px) {
+      .baby-modal-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .baby-modal-photo {
+        padding: 8px;
+      }
+
+      .baby-modal-info {
+        padding: 22px;
+      }
+
+      .baby-modal-info h2 {
+        font-size: 32px;
+      }
+    }
+
     @media (max-width: 700px) {
       .baby-gallery {
         grid-template-columns: 1fr;
@@ -285,23 +312,6 @@
 
       .baby-view {
         font-size: 14px;
-      }
-
-      .baby-modal-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .baby-modal-photo img {
-        max-height: 35dvh;
-        object-fit: contain;
-      }
-
-      .baby-modal-info {
-        padding: 22px;
-      }
-
-      .baby-modal-info h2 {
-        font-size: 32px;
       }
     }
 
@@ -420,6 +430,10 @@
     aria-labelledby="baby-modal-title"
   >
     <div class="baby-modal-top">
+      <p class="baby-modal-top-label">
+        Invitation &amp; welcome sign
+      </p>
+
       <button
         class="baby-close"
         id="baby-close"
@@ -476,10 +490,6 @@
           Matching 5×7 invitations are available.
         </p>
 
-        <p class="baby-prop-note">
-          Display props, including the easel, are not included.
-        </p>
-
         <a
           class="baby-order-link"
           id="baby-order-link"
@@ -492,7 +502,7 @@
   </dialog>
 
   <!-- Shared website navigation -->
-  <script src="script.js?v=9"></script>
+  <script src="script.js?v=10"></script>
 
   <!-- Baby shower gallery and popup -->
   <script>
@@ -500,10 +510,8 @@
       "use strict";
 
       /*
-       * BABY SHOWER DESIGNS
-       *
-       * Each image filename begins with the customer design code.
-       * Filenames are case-sensitive.
+       * image: Styled mockup shown on the main page.
+       * detailImage: Flat designs shown inside the popup.
        */
       const designs = [
         {
@@ -511,56 +519,64 @@
           name: "Sage Bunny",
           description:
             "A sleepy bunny, a golden crescent moon and soft sage greenery.",
-          image: "images/BS01-sage-bunny.png"
+          image: "images/BS01-sage-bunny.png",
+          detailImage: "images/BS01-sage-bunny-flat.png"
         },
         {
           code: "BS02",
           name: "Vintage Teddy",
           description:
             "A cuddly teddy bear, blush balloons and delicate botanical details.",
-          image: "images/BS02-vintage-teddy.png"
+          image: "images/BS02-vintage-teddy.png",
+          detailImage: "images/BS02-vintage-teddy-flat.png"
         },
         {
           code: "BS03",
           name: "Little Clothesline",
           description:
             "Tiny knitted clothes, soft clouds and sweet sage and yellow accents.",
-          image: "images/BS03-little-clothesline.png"
+          image: "images/BS03-little-clothesline.png",
+          detailImage: "images/BS03-little-clothesline-flat.png"
         },
         {
           code: "BS04",
           name: "Special Delivery",
           description:
             "A watercolor stork, fluffy clouds and a special delivery in soft blue.",
-          image: "images/BS04-special-delivery.png"
+          image: "images/BS04-special-delivery.png",
+          detailImage: "images/BS04-special-delivery-flat.png"
         },
         {
           code: "BS05",
           name: "Sage Carriage",
           description:
             "A vintage baby carriage with sage bows, lace and delicate greenery.",
-          image: "images/BS05-sage-carriage.png"
+          image: "images/BS05-sage-carriage.png",
+          detailImage: "images/BS05-sage-carriage-flat.png"
         },
         {
           code: "BS06",
           name: "Little Lamb",
           description:
             "A sweet little lamb, blue ribbon bows and delicate meadow flowers.",
-          image: "images/BS06-little-lamb.png"
+          image: "images/BS06-little-lamb.png",
+          detailImage: "images/BS06-little-lamb-flat.png"
         },
         {
           code: "BS07",
           name: "Baby in Bloom",
           description:
             "Pink peonies, lavender ribbons and tiny floral baby booties.",
-          image: "images/BS07-baby-in-bloom.png"
+          image: "images/BS07-baby-in-bloom.png",
+          detailImage: "images/BS07-baby-in-bloom-flat.png"
         },
         {
           code: "BS08",
           name: "Little Swan",
           description:
             "A crowned swan, blush bows and soft watercolor lotus flowers.",
-          image: "images/BS08-little-swan.png"
+          image: "images/BS08-little-swan.png",
+          detailImage: "images/BS08-little-swan-flat.png"
         }
       ];
 
@@ -621,7 +637,7 @@
             >
               <img
                 src="${escapeHTML(design.image)}"
-                alt="${escapeHTML(design.name)} baby shower invitation and welcome sign"
+                alt="${escapeHTML(design.name)} baby shower invitation and welcome sign mockup"
                 loading="lazy"
                 width="1536"
                 height="1024"
@@ -688,9 +704,18 @@
         activeDesign = design;
         previousFocus = trigger;
 
-        modalImage.src = design.image;
+        /*
+         * Use the flat image in the popup.
+         * If that file fails to load, show the mockup instead.
+         */
+        modalImage.onerror = () => {
+          modalImage.onerror = null;
+          modalImage.src = design.image;
+        };
+
+        modalImage.src = design.detailImage || design.image;
         modalImage.alt =
-          `${design.name} baby shower invitation and welcome sign`;
+          `${design.name}: welcome sign and matching 5×7 invitation`;
 
         modalCode.textContent = `DESIGN ${design.code}`;
         modalTitle.textContent = design.name;
@@ -710,8 +735,9 @@
         selectSize(savedSizes.get(design.code) ?? 0);
 
         dialog.showModal();
+        dialog.scrollTop = 0;
         document.body.classList.add("baby-modal-open");
-        closeButton.focus();
+        closeButton.focus({ preventScroll: true });
       }
 
       function closeDesign() {
@@ -765,7 +791,7 @@
         document.body.classList.remove("baby-modal-open");
 
         if (previousFocus) {
-          previousFocus.focus();
+          previousFocus.focus({ preventScroll: true });
         }
       });
 
