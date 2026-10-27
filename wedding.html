@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Browse wedding and rehearsal dinner designs with invitation and poster-board pricing."
+    content="Wedding invitations, welcome signs and rehearsal dinner designs with print pricing."
   >
 
   <link rel="stylesheet" href="style.css">
@@ -16,6 +16,7 @@
 
 <body class="collection-page">
 
+  <!-- Navigation -->
   <header class="site-header">
     <a class="brand" href="index.html">
       THE UPS STORE PRINT
@@ -48,6 +49,7 @@
 
   <main>
 
+    <!-- Introduction -->
     <section class="intro">
       <div>
         <div class="eyebrow">Wedding collection</div>
@@ -63,6 +65,7 @@
       <div class="count" id="count" aria-live="polite"></div>
     </section>
 
+    <!-- Filters -->
     <nav class="toolbar" aria-label="Filter wedding designs">
       <button
         class="filter active"
@@ -92,12 +95,20 @@
       </button>
     </nav>
 
+    <!-- JavaScript adds the cards here -->
     <section
       class="grid"
       id="wedding-grid"
       aria-label="Wedding and rehearsal dinner designs"
     ></section>
 
+    <noscript>
+      <p>
+        Please enable JavaScript to browse the designs.
+      </p>
+    </noscript>
+
+    <!-- Ordering information -->
     <section class="order">
       <div>
         <div class="eyebrow">Made personal, in store</div>
@@ -138,6 +149,7 @@
     <span>Illustrative collection · Order in store</span>
   </footer>
 
+  <!-- Expanded preview -->
   <dialog id="detail" aria-labelledby="modal-title">
     <div class="modal-head">
       <span class="eyebrow">A closer look</span>
@@ -181,15 +193,15 @@
     </div>
   </dialog>
 
+  <!-- Shared navigation behavior -->
   <script src="script.js"></script>
 
+  <!-- Wedding collection behavior -->
   <script>
     (() => {
-      /*
-        Update prices here once to update every design
-        on this page.
-      */
+      "use strict";
 
+      // PRICES
       const invitationPrices = [
         { quantity: "1–100", price: 0.76 },
         { quantity: "101–250", price: 0.66 },
@@ -203,13 +215,9 @@
         { size: "24 × 36", price: 46.00 }
       ];
 
-      /*
-        Previews are illustrative samples.
-
-        To use finished artwork, add this to a design:
-        image: "images/your-design.jpg"
-      */
-
+      // DESIGNS
+      // Add image: "images/filename.jpg" to use finished artwork.
+      // Without an image, a built-in sample preview is displayed.
       const designs = [
         {
           name: "Ivory Romance",
@@ -273,21 +281,50 @@
       const counter = document.querySelector("#count");
       const dialog = document.querySelector("#detail");
 
-      const money = value => "$" + value.toFixed(2);
+      const selectedSizes = new Map(
+        designs.map(design => [design.code, 0])
+      );
+
+      function money(value) {
+        return "$" + value.toFixed(2);
+      }
 
       function escapeText(value) {
-        return String(value).replace(/[&<>"']/g, character => ({
+        const characters = {
           "&": "&amp;",
           "<": "&lt;",
           ">": "&gt;",
           '"': "&quot;",
           "'": "&apos;"
-        }[character]));
+        };
+
+        return String(value).replace(
+          /[&<>"']/g,
+          character => characters[character]
+        );
       }
 
-      // Reusable pricing block for cards and expanded previews.
+      // PRICING BLOCK
       function pricingHTML(design, selectedIndex = 0) {
         const selected = posterPrices[selectedIndex];
+
+        const tiers = invitationPrices.map(tier => `
+          <tr>
+            <td>${tier.quantity}</td>
+            <td>${money(tier.price)}</td>
+          </tr>
+        `).join("");
+
+        const sizes = posterPrices.map((option, index) => `
+          <button
+            class="size-option"
+            type="button"
+            data-size-index="${index}"
+            aria-pressed="${index === selectedIndex}"
+          >
+            ${option.size} — ${money(option.price)}
+          </button>
+        `).join("");
 
         return `
           <section
@@ -309,14 +346,7 @@
                 </tr>
               </thead>
 
-              <tbody>
-                ${invitationPrices.map(tier => `
-                  <tr>
-                    <td>${tier.quantity}</td>
-                    <td>${money(tier.price)}</td>
-                  </tr>
-                `).join("")}
-              </tbody>
+              <tbody>${tiers}</tbody>
             </table>
 
             <h3 class="pricing-heading">Poster board</h3>
@@ -330,16 +360,7 @@
               role="group"
               aria-label="Choose a poster-board size"
             >
-              ${posterPrices.map((option, index) => `
-                <button
-                  class="size-option"
-                  type="button"
-                  data-size-index="${index}"
-                  aria-pressed="${index === selectedIndex}"
-                >
-                  ${option.size} — ${money(option.price)}
-                </button>
-              `).join("")}
+              ${sizes}
             </div>
 
             <p class="selected-size">
@@ -349,68 +370,27 @@
         `;
       }
 
-      // Remember the selected size for each design.
-      const selectedSizes = new Map(
-        designs.map(design => [design.code, 0])
-      );
-
-      // Keep card and expanded-preview pricing selections in sync.
-      document.addEventListener("click", event => {
-        const button = event.target.closest(".size-option");
-
-        if (!button) return;
-
-        const block = button.closest("[data-price-design]");
-        const code = block.dataset.priceDesign;
-        const index = Number(button.dataset.sizeIndex);
-        const selected = posterPrices[index];
-
-        selectedSizes.set(code, index);
-
-        document.querySelectorAll("[data-price-design]")
-          .forEach(pricingBlock => {
-            if (pricingBlock.dataset.priceDesign !== code) return;
-
-            pricingBlock.querySelector(".poster-price").textContent =
-              money(selected.price);
-
-            pricingBlock.querySelector(".selected-size").textContent =
-              selected.size + " inches · Poster board";
-
-            pricingBlock.querySelectorAll(".size-option")
-              .forEach(option => {
-                option.setAttribute(
-                  "aria-pressed",
-                  String(Number(option.dataset.sizeIndex) === index)
-                );
-              });
-          });
-      });
-
-      // Sample artwork decorations.
+      // SAMPLE ARTWORK
       function decoration(design) {
         if (design.theme === "modern") {
           return `
-            <line x1="81" y1="45" x2="119" y2="45"
-                  stroke="${design.ink}"/>
-            <line x1="81" y1="206" x2="119" y2="206"
-                  stroke="${design.ink}"/>
+            <g stroke="${design.ink}">
+              <line x1="81" y1="45" x2="119" y2="45"/>
+              <line x1="81" y1="206" x2="119" y2="206"/>
+            </g>
           `;
         }
 
         if (design.theme === "classic") {
           return `
-            <rect
-              x="15" y="15" width="170" height="220"
-              fill="none" stroke="${design.accent}"
-              stroke-width="0.5"
-            />
-
-            <path
-              d="M88 43 L100 34 L112 43 L100 52 Z"
-              fill="none" stroke="${design.accent}"
-              stroke-width="0.8"
-            />
+            <g
+              fill="none"
+              stroke="${design.accent}"
+              stroke-width="0.6"
+            >
+              <rect x="15" y="15" width="170" height="220"/>
+              <path d="M88 43 L100 34 L112 43 L100 52 Z"/>
+            </g>
           `;
         }
 
@@ -418,8 +398,8 @@
           <g fill="${design.accent}">
             <path
               d="M20 85 Q25 44 65 22"
-              fill="none" stroke="${design.ink}"
-              stroke-width="1"
+              fill="none"
+              stroke="${design.ink}"
             />
 
             <ellipse
@@ -434,8 +414,8 @@
 
             <path
               d="M180 165 Q175 206 138 228"
-              fill="none" stroke="${design.ink}"
-              stroke-width="1"
+              fill="none"
+              stroke="${design.ink}"
             />
 
             <ellipse
@@ -454,14 +434,19 @@
       function stationery(design, isSign) {
         const rehearsal = design.category === "night-before";
         const modern = design.theme === "modern";
+        const nameSize = modern ? 24 : 27;
+        const nameStyle = modern ? "normal" : "italic";
 
         return `
-          <rect width="200" height="250"
-                fill="${design.paper}"/>
+          <rect
+            width="200" height="250"
+            fill="${design.paper}"
+          />
 
           <rect
             x="10" y="10" width="180" height="230"
-            fill="none" stroke="${design.accent}"
+            fill="none"
+            stroke="${design.accent}"
             stroke-width="0.7"
             opacity="${modern ? 0 : 0.7}"
           />
@@ -472,7 +457,8 @@
             <text
               x="100" y="68"
               font-family="Arial, sans-serif"
-              font-size="7" letter-spacing="2"
+              font-size="7"
+              letter-spacing="2"
             >
               ${isSign ? "WELCOME" : "YOU'RE INVITED"}
             </text>
@@ -480,7 +466,8 @@
             <text
               x="100" y="88"
               font-family="Arial, sans-serif"
-              font-size="6.5" letter-spacing="1"
+              font-size="6.5"
+              letter-spacing="1"
             >
               ${rehearsal ? "THE NIGHT BEFORE" : "TO THE WEDDING OF"}
             </text>
@@ -488,8 +475,8 @@
             <text
               x="100" y="126"
               font-family="Georgia, serif"
-              font-size="${modern ? 24 : 27}"
-              font-style="${modern ? "normal" : "italic"}"
+              font-size="${nameSize}"
+              font-style="${nameStyle}"
             >
               ${escapeText(design.names[0])}
             </text>
@@ -497,8 +484,8 @@
             <text
               x="100" y="158"
               font-family="Georgia, serif"
-              font-size="${modern ? 24 : 27}"
-              font-style="${modern ? "normal" : "italic"}"
+              font-size="${nameSize}"
+              font-style="${nameStyle}"
             >
               ${escapeText(design.names[1])}
             </text>
@@ -506,7 +493,8 @@
             <text
               x="100" y="187"
               font-family="Arial, sans-serif"
-              font-size="6.5" letter-spacing="1"
+              font-size="6.5"
+              letter-spacing="1"
             >
               ${escapeText(design.date)}
             </text>
@@ -514,7 +502,8 @@
             <text
               x="100" y="222"
               font-family="Arial, sans-serif"
-              font-size="5" letter-spacing="0.7"
+              font-size="5"
+              letter-spacing="0.7"
             >
               ${rehearsal
                 ? "DINNER · DRINKS · CELEBRATION"
@@ -530,11 +519,14 @@
         const svg = `
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="900" height="620"
+            width="900"
+            height="620"
             viewBox="0 0 900 620"
           >
-            <rect width="900" height="620"
-                  fill="${design.background}"/>
+            <rect
+              width="900" height="620"
+              fill="${design.background}"
+            />
 
             <ellipse
               cx="450" cy="548" rx="330" ry="22"
@@ -543,8 +535,10 @@
 
             <path
               d="M568 130 L485 560 M568 130 L681 560"
-              fill="none" stroke="${design.accent}"
-              stroke-width="8" stroke-linecap="round"
+              fill="none"
+              stroke="${design.accent}"
+              stroke-width="8"
+              stroke-linecap="round"
             />
 
             <rect
@@ -571,5 +565,188 @@
           encodeURIComponent(svg);
       }
 
-      // Build the design cards.
-      designs
+      // CREATE ALL DESIGN CARDS
+      designs.forEach((design, index) => {
+        design.preview = makePreview(design);
+
+        const card = document.createElement("article");
+        card.className = "card";
+        card.dataset.category = design.category;
+
+        card.innerHTML = `
+          <button
+            class="image-button"
+            type="button"
+            data-design-index="${index}"
+            aria-label="View ${escapeText(design.name)}, design ${design.code}"
+          >
+            <img
+              src="${design.preview}"
+              alt="${escapeText(design.name)} sample invitation and welcome sign"
+              ${index > 1 ? 'loading="lazy"' : ""}
+            >
+
+            <span class="zoom" aria-hidden="true">+</span>
+          </button>
+
+          <div class="details">
+            <div>
+              <h2>${escapeText(design.name)}</h2>
+
+              <div class="code">
+                Design ${design.code} · Invitation & welcome sign
+              </div>
+
+              <p class="description">
+                ${escapeText(design.description)}
+              </p>
+            </div>
+
+            <button
+              class="view"
+              type="button"
+              data-design-index="${index}"
+              aria-label="View ${escapeText(design.name)} details"
+            >
+              View design ↗
+            </button>
+          </div>
+
+          ${pricingHTML(design)}
+        `;
+
+        grid.appendChild(card);
+      });
+
+      // DESIGN COUNT
+      function updateCount(number) {
+        counter.textContent =
+          String(number).padStart(2, "0") +
+          " coordinated design" +
+          (number === 1 ? "" : "s");
+      }
+
+      updateCount(designs.length);
+
+      // OCCASION FILTERS
+      const filters = document.querySelectorAll("[data-filter]");
+
+      filters.forEach(button => {
+        button.addEventListener("click", () => {
+          const category = button.dataset.filter;
+          let visibleCount = 0;
+
+          filters.forEach(filter => {
+            const selected = filter === button;
+
+            filter.classList.toggle("active", selected);
+            filter.setAttribute("aria-pressed", String(selected));
+          });
+
+          grid.querySelectorAll(".card").forEach(card => {
+            const matches =
+              category === "all" ||
+              card.dataset.category === category;
+
+            card.hidden = !matches;
+
+            if (matches) visibleCount++;
+          });
+
+          updateCount(visibleCount);
+        });
+      });
+
+      // POSTER SIZE SELECTION
+      document.addEventListener("click", event => {
+        const button = event.target.closest(".size-option");
+
+        if (!button) return;
+
+        const block = button.closest("[data-price-design]");
+        const code = block.dataset.priceDesign;
+        const index = Number(button.dataset.sizeIndex);
+        const selected = posterPrices[index];
+
+        selectedSizes.set(code, index);
+
+        document.querySelectorAll("[data-price-design]")
+          .forEach(pricingBlock => {
+            if (pricingBlock.dataset.priceDesign !== code) return;
+
+            pricingBlock.querySelector(".poster-price").textContent =
+              money(selected.price);
+
+            pricingBlock.querySelector(".selected-size").textContent =
+              selected.size + " inches · Poster board";
+
+            pricingBlock.querySelectorAll(".size-option")
+              .forEach(option => {
+                const isSelected =
+                  Number(option.dataset.sizeIndex) === index;
+
+                option.setAttribute(
+                  "aria-pressed",
+                  String(isSelected)
+                );
+              });
+          });
+      });
+
+      // OPEN EXPANDED PREVIEW
+      grid.addEventListener("click", event => {
+        const button = event.target.closest("[data-design-index]");
+
+        if (!button) return;
+
+        const design = designs[Number(button.dataset.designIndex)];
+
+        document.querySelector("#modal-title").textContent =
+          design.name;
+
+        document.querySelector("#modal-code").textContent =
+          "DESIGN " + design.code;
+
+        document.querySelector("#modal-description").textContent =
+          design.description;
+
+        document.querySelector("#modal-order").textContent =
+          "Ask for " + design.code + " in store";
+
+        const image = document.querySelector("#modal-image");
+
+        image.src = design.preview;
+        image.alt =
+          design.name + " invitation and matching welcome sign";
+
+        document.querySelector("#modal-pricing").innerHTML =
+          pricingHTML(design, selectedSizes.get(design.code));
+
+        dialog.showModal();
+      });
+
+      // CLOSE EXPANDED PREVIEW
+      dialog.querySelector(".close").addEventListener(
+        "click",
+        () => dialog.close()
+      );
+
+      dialog.addEventListener("click", event => {
+        if (event.target !== dialog) return;
+
+        const bounds = dialog.getBoundingClientRect();
+
+        const clickedOutside =
+          event.clientX < bounds.left ||
+          event.clientX > bounds.right ||
+          event.clientY < bounds.top ||
+          event.clientY > bounds.bottom;
+
+        if (clickedOutside) dialog.close();
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
