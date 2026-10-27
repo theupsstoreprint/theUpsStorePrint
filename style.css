@@ -1107,3 +1107,10 @@ body.collection-page .site-header .nav-toggle {
   border: none;
   color: #351c15;
 }
+body.landing .collection .art > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
