@@ -6,13 +6,67 @@
 
   <title>Baby Shower | The UPS Store Print</title>
 
-<link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="style.css?v=12">
+
   <style>
+    /* Page layout */
+    body.collection-page main.baby-page {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 1344px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* Intro */
+    body.collection-page .baby-intro {
+      display: block;
+      padding: 56px 0 32px;
+      margin: 0;
+    }
+
+    body.collection-page .baby-intro .baby-eyebrow {
+      margin: 0 0 18px;
+      color: #8c6b35;
+      font: 600 12px/1.5 Arial, sans-serif;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    body.collection-page .baby-intro h1 {
+      max-width: 950px;
+      margin: 0 0 24px;
+      color: #351c15;
+      font: normal clamp(44px, 5vw, 76px)/1.08 Georgia, serif;
+      letter-spacing: -.03em;
+    }
+
+    .baby-intro-text {
+      max-width: 650px;
+      margin: 0;
+      color: #756b65;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .baby-count {
+      margin: 24px 0 0;
+      color: #756b65;
+      font-size: 13px;
+    }
+
+    /* Design gallery */
     .baby-gallery {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 56px 32px;
-      margin: 36px 0 72px;
+      gap: 52px 32px;
+      margin: 0 0 72px;
+      padding-top: 32px;
+      border-top: 1px solid #e8e0d8;
+    }
+
+    .baby-card {
+      min-width: 0;
     }
 
     .baby-photo-button {
@@ -21,7 +75,7 @@
       width: 100%;
       padding: 0;
       border: 0;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       background: #f7f4ef;
       cursor: pointer;
@@ -60,18 +114,15 @@
     .baby-card-heading {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-top: 22px;
+      align-items: baseline;
+      gap: 12px 16px;
+      margin-top: 20px;
     }
 
-    .baby-card h2 {
+    body.collection-page .baby-card h2 {
       margin: 0;
       color: #351c15;
-      font-family: Georgia, serif;
-      font-size: clamp(28px, 3vw, 40px);
-      font-weight: 400;
-      line-height: 1.15;
+      font: normal clamp(26px, 2.5vw, 36px)/1.2 Georgia, serif;
     }
 
     .baby-view {
@@ -81,33 +132,85 @@
       border-bottom: 1px solid #b68b42;
       background: transparent;
       color: #351c15;
-      font: inherit;
+      font: 14px/1.5 Arial, sans-serif;
       cursor: pointer;
     }
 
     .baby-code {
-      margin: 12px 0;
+      margin: 10px 0;
       color: #756b65;
-      font-size: 13px;
-      letter-spacing: .04em;
+      font-size: 12px;
+      line-height: 1.6;
+      letter-spacing: .03em;
     }
 
     .baby-description {
+      max-width: 540px;
       margin: 0;
       color: #756b65;
+      font-size: 15px;
       line-height: 1.7;
     }
 
-    .baby-count {
-      margin-top: 24px;
+    /* How to order */
+    .baby-order {
+      display: grid;
+      grid-template-columns: 1.3fr repeat(3, minmax(0, 1fr));
+      align-items: start;
+      gap: 30px;
+      margin: 0 0 64px;
+      padding: 36px;
+      border-top: 2px solid #ffb500;
+      border-radius: 0 0 10px 10px;
+      background: #faf7f2;
+    }
+
+    .baby-order-eyebrow {
+      margin: 0 0 16px;
+      color: #8c6b35;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.6;
+      letter-spacing: .18em;
+    }
+
+    body.collection-page .baby-order h2 {
+      margin: 0;
+      color: #351c15;
+      font: normal 32px/1.2 Georgia, serif;
+    }
+
+    .baby-order-step {
+      min-width: 0;
+    }
+
+    .baby-step-number {
+      margin: 0 0 16px;
+      color: #8c6b35;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+    }
+
+    body.collection-page .baby-order-step h3 {
+      margin: 0 0 12px;
+      color: #351c15;
+      font: normal 23px/1.25 Georgia, serif;
+    }
+
+    .baby-step-description {
+      margin: 0;
       color: #756b65;
       font-size: 14px;
+      line-height: 1.75;
     }
 
     /* Popup */
-    .baby-dialog {
+    body.collection-page dialog.baby-dialog {
+      box-sizing: border-box;
       width: min(1180px, calc(100% - 32px));
       max-width: none;
+      max-height: 90vh;
       max-height: 90dvh;
       padding: 0;
       border: 0;
@@ -117,7 +220,7 @@
       overflow: auto;
     }
 
-    .baby-dialog::backdrop {
+    body.collection-page dialog.baby-dialog::backdrop {
       background: rgb(30 20 15 / 65%);
     }
 
@@ -126,12 +229,16 @@
     }
 
     .baby-modal-top {
+      position: sticky;
+      top: 0;
+      z-index: 1;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
       padding: 10px 16px;
       border-bottom: 1px solid #e8e0d8;
+      background: white;
     }
 
     .baby-modal-top-label {
@@ -190,16 +297,15 @@
       text-transform: uppercase;
     }
 
-    .baby-modal-info h2 {
+    body.collection-page .baby-modal-info h2 {
       margin: 0 0 14px;
-      font-family: Georgia, serif;
-      font-size: 38px;
-      font-weight: 400;
-      line-height: 1.1;
+      color: #351c15;
+      font: normal 38px/1.1 Georgia, serif;
     }
 
     .baby-modal-description {
       color: #756b65;
+      font-size: 15px;
       line-height: 1.6;
     }
 
@@ -209,11 +315,10 @@
       border-top: 1px solid #e8e0d8;
     }
 
-    .baby-pricing h3 {
+    body.collection-page .baby-pricing h3 {
       margin: 0 0 14px;
-      font-family: Georgia, serif;
-      font-size: 24px;
-      font-weight: 400;
+      color: #351c15;
+      font: normal 24px/1.2 Georgia, serif;
     }
 
     .baby-sizes {
@@ -228,7 +333,7 @@
       border-radius: 6px;
       background: white;
       color: #351c15;
-      font: inherit;
+      font: 14px Arial, sans-serif;
       cursor: pointer;
     }
 
@@ -239,8 +344,8 @@
 
     .baby-price {
       margin: 18px 0 5px;
-      font-family: Georgia, serif;
-      font-size: 34px;
+      color: #351c15;
+      font: normal 34px/1.2 Georgia, serif;
     }
 
     .baby-selected-size {
@@ -281,6 +386,16 @@
       outline-offset: 4px;
     }
 
+    @media (max-width: 1000px) {
+      .baby-order {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .baby-order > div:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
     @media (max-width: 800px) {
       .baby-modal-layout {
         grid-template-columns: 1fr;
@@ -294,23 +409,69 @@
         padding: 22px;
       }
 
-      .baby-modal-info h2 {
+      body.collection-page .baby-modal-info h2 {
         font-size: 32px;
       }
     }
 
     @media (max-width: 700px) {
+      body.collection-page main.baby-page {
+        padding: 0 18px;
+      }
+
+      body.collection-page .baby-intro {
+        padding: 36px 0 28px;
+      }
+
+      body.collection-page .baby-intro .baby-eyebrow {
+        font-size: 10px;
+        margin-bottom: 16px;
+      }
+
+      body.collection-page .baby-intro h1 {
+        font-size: clamp(42px, 10vw, 60px);
+        margin-bottom: 20px;
+      }
+
+      .baby-intro-text {
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
       .baby-gallery {
         grid-template-columns: 1fr;
-        gap: 42px;
+        gap: 40px;
+        padding-top: 24px;
+        margin-bottom: 48px;
       }
 
       .baby-card-heading {
-        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-top: 16px;
+        gap: 8px 16px;
       }
 
-      .baby-view {
+      body.collection-page .baby-card h2 {
+        font-size: 29px;
+      }
+
+      .baby-description {
         font-size: 14px;
+      }
+
+      .baby-order {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        padding: 28px 24px;
+        margin-bottom: 40px;
+      }
+
+      body.collection-page .baby-order h2 {
+        font-size: 30px;
+      }
+
+      .baby-step-number {
+        margin-bottom: 10px;
       }
     }
 
@@ -357,14 +518,14 @@
     </nav>
   </header>
 
-  <main class="page">
+  <main class="baby-page">
 
-    <section class="intro">
-      <p class="eyebrow">BABY SHOWER COLLECTION</p>
+    <section class="baby-intro">
+      <p class="baby-eyebrow">BABY SHOWER COLLECTION</p>
 
       <h1>A little wonder.<br>A lot of love.</h1>
 
-      <p class="intro-text">
+      <p class="baby-intro-text">
         Celebrate a new arrival with matching invitations
         and welcome signs, personalized for your special day.
       </p>
@@ -382,34 +543,34 @@
       <p>Please enable JavaScript to browse the baby shower designs.</p>
     </noscript>
 
-    <section class="order-section" id="how-to-order">
+    <section class="baby-order" id="how-to-order">
       <div>
-        <p class="eyebrow">MADE PERSONAL, IN STORE</p>
+        <p class="baby-order-eyebrow">MADE PERSONAL, IN STORE</p>
         <h2>A sweet beginning, made yours.</h2>
       </div>
 
-      <div class="order-step">
-        <p class="step-number">01 / BROWSE</p>
+      <div class="baby-order-step">
+        <p class="baby-step-number">01 / BROWSE</p>
         <h3>Find your favorite</h3>
-        <p>
+        <p class="baby-step-description">
           Explore the designs and open your favorites
           for a closer look.
         </p>
       </div>
 
-      <div class="order-step">
-        <p class="step-number">02 / CHOOSE</p>
+      <div class="baby-order-step">
+        <p class="baby-step-number">02 / CHOOSE</p>
         <h3>Plan your prints</h3>
-        <p>
+        <p class="baby-step-description">
           Note your design number, invitation quantity
           and poster size.
         </p>
       </div>
 
-      <div class="order-step">
-        <p class="step-number">03 / VISIT</p>
+      <div class="baby-order-step">
+        <p class="baby-step-number">03 / VISIT</p>
         <h3>Make it personal</h3>
-        <p>
+        <p class="baby-step-description">
           Bring your selection, name and event details
           to the store.
         </p>
@@ -500,18 +661,12 @@
     </div>
   </dialog>
 
-  <!-- Shared website navigation -->
-  <script src="script.js?v=10"></script>
+  <script src="script.js?v=12"></script>
 
-  <!-- Baby shower gallery and popup -->
   <script>
     (() => {
       "use strict";
 
-      /*
-       * image: Styled mockup shown on the main page.
-       * detailImage: Flat designs shown inside the popup.
-       */
       const designs = [
         {
           code: "BS01",
@@ -588,7 +743,6 @@
 
       const gallery = document.getElementById("baby-gallery");
       const count = document.getElementById("baby-count");
-
       const dialog = document.getElementById("baby-detail");
       const closeButton = document.getElementById("baby-close");
 
@@ -636,7 +790,7 @@
             >
               <img
                 src="${escapeHTML(design.image)}"
-                alt="${escapeHTML(design.name)} baby shower invitation and welcome sign mockup"
+                alt="${escapeHTML(design.name)} invitation and welcome sign mockup"
                 loading="lazy"
                 width="1536"
                 height="1024"
@@ -703,10 +857,6 @@
         activeDesign = design;
         previousFocus = trigger;
 
-        /*
-         * Use the flat image in the popup.
-         * If that file fails to load, show the mockup instead.
-         */
         modalImage.onerror = () => {
           modalImage.onerror = null;
           modalImage.src = design.image;
