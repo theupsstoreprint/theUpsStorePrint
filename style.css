@@ -1101,3 +1101,9 @@ body.collection-page .site-header .nav-toggle {
     font-size: 14px;
   }
 }
+body.landing .site-header .nav-toggle,
+body.collection-page .site-header .nav-toggle {
+  background: transparent;
+  border: none;
+  color: #351c15;
+}
