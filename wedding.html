@@ -16,7 +16,6 @@
 
 <body class="collection-page">
 
-  <!-- Navigation -->
   <header class="site-header">
     <a class="brand" href="index.html">
       THE UPS STORE PRINT
@@ -49,7 +48,6 @@
 
   <main>
 
-    <!-- Introduction -->
     <section class="intro">
       <div>
         <div class="eyebrow">Wedding collection</div>
@@ -65,7 +63,6 @@
       <div class="count" id="count" aria-live="polite"></div>
     </section>
 
-    <!-- Filters -->
     <nav class="toolbar" aria-label="Filter wedding designs">
       <button
         class="filter active"
@@ -95,7 +92,6 @@
       </button>
     </nav>
 
-    <!-- JavaScript adds the cards here -->
     <section
       class="grid"
       id="wedding-grid"
@@ -103,12 +99,9 @@
     ></section>
 
     <noscript>
-      <p>
-        Please enable JavaScript to browse the designs.
-      </p>
+      <p>Please enable JavaScript to browse the designs.</p>
     </noscript>
 
-    <!-- Ordering information -->
     <section class="order">
       <div>
         <div class="eyebrow">Made personal, in store</div>
@@ -177,26 +170,17 @@
 
         <h3>Make it your own</h3>
 
-        <ul>
-          <li>Your names and celebration date</li>
-          <li>Event time and location</li>
-          <li>Your wording and RSVP details</li>
-        </ul>
+        <p>
+          Personalize the names, date, wording and event details.
+        </p>
 
         <h3 id="modal-order"></h3>
-
-        <p>
-          Show this design number to the store team
-          to discuss your order.
-        </p>
       </div>
     </div>
   </dialog>
 
-  <!-- Shared navigation behavior -->
   <script src="script.js"></script>
 
-  <!-- Wedding collection behavior -->
   <script>
     (() => {
       "use strict";
@@ -215,9 +199,8 @@
         { size: "24 × 36", price: 46.00 }
       ];
 
-      // DESIGNS
       // Add image: "images/filename.jpg" to use finished artwork.
-      // Without an image, a built-in sample preview is displayed.
+      // Otherwise, the built-in sample preview is displayed.
       const designs = [
         {
           name: "Ivory Romance",
@@ -304,8 +287,13 @@
         );
       }
 
-      // PRICING BLOCK
-      function pricingHTML(design, selectedIndex = 0) {
+      // MAIN CARDS: invitations and poster-board prices.
+      // POPUP: poster-board prices only.
+      function pricingHTML(
+        design,
+        selectedIndex = 0,
+        showInvitations = true
+      ) {
         const selected = posterPrices[selectedIndex];
 
         const tiers = invitationPrices.map(tier => `
@@ -314,6 +302,25 @@
             <td>${money(tier.price)}</td>
           </tr>
         `).join("");
+
+        const invitations = showInvitations ? `
+          <h3 class="pricing-heading">5 × 7 invitations</h3>
+
+          <p class="price-note">
+            Price per invitation, based on your quantity.
+          </p>
+
+          <table class="price-tiers">
+            <thead>
+              <tr>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price each</th>
+              </tr>
+            </thead>
+
+            <tbody>${tiers}</tbody>
+          </table>
+        ` : "";
 
         const sizes = posterPrices.map((option, index) => `
           <button
@@ -332,22 +339,7 @@
             data-price-design="${design.code}"
             aria-label="Pricing for ${escapeText(design.name)}"
           >
-            <h3 class="pricing-heading">5 × 7 invitations</h3>
-
-            <p class="price-note">
-              Price per invitation, based on your quantity.
-            </p>
-
-            <table class="price-tiers">
-              <thead>
-                <tr>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Price each</th>
-                </tr>
-              </thead>
-
-              <tbody>${tiers}</tbody>
-            </table>
+            ${invitations}
 
             <h3 class="pricing-heading">Poster board</h3>
 
@@ -565,7 +557,7 @@
           encodeURIComponent(svg);
       }
 
-      // CREATE ALL DESIGN CARDS
+      // CREATE DESIGN CARDS
       designs.forEach((design, index) => {
         design.preview = makePreview(design);
 
@@ -628,7 +620,7 @@
 
       updateCount(designs.length);
 
-      // OCCASION FILTERS
+      // FILTERS
       const filters = document.querySelectorAll("[data-filter]");
 
       filters.forEach(button => {
@@ -693,7 +685,7 @@
           });
       });
 
-      // OPEN EXPANDED PREVIEW
+      // OPEN POPUP — POSTER PRICING ONLY
       grid.addEventListener("click", event => {
         const button = event.target.closest("[data-design-index]");
 
@@ -720,12 +712,16 @@
           design.name + " invitation and matching welcome sign";
 
         document.querySelector("#modal-pricing").innerHTML =
-          pricingHTML(design, selectedSizes.get(design.code));
+          pricingHTML(
+            design,
+            selectedSizes.get(design.code),
+            false
+          );
 
         dialog.showModal();
       });
 
-      // CLOSE EXPANDED PREVIEW
+      // CLOSE POPUP
       dialog.querySelector(".close").addEventListener(
         "click",
         () => dialog.close()
