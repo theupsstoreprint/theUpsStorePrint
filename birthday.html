@@ -4,19 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Kids’ Birthday | The UPS Store Print</title>
+  <title>Birthday Collection | The UPS Store Print</title>
+
   <meta
     name="description"
-    content="Browse coordinated kids’ birthday invitations and welcome signs. Choose a design and personalize your prints in store."
+    content="Browse birthday invitations and welcome signs for kids, teens, adults and milestone celebrations."
   >
 
-  <link rel="stylesheet" href="style.css?v=13">
+  <link rel="stylesheet" href="style.css?v=14">
 
   <style>
     body.birthday-page {
       margin: 0;
-      color: #351c15;
       background: #fff;
+      color: #351c15;
       font-family: Arial, sans-serif;
     }
 
@@ -26,12 +27,21 @@
       box-sizing: border-box;
     }
 
-    .birthday-page button,
-    .birthday-page a {
+    .birthday-page button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .birthday-page a,
+    .birthday-page button {
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Shared header */
+    .birthday-page [hidden] {
+      display: none !important;
+    }
+
+    /* Navigation */
     .birthday-page .site-header {
       position: relative;
       z-index: 20;
@@ -103,7 +113,6 @@
       border-radius: 6px;
       background: transparent;
       color: #351c15;
-      cursor: pointer;
     }
 
     .birthday-page .nav-toggle svg {
@@ -111,7 +120,7 @@
       height: 24px;
     }
 
-    /* Page introduction */
+    /* Introduction */
     .birthday-shell {
       width: 100%;
       max-width: 1344px;
@@ -135,9 +144,8 @@
     }
 
     .birthday-intro h1 {
-      max-width: 950px;
+      max-width: 1000px;
       margin: 0 0 24px;
-      color: #351c15;
       font-family: Georgia, serif;
       font-size: clamp(44px, 5vw, 76px);
       font-weight: 400;
@@ -146,7 +154,7 @@
     }
 
     .birthday-intro-text {
-      max-width: 650px;
+      max-width: 670px;
       margin: 0;
       color: #756b65;
       font-size: 17px;
@@ -159,14 +167,75 @@
       font-size: 13px;
     }
 
-    /* Design gallery */
+    /* Filters */
+    .birthday-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+      padding-top: 28px;
+      border-top: 1px solid #e8e0d8;
+    }
+
+    .birthday-filter {
+      min-height: 44px;
+      padding: 11px 22px;
+      border: 1px solid #ded5cb;
+      border-radius: 30px;
+      background: #fff;
+      color: #351c15;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .birthday-filter:hover {
+      border-color: #351c15;
+    }
+
+    .birthday-filter[aria-pressed="true"] {
+      border-color: #351c15;
+      background: #351c15;
+      color: #fff;
+    }
+
+    .birthday-empty {
+      margin: 0 0 64px;
+      padding: 40px 24px;
+      border: 1px solid #e8e0d8;
+      border-radius: 8px;
+      background: #faf7f2;
+      text-align: center;
+    }
+
+    .birthday-empty h2 {
+      margin: 0 0 12px;
+      font-family: Georgia, serif;
+      font-size: 28px;
+      font-weight: 400;
+    }
+
+    .birthday-empty p {
+      margin: 0 0 20px;
+      color: #756b65;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .birthday-reset {
+      padding: 12px 20px;
+      border: 1px solid #351c15;
+      border-radius: 5px;
+      background: #351c15;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    /* Gallery */
     .birthday-gallery {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 52px 32px;
-      margin: 0 0 72px;
-      padding-top: 32px;
-      border-top: 1px solid #e8e0d8;
+      margin-bottom: 72px;
     }
 
     .birthday-card {
@@ -183,7 +252,6 @@
       border: 0;
       border-radius: 8px;
       background: #faf7f2;
-      cursor: pointer;
     }
 
     .birthday-image-button img {
@@ -240,9 +308,7 @@
       border-bottom: 1px solid #b69054;
       background: transparent;
       color: #351c15;
-      font: inherit;
       font-size: 14px;
-      cursor: pointer;
     }
 
     .birthday-code {
@@ -259,7 +325,7 @@
       line-height: 1.7;
     }
 
-    /* How to order */
+    /* Ordering */
     .birthday-order {
       display: grid;
       grid-template-columns: 1.3fr repeat(3, 1fr);
@@ -369,7 +435,6 @@
       background: #fff;
       color: #351c15;
       font-size: 28px;
-      cursor: pointer;
     }
 
     .birthday-dialog-layout {
@@ -457,9 +522,7 @@
       border-radius: 5px;
       background: #fff;
       color: #351c15;
-      font: inherit;
       font-size: 12px;
-      cursor: pointer;
     }
 
     .birthday-sizes button[aria-pressed="true"] {
@@ -576,11 +639,21 @@
         font-size: 15px;
       }
 
+      .birthday-filters {
+        gap: 8px;
+        margin-bottom: 26px;
+        padding-top: 24px;
+      }
+
+      .birthday-filter {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+
       .birthday-gallery {
         grid-template-columns: 1fr;
         gap: 40px;
         margin-bottom: 48px;
-        padding-top: 24px;
       }
 
       .birthday-card-heading {
@@ -640,7 +713,9 @@
   <header class="site-header">
     <a class="brand" href="index.html">
       <span class="brand-name">THE UPS STORE PRINT</span>
-      <span class="brand-tagline">INVITATIONS &amp; EVENT PRINTING</span>
+      <span class="brand-tagline">
+        INVITATIONS &amp; EVENT PRINTING
+      </span>
     </a>
 
     <button
@@ -680,29 +755,94 @@
 
   <main class="birthday-shell">
 
-    <section class="birthday-intro" aria-labelledby="birthday-title">
-      <p class="birthday-eyebrow">Kids’ Birthday Collection</p>
+    <section
+      class="birthday-intro"
+      aria-labelledby="birthday-title"
+    >
+      <p class="birthday-eyebrow">Birthday Collection</p>
 
       <h1 id="birthday-title">
-        Little moments.<br>
-        Big birthday magic.
+        Another year.<br>
+        A celebration all your own.
       </h1>
 
       <p class="birthday-intro-text">
-        From first birthdays to big adventures, explore matching
-        invitations and welcome signs made personal for their special day.
+        From first birthdays to milestone moments, find matching
+        invitations and welcome signs made personal for the celebration.
       </p>
 
-      <p class="birthday-count" id="birthday-count">
-        06 coordinated designs
-      </p>
+      <p
+        class="birthday-count"
+        id="birthday-count"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      ></p>
     </section>
+
+    <div
+      class="birthday-filters"
+      id="birthday-filters"
+      role="group"
+      aria-label="Filter birthday designs"
+    >
+      <button
+        class="birthday-filter"
+        type="button"
+        data-filter="all"
+        aria-pressed="true"
+        aria-controls="birthday-gallery"
+      >All designs</button>
+
+      <button
+        class="birthday-filter"
+        type="button"
+        data-filter="kids"
+        aria-pressed="false"
+        aria-controls="birthday-gallery"
+      >Kids</button>
+
+      <button
+        class="birthday-filter"
+        type="button"
+        data-filter="teens"
+        aria-pressed="false"
+        aria-controls="birthday-gallery"
+      >Teens</button>
+
+      <button
+        class="birthday-filter"
+        type="button"
+        data-filter="adults"
+        aria-pressed="false"
+        aria-controls="birthday-gallery"
+      >Adults</button>
+
+      <button
+        class="birthday-filter"
+        type="button"
+        data-filter="milestones"
+        aria-pressed="false"
+        aria-controls="birthday-gallery"
+      >Milestone birthdays</button>
+    </div>
 
     <section
       class="birthday-gallery"
       id="birthday-gallery"
-      aria-label="Kids’ birthday designs"
+      aria-label="Birthday designs"
     ></section>
+
+    <div class="birthday-empty" id="birthday-empty" hidden>
+      <h2>No designs in this selection yet.</h2>
+      <p>Explore the full birthday collection below.</p>
+
+      <button
+        class="birthday-reset"
+        id="birthday-reset"
+        type="button"
+      >View all designs</button>
+    </div>
 
     <noscript>
       <p>Please enable JavaScript to browse the birthday designs.</p>
@@ -715,9 +855,10 @@
     >
       <div class="birthday-order-heading">
         <p class="birthday-eyebrow">Made personal, in store</p>
+
         <h2 id="birthday-order-title">
-          Their day.<br>
-          Their kind of magic.
+          Your celebration.<br>
+          Your personal touch.
         </h2>
       </div>
 
@@ -759,7 +900,7 @@
     aria-labelledby="birthday-dialog-title"
   >
     <div class="birthday-dialog-top">
-      <p class="birthday-dialog-label">KIDS’ BIRTHDAY COLLECTION</p>
+      <p class="birthday-dialog-label">BIRTHDAY COLLECTION</p>
 
       <button
         class="birthday-close"
@@ -770,8 +911,9 @@
     </div>
 
     <div class="birthday-dialog-layout">
+
       <div class="birthday-dialog-art">
-        <img id="birthday-detail-image" src="" alt="">
+        <img id="birthday-detail-image" alt="">
       </div>
 
       <div class="birthday-dialog-info">
@@ -810,26 +952,34 @@
             role="group"
             aria-label="Choose poster size"
           >
-            <button type="button" data-size="0" aria-pressed="true">
-              16 × 20 — $18.50
-            </button>
+            <button
+              type="button"
+              data-size="0"
+              aria-pressed="true"
+            >16 × 20 — $18.50</button>
 
-            <button type="button" data-size="1" aria-pressed="false">
-              18 × 24 — $25.50
-            </button>
+            <button
+              type="button"
+              data-size="1"
+              aria-pressed="false"
+            >18 × 24 — $25.50</button>
 
-            <button type="button" data-size="2" aria-pressed="false">
-              20 × 24 — $28.50
-            </button>
+            <button
+              type="button"
+              data-size="2"
+              aria-pressed="false"
+            >20 × 24 — $28.50</button>
 
-            <button type="button" data-size="3" aria-pressed="false">
-              24 × 36 — $46.00
-            </button>
+            <button
+              type="button"
+              data-size="3"
+              aria-pressed="false"
+            >24 × 36 — $46.00</button>
           </div>
         </section>
 
         <p class="birthday-personalization">
-          <strong>Make it theirs.</strong><br>
+          <strong>Make it personal.</strong><br>
           Personalize the name, age and party details.
           Matching 5 × 7 invitations are available.
         </p>
@@ -838,22 +988,33 @@
           class="birthday-order-link"
           id="birthday-order-link"
           href="#how-to-order"
-        >
-          How to order ↗
-        </a>
+        >How to order ↗</a>
       </div>
     </div>
   </dialog>
 
-  <!-- This page includes its own menu and popup JavaScript. -->
+  <!-- Menu, filters and popups are included below.
+       Do not add another script.js tag to this page. -->
   <script>
     (() => {
       "use strict";
+
+      /*
+        Category options:
+        "kids"
+        "teens"
+        "adults"
+        "milestones"
+
+        A design can appear in multiple filters:
+        categories: ["adults", "milestones"]
+      */
 
       const designs = [
         {
           code: "KB01",
           name: "Beary Sweet",
+          categories: ["kids", "milestones"],
           description:
             "A cuddly teddy, blue gingham bows and a picnic full of daisies.",
           image: "images/KB01-beary-sweet.png",
@@ -862,6 +1023,7 @@
         {
           code: "KB02",
           name: "Monster Truck Mayhem",
+          categories: ["kids"],
           description:
             "Big wheels, muddy adventures and bold red, white and blue.",
           image: "images/KB02-monster-truck-mayhem.png",
@@ -870,6 +1032,7 @@
         {
           code: "KB03",
           name: "Dino-Mite Birthday",
+          categories: ["kids"],
           description:
             "Friendly dinosaurs, leafy ferns and a prehistoric adventure.",
           image: "images/KB03-dino-mite-birthday.png",
@@ -878,6 +1041,7 @@
         {
           code: "KB04",
           name: "Royal Princess",
+          categories: ["kids"],
           description:
             "A storybook princess, a dreamy castle and soft pink bows.",
           image: "images/KB04-royal-princess.png",
@@ -886,6 +1050,7 @@
         {
           code: "KB05",
           name: "Up, Up & Away",
+          categories: ["kids"],
           description:
             "A vintage red airplane, soft blue clouds and sky-high adventures.",
           image: "images/KB05-up-up-away.png",
@@ -894,12 +1059,21 @@
         {
           code: "KB06",
           name: "Woodland Adventure",
+          categories: ["kids"],
           description:
             "A little fox and bunny surrounded by ferns and forest treasures.",
           image: "images/KB06-woodland-adventure.png",
           detailImage: "images/KB06-woodland-adventure-flat.png"
         }
       ];
+
+      const filterLabels = {
+        all: "All designs",
+        kids: "Kids",
+        teens: "Teens",
+        adults: "Adults",
+        milestones: "Milestone birthdays"
+      };
 
       const sizes = [
         { label: "16 × 20", price: 18.50 },
@@ -914,15 +1088,25 @@
       });
 
       const gallery = document.getElementById("birthday-gallery");
+      const count = document.getElementById("birthday-count");
+      const emptyState = document.getElementById("birthday-empty");
+      const filters = document.getElementById("birthday-filters");
+
+      const filterButtons = [
+        ...filters.querySelectorAll("[data-filter]")
+      ];
+
       const dialog = document.getElementById("birthday-dialog");
       const closeButton = document.getElementById("birthday-close");
       const detailImage = document.getElementById("birthday-detail-image");
+
       const sizeButtons = [
         ...document.querySelectorAll("#birthday-sizes button")
       ];
 
       let lastTrigger = null;
       let previousOverflow = "";
+      let goingToOrder = false;
 
       function escapeHTML(value) {
         return String(value).replace(/[&<>"']/g, character => ({
@@ -934,52 +1118,81 @@
         })[character]);
       }
 
-      gallery.innerHTML = designs.map((design, index) => `
-        <article class="birthday-card">
-          <button
-            class="birthday-image-button"
-            type="button"
-            data-design="${index}"
-            aria-label="View ${escapeHTML(design.code)} ${escapeHTML(design.name)}"
-            aria-haspopup="dialog"
-          >
-            <img
-              src="${escapeHTML(design.image)}"
-              alt="${escapeHTML(design.name)} welcome sign and matching invitation"
-              loading="${index < 2 ? "eager" : "lazy"}"
-              decoding="async"
-              width="1536"
-              height="1024"
-            >
-            <span class="birthday-plus" aria-hidden="true">+</span>
-          </button>
+      function renderGallery(filter = "all") {
+        const visible = designs.filter(design =>
+          filter === "all" || design.categories.includes(filter)
+        );
 
-          <div class="birthday-card-heading">
-            <h2>${escapeHTML(design.name)}</h2>
-
+        gallery.innerHTML = visible.map((design, index) => `
+          <article class="birthday-card">
             <button
-              class="birthday-view"
+              class="birthday-image-button"
               type="button"
-              data-design="${index}"
+              data-code="${escapeHTML(design.code)}"
+              aria-label="View ${escapeHTML(design.code)} ${escapeHTML(design.name)}"
               aria-haspopup="dialog"
-              aria-label="View ${escapeHTML(design.name)}"
             >
-              View design ↗
+              <img
+                src="${escapeHTML(design.image)}"
+                alt="${escapeHTML(design.name)} welcome sign and matching invitation"
+                loading="${index < 2 ? "eager" : "lazy"}"
+                decoding="async"
+                width="1536"
+                height="1024"
+              >
+              <span class="birthday-plus" aria-hidden="true">+</span>
             </button>
-          </div>
 
-          <p class="birthday-code">
-            Design ${escapeHTML(design.code)} · Invitation &amp; welcome sign
-          </p>
+            <div class="birthday-card-heading">
+              <h2>${escapeHTML(design.name)}</h2>
 
-          <p class="birthday-description">
-            ${escapeHTML(design.description)}
-          </p>
-        </article>
-      `).join("");
+              <button
+                class="birthday-view"
+                type="button"
+                data-code="${escapeHTML(design.code)}"
+                aria-label="View ${escapeHTML(design.name)}"
+                aria-haspopup="dialog"
+              >View design ↗</button>
+            </div>
 
-      document.getElementById("birthday-count").textContent =
-        `${String(designs.length).padStart(2, "0")} coordinated designs`;
+            <p class="birthday-code">
+              Design ${escapeHTML(design.code)} · Invitation &amp; welcome sign
+            </p>
+
+            <p class="birthday-description">
+              ${escapeHTML(design.description)}
+            </p>
+          </article>
+        `).join("");
+
+        const total = String(visible.length).padStart(2, "0");
+        const noun = visible.length === 1 ? "design" : "designs";
+
+        count.textContent = filter === "all"
+          ? `${total} coordinated ${noun}`
+          : `${total} ${noun} · ${filterLabels[filter]}`;
+
+        gallery.hidden = visible.length === 0;
+        emptyState.hidden = visible.length !== 0;
+
+        filterButtons.forEach(button => {
+          button.setAttribute(
+            "aria-pressed",
+            String(button.dataset.filter === filter)
+          );
+        });
+      }
+
+      filters.addEventListener("click", event => {
+        const button = event.target.closest("button[data-filter]");
+        if (button) renderGallery(button.dataset.filter);
+      });
+
+      document.getElementById("birthday-reset")
+        .addEventListener("click", () => {
+          renderGallery("all");
+          filterButtons[0].focus({ preventScroll: true });
+        });
 
       function selectSize(index) {
         const size = sizes[index];
@@ -998,11 +1211,12 @@
         });
       }
 
-      function openDesign(index, trigger) {
-        const design = designs[index];
+      function openDesign(code, trigger) {
+        const design = designs.find(item => item.code === code);
         if (!design) return;
 
         lastTrigger = trigger;
+        goingToOrder = false;
 
         document.getElementById("birthday-dialog-code").textContent =
           `Design ${design.code} · Invitation & welcome sign`;
@@ -1016,27 +1230,28 @@
         detailImage.alt =
           `${design.code} ${design.name}: flat welcome poster and matching 5 × 7 invitation`;
 
-        // Use the display image if the flat image has not been uploaded yet.
         detailImage.onerror = () => {
           detailImage.onerror = null;
+          detailImage.alt =
+            `${design.name} welcome sign and matching invitation`;
           detailImage.src = design.image;
         };
 
         detailImage.src = design.detailImage;
-        selectSize(0);
 
+        selectSize(0);
         previousOverflow = document.body.style.overflow;
+
         dialog.showModal();
         document.body.style.overflow = "hidden";
         dialog.scrollTop = 0;
+
         closeButton.focus({ preventScroll: true });
       }
 
       gallery.addEventListener("click", event => {
-        const trigger = event.target.closest("button[data-design]");
-        if (!trigger) return;
-
-        openDesign(Number(trigger.dataset.design), trigger);
+        const trigger = event.target.closest("button[data-code]");
+        if (trigger) openDesign(trigger.dataset.code, trigger);
       });
 
       sizeButtons.forEach(button => {
@@ -1052,19 +1267,19 @@
 
         const bounds = dialog.getBoundingClientRect();
 
-        const outside =
+        if (
           event.clientX < bounds.left ||
           event.clientX > bounds.right ||
           event.clientY < bounds.top ||
-          event.clientY > bounds.bottom;
-
-        if (outside) dialog.close();
+          event.clientY > bounds.bottom
+        ) {
+          dialog.close();
+        }
       });
 
-      let goingToOrder = false;
-
       document.getElementById("birthday-order-link")
-        .addEventListener("click", () => {
+        .addEventListener("click", event => {
+          event.preventDefault();
           goingToOrder = true;
           dialog.close();
         });
@@ -1072,19 +1287,25 @@
       dialog.addEventListener("close", () => {
         document.body.style.overflow = previousOverflow;
 
-        if (!goingToOrder && lastTrigger) {
+        if (goingToOrder) {
+          const heading = document.getElementById("birthday-order-title");
+          heading.setAttribute("tabindex", "-1");
+          heading.focus({ preventScroll: true });
+          heading.scrollIntoView({ block: "start" });
+        } else if (lastTrigger && lastTrigger.isConnected) {
           lastTrigger.focus({ preventScroll: true });
         }
 
         goingToOrder = false;
       });
 
-      /* Mobile navigation */
+      /* Mobile menu */
       const menuToggle = document.getElementById("birthday-menu-toggle");
       const navigation = document.getElementById("site-navigation");
 
       function setMenu(open) {
         navigation.classList.toggle("is-open", open);
+
         menuToggle.setAttribute("aria-expanded", String(open));
         menuToggle.setAttribute(
           "aria-label",
@@ -1116,6 +1337,8 @@
 
       window.matchMedia("(max-width: 1100px)")
         .addEventListener("change", () => setMenu(false));
+
+      renderGallery();
     })();
   </script>
 
