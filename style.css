@@ -1114,3 +1114,235 @@ body.landing .collection .art > img {
   object-fit: cover;
   object-position: center;
 }
+/* ==================================
+   COLLECTION PAGE CLEANUP
+   ================================== */
+
+body.collection-page .page {
+  width: min(1280px, calc(100% - 64px));
+  margin-inline: auto;
+}
+
+/* Intro: keep the heading and description together */
+body.collection-page .page > .intro {
+  display: block;
+  padding: 64px 0 32px;
+  margin: 0;
+  border: 0;
+}
+
+body.collection-page .intro .eyebrow {
+  margin: 0 0 20px;
+  color: #8c6b35;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: .2em;
+}
+
+body.collection-page .intro h1 {
+  width: auto;
+  max-width: 950px;
+  margin: 0 0 24px;
+  color: #351c15;
+  font-family: Georgia, serif;
+  font-size: clamp(48px, 5.5vw, 80px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -.035em;
+}
+
+body.collection-page .intro .intro-text {
+  width: auto;
+  max-width: 650px;
+  margin: 0;
+  color: #756b65;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+body.collection-page .intro .baby-count,
+body.collection-page .intro .sweet-count,
+body.collection-page .intro .wedding-count {
+  margin: 24px 0 0;
+  color: #756b65;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Gallery spacing */
+body.collection-page .baby-gallery {
+  gap: 52px 32px;
+  margin: 20px 0 72px;
+  padding-top: 32px;
+  border-top: 1px solid #e8e0d8;
+}
+
+body.collection-page .baby-card {
+  min-width: 0;
+}
+
+body.collection-page .baby-photo-button {
+  border-radius: 10px;
+}
+
+body.collection-page .baby-card-heading {
+  align-items: baseline;
+  margin-top: 20px;
+  gap: 16px;
+}
+
+body.collection-page .baby-card h2 {
+  font-size: clamp(26px, 2.5vw, 36px);
+  line-height: 1.2;
+}
+
+body.collection-page .baby-view {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+body.collection-page .baby-code {
+  margin: 10px 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+body.collection-page .baby-description {
+  max-width: 540px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* How to order */
+body.collection-page .order-section {
+  display: grid;
+  grid-template-columns: 1.3fr repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 32px;
+  margin: 0 0 64px;
+  padding: 40px;
+  border-top: 2px solid #ffb500;
+  border-radius: 0 0 10px 10px;
+  background: #faf7f2;
+}
+
+body.collection-page .order-section .eyebrow {
+  margin: 0 0 16px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: .18em;
+}
+
+body.collection-page .order-section h2 {
+  margin: 0;
+  color: #351c15;
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+body.collection-page .order-step {
+  min-width: 0;
+}
+
+body.collection-page .order-step .step-number {
+  margin: 0 0 16px;
+  color: #8c6b35;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+
+body.collection-page .order-step h3 {
+  margin: 0 0 12px;
+  color: #351c15;
+  font-family: Georgia, serif;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+body.collection-page .order-step p:not(.step-number) {
+  margin: 0;
+  color: #756b65;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+  body.collection-page .order-section {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    padding: 32px;
+  }
+
+  body.collection-page .order-section > div:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Phone */
+@media (max-width: 700px) {
+  body.collection-page .page {
+    width: calc(100% - 36px);
+  }
+
+  body.collection-page .page > .intro {
+    padding: 40px 0 28px;
+  }
+
+  body.collection-page .intro .eyebrow {
+    margin-bottom: 16px;
+    font-size: 10px;
+  }
+
+  body.collection-page .intro h1 {
+    font-size: clamp(42px, 10vw, 60px);
+    margin-bottom: 20px;
+  }
+
+  body.collection-page .intro .intro-text {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  body.collection-page .baby-gallery {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin: 12px 0 48px;
+    padding-top: 24px;
+  }
+
+  body.collection-page .baby-card-heading {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-top: 16px;
+  }
+
+  body.collection-page .baby-card h2 {
+    font-size: 29px;
+  }
+
+  body.collection-page .baby-description {
+    font-size: 14px;
+  }
+
+  body.collection-page .order-section {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    margin-bottom: 40px;
+    padding: 28px 24px;
+  }
+
+  body.collection-page .order-section h2 {
+    font-size: 30px;
+  }
+
+  body.collection-page .order-step .step-number {
+    margin-bottom: 10px;
+  }
+}
