@@ -992,3 +992,13 @@ body.landing .hero-price small {
     margin-top: 24px;
   }
 }
+
+body .site-header .nav-toggle {
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  font-size: 25px;
+  line-height: 1;
+}
