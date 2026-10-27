@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Wedding Collection | The UPS Store Print</title>
+
+  <meta
+    name="description"
+    content="Browse matching wedding invitations and welcome signs."
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="collection-page">
+
+  <header>
+    <a
+      class="brand"
+      href="index.html"
+      style="color: inherit; text-decoration: none;"
+    >
+      THE UPS STORE PRINT
+      <span>INVITATIONS & EVENT PRINTING</span>
+    </a>
+
+    <a
+      class="header-note"
+      href="index.html"
+      style="color: inherit; text-decoration: none;"
+    >
+      ← All collections
+    </a>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <div>
+        <div class="eyebrow">Wedding collection</div>
+
+        <h1>A beautiful beginning.</h1>
+
+        <p>
+          Invitations that set the tone. Welcome signs that bring
+          it all together. Explore a matching look for your day.
+        </p>
+      </div>
+
+      <div class="count" id="count" aria-live="polite">
+        02 coordinated designs
+      </div>
+    </section>
+
+    <!-- Style filters -->
+    <nav class="toolbar" aria-label="Filter wedding designs">
+      <button
+        class="filter active"
+        type="button"
+        data-filter="all"
+        aria-pressed="true"
+      >
+        All designs
+      </button>
+
+      <button
+        class="filter"
+        type="button"
+        data-filter="floral"
+        aria-pressed="false"
+      >
+        Romantic & floral
+      </button>
+
+      <button
+        class="filter"
+        type="button"
+        data-filter="modern"
+        aria-pressed="false"
+      >
+        Modern & minimal
+      </button>
+    </nav>
+
+    <!-- Design collection -->
+    <section class="grid" aria-label="Wedding designs">
+
+      <!-- Design W01 -->
+      <article class="card" data-style="floral">
+        <button
+          class="image-button"
+          type="button"
+          data-design="ivory"
+          aria-label="View Ivory Romance, design W01"
+        >
+          <img
+            src="images/ivory-romance.jpg"
+            alt="Ivory floral wedding invitation and matching welcome sign"
+            fetchpriority="high"
+          >
+
+          <span class="zoom" aria-hidden="true">+</span>
+        </button>
+
+        <div class="details">
+          <div>
+            <h2>Ivory Romance</h2>
+
+            <div class="code">
+              Design W01 · Invitation & welcome sign
+            </div>
+
+            <p class="description">
+              Soft florals, sage greenery & a touch of gold.
+            </p>
+          </div>
+
+          <button
+            class="view"
+            type="button"
+            data-design="ivory"
+            aria-label="View Ivory Romance details"
+          >
+            View design ↗
+          </button>
+        </div>
+      </article>
+
+      <!-- Design W02 -->
+      <article class="card" data-style="modern">
+        <button
+          class="image-button"
+          type="button"
+          data-design="modern"
+          aria-label="View Modern Vows, design W02"
+        >
+          <img
+            src="images/modern-vows.jpg"
+            alt="Black and white wedding invitation and matching welcome sign"
+            loading="lazy"
+          >
+
+          <span class="zoom" aria-hidden="true">+</span>
+        </button>
+
+        <div class="details">
+          <div>
+            <h2>Modern Vows</h2>
+
+            <div class="code">
+              Design W02 · Invitation & welcome sign
+            </div>
+
+            <p class="description">
+              Bold typography. Clean lines. Timeless simplicity.
+            </p>
+          </div>
+
+          <button
+            class="view"
+            type="button"
+            data-design="modern"
+            aria-label="View Modern Vows details"
+          >
+            View design ↗
+          </button>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Ordering instructions -->
+    <section class="order">
+      <div>
+        <div class="eyebrow">Made personal, in store</div>
+        <h2>Your favorite, with<br>your details.</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <b>01 / BROWSE</b>
+          <h3>Find your style</h3>
+          <p>
+            Explore the collection and open a design for a closer look.
+          </p>
+        </div>
+
+        <div class="step">
+          <b>02 / SAVE</b>
+          <h3>Note the number</h3>
+          <p>
+            Keep the design number handy or screenshot your favorite.
+          </p>
+        </div>
+
+        <div class="step">
+          <b>03 / VISIT</b>
+          <h3>Make it yours</h3>
+          <p>
+            Ask in store about personalization, sizes and pricing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>THE UPS STORE PRINT</span>
+    <span>Illustrative collection · Order in store</span>
+  </footer>
+
+  <!-- Expanded design preview -->
+  <dialog id="detail" aria-labelledby="modal-title">
+    <div class="modal-head">
+      <span class="eyebrow">A closer look</span>
+
+      <button
+        class="close"
+        type="button"
+        aria-label="Close design preview"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <img id="modal-image" alt="">
+
+      <div class="modal-info">
+        <div class="code" id="modal-code"></div>
+
+        <h2 id="modal-title"></h2>
+
+        <p id="modal-description"></p>
+
+        <span class="badge">
+          Invitation + matching welcome sign
+        </span>
+
+        <h3>Make it your own</h3>
+
+        <ul>
+          <li>Your names and celebration date</li>
+          <li>Your wording and event details</li>
+          <li>Ask in store about sizes and pricing</li>
+        </ul>
+
+        <h3 id="modal-order"></h3>
+
+        <p>
+          Show this design number to the store team
+          to discuss your order.
+        </p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Shared website JavaScript -->
+  <script src="script.js"></script>
+
+  <!-- Wedding filters and previews -->
+  <script>
+    const weddingDesigns = {
+      ivory: {
+        title: "Ivory Romance",
+        code: "W01",
+        image: "images/ivory-romance.jpg",
+        description:
+          "A romantic pairing of ivory florals, muted sage greenery " +
+          "and delicate gold accents."
+      },
+
+      modern: {
+        title: "Modern Vows",
+        code: "W02",
+        image: "images/modern-vows.jpg",
+        description:
+          "A striking black-and-white suite with oversized serif " +
+          "lettering and a clean, contemporary layout."
+      }
+    };
+
+    const designDialog = document.querySelector("#detail");
+
+    // Open a larger design preview.
+    document.querySelectorAll("[data-design]").forEach(button => {
+      button.addEventListener("click", () => {
+        const design = weddingDesigns[button.dataset.design];
+
+        document.querySelector("#modal-title").textContent =
+          design.title;
+
+        document.querySelector("#modal-code").textContent =
+          "DESIGN " + design.code;
+
+        document.querySelector("#modal-description").textContent =
+          design.description;
+
+        document.querySelector("#modal-order").textContent =
+          "Ask for " + design.code + " in store";
+
+        const image = document.querySelector("#modal-image");
+
+        image.src = design.image;
+        image.alt =
+          design.title + " invitation and matching welcome sign";
+
+        designDialog.showModal();
+      });
+    });
+
+    // Close using the X button.
+    designDialog.querySelector(".close").addEventListener(
+      "click",
+      () => designDialog.close()
+    );
+
+    // Close when clicking outside the dialog.
+    designDialog.addEventListener("click", event => {
+      if (event.target !== designDialog) return;
+
+      const bounds = designDialog.getBoundingClientRect();
+
+      const clickedOutside =
+        event.clientX < bounds.left ||
+        event.clientX > bounds.right ||
+        event.clientY < bounds.top ||
+        event.clientY > bounds.bottom;
+
+      if (clickedOutside) designDialog.close();
+    });
+
+    // Filter the design cards.
+    const filters = document.querySelectorAll("[data-filter]");
+    const cards = document.querySelectorAll(".card[data-style]");
+
+    filters.forEach(button => {
+      button.addEventListener("click", () => {
+        const selectedStyle = button.dataset.filter;
+        let visibleCount = 0;
+
+        filters.forEach(filter => {
+          const isSelected = filter === button;
+
+          filter.classList.toggle("active", isSelected);
+          filter.setAttribute("aria-pressed", String(isSelected));
+        });
+
+        cards.forEach(card => {
+          const matches =
+            selectedStyle === "all" ||
+            card.dataset.style === selectedStyle;
+
+          card.hidden = !matches;
+
+          if (matches) visibleCount++;
+        });
+
+        document.querySelector("#count").textContent =
+          String(visibleCount).padStart(2, "0") +
+          " coordinated design" +
+          (visibleCount === 1 ? "" : "s");
+      });
+    });
+  </script>
+
+</body>
+</html>
