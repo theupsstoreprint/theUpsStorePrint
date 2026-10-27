@@ -900,3 +900,95 @@ body.collection-page :focus-visible {
     transform: none;
   }
 }
+/* Landing-page hero image */
+
+body.landing .hero.hero-photo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 490px;
+  margin: 30px 0 45px;
+  padding: 45px 4%;
+  overflow: hidden;
+  background: #faf7f2 url("images/hero.png") center / cover no-repeat;
+}
+
+body.landing .hero-photo .hero-copy {
+  position: relative;
+  z-index: 1;
+  width: 43%;
+}
+
+body.landing .hero-photo h1 {
+  margin: 16px 0 20px;
+  font-size: clamp(36px, 4.2vw, 62px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+}
+
+body.landing .hero-photo p {
+  max-width: 340px;
+  color: #61534a;
+}
+
+body.landing .hero-price {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 16px 20px;
+  border: 1px solid #ffb500;
+  border-radius: 5px;
+  background: #fffaf0;
+  color: #351c15;
+  box-shadow: 0 4px 18px #351c1512;
+}
+
+body.landing .hero-price span {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+body.landing .hero-price strong {
+  font: normal 27px/1.2 Georgia, serif;
+}
+
+body.landing .hero-price small {
+  color: #756b65;
+  font-size: 10px;
+}
+
+@media (max-width: 700px) {
+  body.landing .hero.hero-photo {
+    display: block;
+    min-height: 0;
+    margin-top: 20px;
+    padding: 245px 22px 24px;
+    background-image: none;
+  }
+
+  body.landing .hero-photo::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 220px;
+    background: url("images/hero.png") right center / auto 100% no-repeat;
+  }
+
+  body.landing .hero-photo .hero-copy {
+    width: 100%;
+  }
+
+  body.landing .hero-photo h1 {
+    font-size: clamp(36px, 9vw, 48px);
+  }
+
+  body.landing .hero-photo .hero-price {
+    position: static;
+    width: fit-content;
+    margin-top: 24px;
+  }
+}
