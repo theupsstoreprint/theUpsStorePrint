@@ -6,12 +6,320 @@
 
   <title>Wedding Collection | The UPS Store Print</title>
 
-  <meta
-    name="description"
-    content="Wedding invitations, welcome signs and rehearsal dinner designs with print pricing."
-  >
+  <link rel="stylesheet" href="style.css?v=7">
 
-  <link rel="stylesheet" href="style.css?v=6">
+  <style>
+    /* Wedding gallery and popup */
+    .wedding-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 56px 32px;
+      margin: 36px 0 72px;
+    }
+
+    .wedding-card[hidden] {
+      display: none;
+    }
+
+    .wedding-image-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: #f7f4ef;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .wedding-image-button img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+    }
+
+    .wedding-zoom {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: white;
+      color: #351c15;
+      font: 30px Arial, sans-serif;
+      box-shadow: 0 3px 15px #351c1510;
+    }
+
+    .wedding-card-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .wedding-card h2 {
+      margin: 0;
+      color: #351c15;
+      font-family: Georgia, serif;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 400;
+    }
+
+    .wedding-view {
+      flex-shrink: 0;
+      padding: 6px 0;
+      border: 0;
+      border-bottom: 1px solid #b68b42;
+      background: transparent;
+      color: #351c15;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .wedding-card-code {
+      margin: 12px 0;
+      color: #756b65;
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+
+    .wedding-card-description {
+      margin: 0;
+      color: #756b65;
+      line-height: 1.7;
+    }
+
+    .wedding-filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      border-top: 1px solid #e8e0d8;
+    }
+
+    .wedding-filter {
+      padding: 12px 24px;
+      border: 1px solid #e8e0d8;
+      border-radius: 30px;
+      background: white;
+      color: #351c15;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .wedding-filter[aria-pressed="true"] {
+      border-color: #ffb500;
+      background: #ffb500;
+    }
+
+    .wedding-count {
+      margin-top: 24px;
+      color: #756b65;
+      font-size: 14px;
+    }
+
+    .wedding-empty {
+      grid-column: 1 / -1;
+      padding: 40px 24px;
+      background: #faf7f2;
+      color: #756b65;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .wedding-dialog {
+      width: min(1040px, calc(100% - 32px));
+      max-width: none;
+      max-height: 90dvh;
+      padding: 0;
+      border: 0;
+      border-radius: 12px;
+      background: white;
+      color: #351c15;
+      overflow: auto;
+    }
+
+    .wedding-dialog::backdrop {
+      background: rgb(30 20 15 / 65%);
+    }
+
+    body.wedding-modal-open {
+      overflow: hidden;
+    }
+
+    .wedding-modal-top {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8e0d8;
+    }
+
+    .wedding-close {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #faf7f2;
+      color: #351c15;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .wedding-modal-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+    }
+
+    .wedding-modal-photo {
+      display: flex;
+      align-items: center;
+      background: #f7f4ef;
+    }
+
+    .wedding-modal-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .wedding-modal-info {
+      padding: 28px;
+    }
+
+    .wedding-modal-code {
+      margin: 0 0 12px;
+      color: #8c6b35;
+      font-size: 12px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .wedding-modal-info h2 {
+      margin: 0 0 14px;
+      font-family: Georgia, serif;
+      font-size: 38px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .wedding-modal-description {
+      color: #756b65;
+      line-height: 1.6;
+    }
+
+    .wedding-poster-pricing {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #e8e0d8;
+    }
+
+    .wedding-poster-pricing h3 {
+      margin: 0 0 14px;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    .wedding-size-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .wedding-size {
+      padding: 12px 8px;
+      border: 1px solid #e8e0d8;
+      border-radius: 6px;
+      background: white;
+      color: #351c15;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .wedding-size[aria-pressed="true"] {
+      border-color: #ffb500;
+      background: #fff5d9;
+    }
+
+    .wedding-selected-price {
+      margin: 18px 0 5px;
+      font-family: Georgia, serif;
+      font-size: 34px;
+    }
+
+    .wedding-selected-size {
+      margin: 0;
+      color: #756b65;
+      font-size: 13px;
+    }
+
+    .wedding-personalize {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid #e8e0d8;
+      color: #756b65;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .wedding-personalize strong {
+      color: #351c15;
+    }
+
+    .wedding-order-link {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 12px 20px;
+      border-radius: 6px;
+      background: #ffb500;
+      color: #351c15;
+      text-decoration: none;
+    }
+
+    @media (max-width: 700px) {
+      .wedding-gallery {
+        grid-template-columns: 1fr;
+        gap: 42px;
+      }
+
+      .wedding-card-heading {
+        align-items: flex-start;
+      }
+
+      .wedding-view {
+        font-size: 14px;
+      }
+
+      .wedding-filter {
+        padding: 11px 18px;
+        font-size: 14px;
+      }
+
+      .wedding-modal-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .wedding-modal-photo img {
+        max-height: 35dvh;
+        object-fit: contain;
+      }
+
+      .wedding-modal-info {
+        padding: 22px;
+      }
+
+      .wedding-modal-info h2 {
+        font-size: 32px;
+      }
+    }
+  </style>
 </head>
 
 <body class="collection-page">
@@ -19,16 +327,17 @@
   <header class="site-header">
     <a class="brand" href="index.html">
       THE UPS STORE PRINT
-      <small>INVITATIONS & EVENT PRINTING</small>
+      <small>INVITATIONS &amp; EVENT PRINTING</small>
     </a>
 
     <button
       class="nav-toggle"
       type="button"
+      aria-label="Open menu"
       aria-expanded="false"
       aria-controls="site-navigation"
     >
-      Menu ☰
+      ☰
     </button>
 
     <nav
@@ -38,7 +347,7 @@
     >
       <a href="index.html">Home</a>
       <a href="wedding.html" aria-current="page">Wedding</a>
-      <a href="baby-shower.html">Baby Shower & Gender Reveal</a>
+      <a href="baby-shower.html">Baby Shower &amp; Gender Reveal</a>
       <a href="birthday.html">Birthday</a>
       <a href="sweet-16.html">Sweet 16</a>
       <a href="sympathy.html">Sympathy</a>
@@ -46,26 +355,28 @@
     </nav>
   </header>
 
-  <main>
+  <main class="page">
 
     <section class="intro">
-      <div>
-        <div class="eyebrow">Wedding collection</div>
+      <p class="eyebrow">WEDDING COLLECTION</p>
 
-        <h1>A beautiful beginning.</h1>
+      <h1>A beautiful beginning.</h1>
 
-        <p>
-          Wedding invitations, welcome signs & rehearsal dinners.
-          Find a coordinated look for your celebration.
-        </p>
-      </div>
+      <p class="intro-text">
+        Wedding invitations, welcome signs &amp; rehearsal dinners.
+        Find a coordinated look for your celebration.
+      </p>
 
-      <div class="count" id="count" aria-live="polite"></div>
+      <p class="wedding-count" id="design-count"></p>
     </section>
 
-    <nav class="toolbar" aria-label="Filter wedding designs">
+    <div
+      class="wedding-filters"
+      role="group"
+      aria-label="Filter wedding designs"
+    >
       <button
-        class="filter active"
+        class="wedding-filter"
         type="button"
         data-filter="all"
         aria-pressed="true"
@@ -74,7 +385,7 @@
       </button>
 
       <button
-        class="filter"
+        class="wedding-filter"
         type="button"
         data-filter="wedding"
         aria-pressed="false"
@@ -83,664 +394,430 @@
       </button>
 
       <button
-        class="filter"
+        class="wedding-filter"
         type="button"
         data-filter="night-before"
         aria-pressed="false"
       >
         The Night Before
       </button>
-    </nav>
+    </div>
 
     <section
-      class="grid"
+      class="wedding-gallery"
       id="wedding-grid"
-      aria-label="Wedding and rehearsal dinner designs"
+      aria-label="Wedding designs"
     ></section>
 
     <noscript>
-      <p>Please enable JavaScript to browse the designs.</p>
+      <p>Please enable JavaScript to browse the wedding designs.</p>
     </noscript>
 
-    <section class="order">
+    <section class="order-section" id="how-to-order">
       <div>
-        <div class="eyebrow">Made personal, in store</div>
-        <h2>Your favorite, with<br>your details.</h2>
+        <p class="eyebrow">MADE PERSONAL, IN STORE</p>
+        <h2>Your favorite, with your details.</h2>
       </div>
 
-      <div class="steps">
-        <div class="step">
-          <b>01 / BROWSE</b>
-          <h3>Find your style</h3>
-          <p>
-            Explore designs and compare prices right on the page.
-          </p>
-        </div>
+      <div class="order-step">
+        <p class="step-number">01 / BROWSE</p>
+        <h3>Find your style</h3>
+        <p>Explore the designs and open your favorites for a closer look.</p>
+      </div>
 
-        <div class="step">
-          <b>02 / CHOOSE</b>
-          <h3>Plan your prints</h3>
-          <p>
-            Note your design number, invitation quantity and poster size.
-          </p>
-        </div>
+      <div class="order-step">
+        <p class="step-number">02 / CHOOSE</p>
+        <h3>Plan your prints</h3>
+        <p>Note your design number, invitation quantity and poster size.</p>
+      </div>
 
-        <div class="step">
-          <b>03 / VISIT</b>
-          <h3>Make it yours</h3>
-          <p>
-            Bring your selection and event details to the store.
-          </p>
-        </div>
+      <div class="order-step">
+        <p class="step-number">03 / VISIT</p>
+        <h3>Make it yours</h3>
+        <p>Bring your selection and event details to the store.</p>
       </div>
     </section>
 
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <span>THE UPS STORE PRINT</span>
-    <span>Illustrative collection · Order in store</span>
+    <span>Personalized for your celebration.</span>
   </footer>
 
-  <!-- Expanded preview -->
-  <dialog id="detail" aria-labelledby="modal-title">
-    <div class="modal-head">
-      <span class="eyebrow">A closer look</span>
-
+  <dialog
+    class="wedding-dialog"
+    id="wedding-detail"
+    aria-labelledby="wedding-modal-title"
+  >
+    <div class="wedding-modal-top">
       <button
-        class="close"
+        class="wedding-close"
+        id="wedding-close"
         type="button"
-        aria-label="Close design preview"
+        aria-label="Close design"
       >
         ×
       </button>
     </div>
 
-    <div class="modal-body">
-      <img id="modal-image" alt="">
+    <div class="wedding-modal-layout">
+      <div class="wedding-modal-photo">
+        <img id="wedding-modal-image" alt="">
+      </div>
 
-      <div class="modal-info">
-        <div class="code" id="modal-code"></div>
+      <div class="wedding-modal-info">
+        <p class="wedding-modal-code" id="wedding-modal-code"></p>
 
-        <h2 id="modal-title"></h2>
+        <h2 id="wedding-modal-title"></h2>
 
-        <p id="modal-description"></p>
+        <p
+          class="wedding-modal-description"
+          id="wedding-modal-description"
+        ></p>
 
-        <div id="modal-pricing"></div>
+        <section
+          class="wedding-poster-pricing"
+          aria-label="Poster board pricing"
+        >
+          <h3>Poster board</h3>
 
-        <h3>Make it your own</h3>
+          <div
+            class="wedding-size-options"
+            id="wedding-size-options"
+            role="group"
+            aria-label="Choose poster board size"
+          ></div>
 
-        <p>
-          Personalize the names, date, wording and event details.
+          <p
+            class="wedding-selected-price"
+            id="wedding-selected-price"
+            aria-live="polite"
+          ></p>
+
+          <p
+            class="wedding-selected-size"
+            id="wedding-selected-size"
+          ></p>
+        </section>
+
+        <p class="wedding-personalize">
+          <strong>Make it your own</strong><br>
+          Personalized with your names, date and event details.
+          Matching 5×7 invitations are available.
         </p>
 
-        <h3 id="modal-order"></h3>
+        <a
+          class="wedding-order-link"
+          href="#how-to-order"
+          id="wedding-order-link"
+        >
+          How to order
+        </a>
       </div>
     </div>
   </dialog>
 
-  <script src="script.js?v=6"></script>
+  <!-- Shared hamburger navigation -->
+  <script src="script.js?v=7"></script>
 
+  <!-- Wedding gallery -->
   <script>
     (() => {
       "use strict";
 
-      // PRICES
-      const invitationPrices = [
-        { quantity: "1–100", price: 0.76 },
-        { quantity: "101–250", price: 0.66 },
-        { quantity: "251–500", price: 0.52 }
-      ];
-
-      const posterPrices = [
-        { size: "16 × 20", price: 18.50 },
-        { size: "18 × 24", price: 25.50 },
-        { size: "20 × 24", price: 28.50 },
-        { size: "24 × 36", price: 46.00 }
-      ];
-
-      // Add image: "images/filename.jpg" to use finished artwork.
-      // Otherwise, the built-in sample preview is displayed.
+      /*
+       * ADD NEW DESIGNS HERE.
+       * Keep a comma between each design.
+       */
       const designs = [
         {
-
-          // card one
-          
-          {
-  name: "Floral Wedding",
-  code: "W01",
-  category: "wedding",
-  description:
-    "White roses, soft greenery and a delicate gold arch.",
-  image: "images/wedding-w01.png"
-},
-        },
-     
-// card two
-     {
-  name: "Blush Romance",
-  code: "W02",
-  category: "wedding",
-  description:
-    "Blush and ivory roses, soft greenery and an ornate gold border.",
-  image: "images/wedding-w02.png"
-},
-
-     // card three
-     
-        {
-          name: "An Evening in Gold",
-          code: "NB01",
-          category: "night-before",
+          name: "Floral Wedding",
+          code: "W01",
+          category: "wedding",
           description:
-            "Rich charcoal and warm gold for an elegant rehearsal dinner.",
-          background: "#e8e2d8",
-          paper: "#332b28",
-          ink: "#dbc18a",
-          accent: "#ad8e54",
-          theme: "classic",
-          names: ["Rachel", "& James"],
-          date: "JUNE 13, 2027"
+            "White roses, soft greenery and a delicate gold arch.",
+          image: "images/wedding-w01.png"
         },
-     
-     // card four
-     
         {
-          name: "Gathered Together",
-          code: "NB02",
-          category: "night-before",
+          name: "Blush Romance",
+          code: "W02",
+          category: "wedding",
           description:
-            "Warm ivory and soft greenery for an intimate evening together.",
-          background: "#e6e8df",
-          paper: "#fffdf4",
-          ink: "#59624e",
-          accent: "#a3ad91",
-          theme: "botanical",
-          names: ["Olivia", "& Ethan"],
-          date: "SEPTEMBER 17, 2027"
+            "Blush and ivory roses, soft greenery and an ornate gold border.",
+          image: "images/wedding-w02.png"
+        },
+        {
+          name: "Something Blue",
+          code: "W03",
+          category: "wedding",
+          description:
+            "Soft blue florals, ivory roses and a delicate ribbon bow.",
+          image: "images/wedding-w03.png"
         }
       ];
 
-      const grid = document.querySelector("#wedding-grid");
-      const counter = document.querySelector("#count");
-      const dialog = document.querySelector("#detail");
+      /*
+       * Add rehearsal dinner designs to the array above using:
+       * category: "night-before"
+       */
 
-      const selectedSizes = new Map(
-        designs.map(design => [design.code, 0])
+      const posterSizes = [
+        { label: "16×20", price: 18.50 },
+        { label: "18×24", price: 25.50 },
+        { label: "20×24", price: 28.50 },
+        { label: "24×36", price: 46.00 }
+      ];
+
+      const grid = document.getElementById("wedding-grid");
+      const count = document.getElementById("design-count");
+      const filters = document.querySelectorAll(".wedding-filter");
+
+      const dialog = document.getElementById("wedding-detail");
+      const closeButton = document.getElementById("wedding-close");
+      const modalImage = document.getElementById("wedding-modal-image");
+      const modalCode = document.getElementById("wedding-modal-code");
+      const modalTitle = document.getElementById("wedding-modal-title");
+      const modalDescription = document.getElementById(
+        "wedding-modal-description"
       );
 
-      function money(value) {
-        return "$" + value.toFixed(2);
-      }
+      const sizeOptions = document.getElementById("wedding-size-options");
+      const selectedPrice = document.getElementById(
+        "wedding-selected-price"
+      );
+      const selectedSize = document.getElementById(
+        "wedding-selected-size"
+      );
 
-      function escapeText(value) {
-        const characters = {
+      const selectedSizes = new Map();
+
+      let activeDesign = null;
+      let previousFocus = null;
+
+      const money = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+      });
+
+      function escapeHTML(value) {
+        return String(value).replace(/[&<>"']/g, character => ({
           "&": "&amp;",
           "<": "&lt;",
           ">": "&gt;",
           '"': "&quot;",
-          "'": "&apos;"
-        };
-
-        return String(value).replace(
-          /[&<>"']/g,
-          character => characters[character]
-        );
+          "'": "&#39;"
+        })[character]);
       }
 
-      // MAIN CARDS: invitations and poster-board prices.
-      // POPUP: poster-board prices only.
-      function pricingHTML(
-        design,
-        selectedIndex = 0,
-        showInvitations = true
-      ) {
-        const selected = posterPrices[selectedIndex];
+      function categoryLabel(design) {
+        return design.category === "night-before"
+          ? "Rehearsal dinner invitation & welcome sign"
+          : "Invitation & welcome sign";
+      }
 
-        const tiers = invitationPrices.map(tier => `
-          <tr>
-            <td>${tier.quantity}</td>
-            <td>${money(tier.price)}</td>
-          </tr>
-        `).join("");
-
-        const invitations = showInvitations ? `
-          <h3 class="pricing-heading">5 × 7 invitations</h3>
-
-          <p class="price-note">
-            Price per invitation, based on your quantity.
-          </p>
-
-          <table class="price-tiers">
-            <thead>
-              <tr>
-                <th scope="col">Quantity</th>
-                <th scope="col">Price each</th>
-              </tr>
-            </thead>
-
-            <tbody>${tiers}</tbody>
-          </table>
-        ` : "";
-
-        const sizes = posterPrices.map((option, index) => `
-          <button
-            class="size-option"
-            type="button"
-            data-size-index="${index}"
-            aria-pressed="${index === selectedIndex}"
+      function buildCards() {
+        grid.innerHTML = designs.map((design, index) => `
+          <article
+            class="wedding-card"
+            data-category="${escapeHTML(design.category)}"
           >
-            ${option.size} — ${money(option.price)}
-          </button>
-        `).join("");
-
-        return `
-          <section
-            class="pricing"
-            data-price-design="${design.code}"
-            aria-label="Pricing for ${escapeText(design.name)}"
-          >
-            ${invitations}
-
-            <h3 class="pricing-heading">Poster board</h3>
-
-            <div class="poster-price" aria-live="polite">
-              ${money(selected.price)}
-            </div>
-
-            <div
-              class="size-options"
-              role="group"
-              aria-label="Choose a poster-board size"
-            >
-              ${sizes}
-            </div>
-
-            <p class="selected-size">
-              ${selected.size} inches · Poster board
-            </p>
-          </section>
-        `;
-      }
-
-      // SAMPLE ARTWORK
-      function decoration(design) {
-        if (design.theme === "modern") {
-          return `
-            <g stroke="${design.ink}">
-              <line x1="81" y1="45" x2="119" y2="45"/>
-              <line x1="81" y1="206" x2="119" y2="206"/>
-            </g>
-          `;
-        }
-
-        if (design.theme === "classic") {
-          return `
-            <g
-              fill="none"
-              stroke="${design.accent}"
-              stroke-width="0.6"
-            >
-              <rect x="15" y="15" width="170" height="220"/>
-              <path d="M88 43 L100 34 L112 43 L100 52 Z"/>
-            </g>
-          `;
-        }
-
-        return `
-          <g fill="${design.accent}">
-            <path
-              d="M20 85 Q25 44 65 22"
-              fill="none"
-              stroke="${design.ink}"
-            />
-
-            <ellipse
-              cx="28" cy="64" rx="7" ry="15"
-              transform="rotate(-30 28 64)"
-            />
-
-            <ellipse
-              cx="43" cy="42" rx="7" ry="15"
-              transform="rotate(35 43 42)"
-            />
-
-            <path
-              d="M180 165 Q175 206 138 228"
-              fill="none"
-              stroke="${design.ink}"
-            />
-
-            <ellipse
-              cx="171" cy="187" rx="7" ry="15"
-              transform="rotate(30 171 187)"
-            />
-
-            <ellipse
-              cx="153" cy="209" rx="7" ry="15"
-              transform="rotate(-35 153 209)"
-            />
-          </g>
-        `;
-      }
-
-      function stationery(design, isSign) {
-        const rehearsal = design.category === "night-before";
-        const modern = design.theme === "modern";
-        const nameSize = modern ? 24 : 27;
-        const nameStyle = modern ? "normal" : "italic";
-
-        return `
-          <rect
-            width="200" height="250"
-            fill="${design.paper}"
-          />
-
-          <rect
-            x="10" y="10" width="180" height="230"
-            fill="none"
-            stroke="${design.accent}"
-            stroke-width="0.7"
-            opacity="${modern ? 0 : 0.7}"
-          />
-
-          ${decoration(design)}
-
-          <g fill="${design.ink}" text-anchor="middle">
-            <text
-              x="100" y="68"
-              font-family="Arial, sans-serif"
-              font-size="7"
-              letter-spacing="2"
-            >
-              ${isSign ? "WELCOME" : "YOU'RE INVITED"}
-            </text>
-
-            <text
-              x="100" y="88"
-              font-family="Arial, sans-serif"
-              font-size="6.5"
-              letter-spacing="1"
-            >
-              ${rehearsal ? "THE NIGHT BEFORE" : "TO THE WEDDING OF"}
-            </text>
-
-            <text
-              x="100" y="126"
-              font-family="Georgia, serif"
-              font-size="${nameSize}"
-              font-style="${nameStyle}"
-            >
-              ${escapeText(design.names[0])}
-            </text>
-
-            <text
-              x="100" y="158"
-              font-family="Georgia, serif"
-              font-size="${nameSize}"
-              font-style="${nameStyle}"
-            >
-              ${escapeText(design.names[1])}
-            </text>
-
-            <text
-              x="100" y="187"
-              font-family="Arial, sans-serif"
-              font-size="6.5"
-              letter-spacing="1"
-            >
-              ${escapeText(design.date)}
-            </text>
-
-            <text
-              x="100" y="222"
-              font-family="Arial, sans-serif"
-              font-size="5"
-              letter-spacing="0.7"
-            >
-              ${rehearsal
-                ? "DINNER · DRINKS · CELEBRATION"
-                : "TOGETHER WITH THEIR FAMILIES"}
-            </text>
-          </g>
-        `;
-      }
-
-      function makePreview(design) {
-        if (design.image) return design.image;
-
-        const svg = `
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="900"
-            height="620"
-            viewBox="0 0 900 620"
-          >
-            <rect
-              width="900" height="620"
-              fill="${design.background}"
-            />
-
-            <ellipse
-              cx="450" cy="548" rx="330" ry="22"
-              fill="#000000" opacity="0.05"
-            />
-
-            <path
-              d="M568 130 L485 560 M568 130 L681 560"
-              fill="none"
-              stroke="${design.accent}"
-              stroke-width="8"
-              stroke-linecap="round"
-            />
-
-            <rect
-              x="403" y="77" width="310" height="388"
-              fill="#000000" opacity="0.07"
-            />
-
-            <g transform="translate(395 68) scale(1.55)">
-              ${stationery(design, true)}
-            </g>
-
-            <g transform="translate(157 225) rotate(-6 100 125)">
-              <rect
-                x="8" y="10" width="200" height="250"
-                fill="#000000" opacity="0.08"
-              />
-
-              ${stationery(design, false)}
-            </g>
-          </svg>
-        `;
-
-        return "data:image/svg+xml;charset=utf-8," +
-          encodeURIComponent(svg);
-      }
-
-      // CREATE DESIGN CARDS
-      designs.forEach((design, index) => {
-        design.preview = makePreview(design);
-
-        const card = document.createElement("article");
-        card.className = "card";
-        card.dataset.category = design.category;
-
-        card.innerHTML = `
-          <button
-            class="image-button"
-            type="button"
-            data-design-index="${index}"
-            aria-label="View ${escapeText(design.name)}, design ${design.code}"
-          >
-            <img
-              src="${design.preview}"
-              alt="${escapeText(design.name)} sample invitation and welcome sign"
-              ${index > 1 ? 'loading="lazy"' : ""}
-            >
-
-            <span class="zoom" aria-hidden="true">+</span>
-          </button>
-
-          <div class="details">
-            <div>
-              <h2>${escapeText(design.name)}</h2>
-
-              <div class="code">
-                Design ${design.code} · Invitation & welcome sign
-              </div>
-
-              <p class="description">
-                ${escapeText(design.description)}
-              </p>
-            </div>
-
             <button
-              class="view"
+              class="wedding-image-button"
               type="button"
               data-design-index="${index}"
-              aria-label="View ${escapeText(design.name)} details"
+              aria-label="View ${escapeHTML(design.name)}"
             >
-              View design ↗
+              <img
+                src="${escapeHTML(design.image)}"
+                alt="${escapeHTML(design.name)} invitation and welcome sign"
+                loading="lazy"
+              >
+              <span class="wedding-zoom" aria-hidden="true">+</span>
             </button>
-          </div>
 
-        `;
+            <div class="wedding-card-heading">
+              <h2>${escapeHTML(design.name)}</h2>
 
-        grid.appendChild(card);
-      });
+              <button
+                class="wedding-view"
+                type="button"
+                data-design-index="${index}"
+                aria-label="View ${escapeHTML(design.name)} details"
+              >
+                View design ↗
+              </button>
+            </div>
 
-      // DESIGN COUNT
-      function updateCount(number) {
-        counter.textContent =
-          String(number).padStart(2, "0") +
-          " coordinated design" +
-          (number === 1 ? "" : "s");
+            <p class="wedding-card-code">
+              Design ${escapeHTML(design.code)}
+              · ${escapeHTML(categoryLabel(design))}
+            </p>
+
+            <p class="wedding-card-description">
+              ${escapeHTML(design.description)}
+            </p>
+          </article>
+        `).join("");
+
+        const emptyMessage = document.createElement("p");
+        emptyMessage.className = "wedding-empty";
+        emptyMessage.id = "wedding-empty";
+        emptyMessage.hidden = true;
+        emptyMessage.textContent =
+          "Rehearsal dinner designs are being added to this collection.";
+        grid.appendChild(emptyMessage);
       }
 
-      updateCount(designs.length);
+      function applyFilter(category) {
+        let visibleCount = 0;
 
-      // FILTERS
-      const filters = document.querySelectorAll("[data-filter]");
+        grid.querySelectorAll(".wedding-card").forEach(card => {
+          const visible =
+            category === "all" ||
+            card.dataset.category === category;
 
-      filters.forEach(button => {
-        button.addEventListener("click", () => {
-          const category = button.dataset.filter;
-          let visibleCount = 0;
+          card.hidden = !visible;
 
-          filters.forEach(filter => {
-            const selected = filter === button;
-
-            filter.classList.toggle("active", selected);
-            filter.setAttribute("aria-pressed", String(selected));
-          });
-
-          grid.querySelectorAll(".card").forEach(card => {
-            const matches =
-              category === "all" ||
-              card.dataset.category === category;
-
-            card.hidden = !matches;
-
-            if (matches) visibleCount++;
-          });
-
-          updateCount(visibleCount);
+          if (visible) {
+            visibleCount += 1;
+          }
         });
-      });
 
-      // POSTER SIZE SELECTION
-      document.addEventListener("click", event => {
-        const button = event.target.closest(".size-option");
+        filters.forEach(button => {
+          button.setAttribute(
+            "aria-pressed",
+            String(button.dataset.filter === category)
+          );
+        });
 
-        if (!button) return;
+        count.textContent =
+          `${String(visibleCount).padStart(2, "0")} coordinated ` +
+          (visibleCount === 1 ? "design" : "designs");
 
-        const block = button.closest("[data-price-design]");
-        const code = block.dataset.priceDesign;
-        const index = Number(button.dataset.sizeIndex);
-        const selected = posterPrices[index];
+        document.getElementById("wedding-empty").hidden =
+          visibleCount !== 0;
+      }
 
-        selectedSizes.set(code, index);
+      function updatePosterPrice(index) {
+        const size = posterSizes[index];
 
-        document.querySelectorAll("[data-price-design]")
-          .forEach(pricingBlock => {
-            if (pricingBlock.dataset.priceDesign !== code) return;
+        if (!size || !activeDesign) {
+          return;
+        }
 
-            pricingBlock.querySelector(".poster-price").textContent =
-              money(selected.price);
+        selectedSizes.set(activeDesign.code, index);
 
-            pricingBlock.querySelector(".selected-size").textContent =
-              selected.size + " inches · Poster board";
+        sizeOptions.querySelectorAll("button").forEach(button => {
+          button.setAttribute(
+            "aria-pressed",
+            String(Number(button.dataset.sizeIndex) === index)
+          );
+        });
 
-            pricingBlock.querySelectorAll(".size-option")
-              .forEach(option => {
-                const isSelected =
-                  Number(option.dataset.sizeIndex) === index;
+        selectedPrice.textContent = money.format(size.price);
+        selectedSize.textContent = `${size.label} inch poster board`;
+      }
 
-                option.setAttribute(
-                  "aria-pressed",
-                  String(isSelected)
-                );
-              });
-          });
-      });
+      function openDesign(index, trigger) {
+        const design = designs[index];
 
-      // OPEN POPUP — POSTER PRICING ONLY
+        if (!design) {
+          return;
+        }
+
+        activeDesign = design;
+        previousFocus = trigger;
+
+        modalImage.src = design.image;
+        modalImage.alt =
+          `${design.name} invitation and welcome sign`;
+
+        modalCode.textContent = `DESIGN ${design.code}`;
+        modalTitle.textContent = design.name;
+        modalDescription.textContent = design.description;
+
+        sizeOptions.innerHTML = posterSizes.map((size, sizeIndex) => `
+          <button
+            class="wedding-size"
+            type="button"
+            data-size-index="${sizeIndex}"
+            aria-pressed="false"
+          >
+            ${size.label}
+          </button>
+        `).join("");
+
+        updatePosterPrice(selectedSizes.get(design.code) ?? 0);
+
+        dialog.showModal();
+        document.body.classList.add("wedding-modal-open");
+        closeButton.focus();
+      }
+
+      function closeDesign() {
+        dialog.close();
+      }
+
       grid.addEventListener("click", event => {
         const button = event.target.closest("[data-design-index]");
 
-        if (!button) return;
+        if (!button) {
+          return;
+        }
 
-        const design = designs[Number(button.dataset.designIndex)];
-
-        document.querySelector("#modal-title").textContent =
-          design.name;
-
-        document.querySelector("#modal-code").textContent =
-          "DESIGN " + design.code;
-
-        document.querySelector("#modal-description").textContent =
-          design.description;
-
-        document.querySelector("#modal-order").textContent =
-          "Ask for " + design.code + " in store";
-
-        const image = document.querySelector("#modal-image");
-
-        image.src = design.preview;
-        image.alt =
-          design.name + " invitation and matching welcome sign";
-
-        document.querySelector("#modal-pricing").innerHTML =
-          pricingHTML(
-            design,
-            selectedSizes.get(design.code),
-            false
-          );
-
-        dialog.showModal();
+        openDesign(Number(button.dataset.designIndex), button);
       });
 
-      // CLOSE POPUP
-      dialog.querySelector(".close").addEventListener(
-        "click",
-        () => dialog.close()
-      );
+      filters.forEach(button => {
+        button.addEventListener("click", () => {
+          applyFilter(button.dataset.filter);
+        });
+      });
+
+      sizeOptions.addEventListener("click", event => {
+        const button = event.target.closest("[data-size-index]");
+
+        if (!button) {
+          return;
+        }
+
+        updatePosterPrice(Number(button.dataset.sizeIndex));
+      });
+
+      closeButton.addEventListener("click", closeDesign);
+
+      document.getElementById("wedding-order-link")
+        .addEventListener("click", closeDesign);
 
       dialog.addEventListener("click", event => {
-        if (event.target !== dialog) return;
+        if (event.target !== dialog) {
+          return;
+        }
 
         const bounds = dialog.getBoundingClientRect();
 
-        const clickedOutside =
+        const outside =
           event.clientX < bounds.left ||
           event.clientX > bounds.right ||
           event.clientY < bounds.top ||
           event.clientY > bounds.bottom;
 
-        if (clickedOutside) dialog.close();
+        if (outside) {
+          closeDesign();
+        }
       });
 
+      dialog.addEventListener("close", () => {
+        document.body.classList.remove("wedding-modal-open");
+
+        if (previousFocus) {
+          previousFocus.focus();
+        }
+      });
+
+      buildCards();
+      applyFilter("all");
     })();
   </script>
 
