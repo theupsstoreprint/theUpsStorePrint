@@ -4,34 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>The UPS Store Print</title>
+  <title>The UPS Store Print | Butler, PA</title>
 
   <meta
     name="description"
-    content="Browse invitations, welcome signs and banners for weddings, birthdays, baby showers and more."
+    content="Browse invitations, welcome signs and banners at The UPS Store Butler Crossing. Explore designs for weddings, birthdays, baby showers and more."
   >
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 
 <body class="landing">
 
-  <header>
+  <!-- Navigation -->
+  <header class="site-header">
     <a class="brand" href="index.html">
       THE UPS STORE PRINT
       <small>INVITATIONS & EVENT PRINTING</small>
     </a>
 
-    <a class="toplink" href="#how-it-works">
-      How to order ↗
-    </a>
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-navigation"
+    >
+      Menu ☰
+    </button>
+
+    <nav
+      class="site-nav"
+      id="site-navigation"
+      aria-label="Main navigation"
+    >
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="wedding.html">Wedding</a>
+      <a href="baby-shower.html">Baby Shower & Gender Reveal</a>
+      <a href="birthday.html">Birthday</a>
+      <a href="sweet-16.html">Sweet 16</a>
+      <a href="sympathy.html">Sympathy</a>
+      <a href="banners.html">Banners</a>
+    </nav>
   </header>
 
   <main>
 
-    <!-- Welcome section -->
-    <section class="hero">
-      <div>
+    <!-- Hero: background image is set in style.css -->
+    <section class="hero hero-photo">
+      <div class="hero-copy">
         <div class="eyebrow">
           A collection for life's moments
         </div>
@@ -52,38 +72,19 @@
         </a>
       </div>
 
-      <div
-        class="hero-art"
-        role="img"
-        aria-label="Wedding and baby shower stationery examples"
-      >
-        <div class="paper p1">
-          <small>TOGETHER WITH THEIR FAMILIES</small>
-          <em>Rachel<br>& James</em>
-          <small>
-            JOYFULLY INVITE YOU TO CELEBRATE<br>
-            JUNE 14, 2027
-          </small>
-        </div>
-
-        <div class="paper p2">
-          <small>A LITTLE ONE IS ON THE WAY</small>
-          <em>Oh,<br>baby!</em>
-          <small>PLEASE JOIN US TO CELEBRATE</small>
-        </div>
-
-        <div class="hero-caption">
-          YOUR MOMENTS, BEAUTIFULLY PRINTED
-        </div>
+      <div class="hero-price">
+        <span>5 × 7 Invitations</span>
+        <strong>From 52¢ each</strong>
+        <small>For orders of 251–500</small>
       </div>
     </section>
 
     <!-- Collections -->
-    <section id="collections">
+    <section id="collections" aria-labelledby="collections-title">
       <div class="section-head">
         <div>
           <div class="eyebrow">Browse by occasion</div>
-          <h2>What are we celebrating?</h2>
+          <h2 id="collections-title">What are we celebrating?</h2>
         </div>
 
         <p>Find your collection. Discover your favorite.</p>
@@ -91,7 +92,7 @@
 
       <div class="category-grid">
 
-        <!-- Wedding, including The Night Before -->
+        <!-- Wedding -->
         <a class="collection" href="wedding.html">
           <div class="art art-wedding" aria-hidden="true">
             <div class="mini">
@@ -108,7 +109,7 @@
           </div>
 
           <p>
-            Wedding invitations, welcome signs & The Night Before
+            Wedding invitations, welcome signs & rehearsal dinners
           </p>
         </a>
 
@@ -188,7 +189,7 @@
           <p>Thoughtful designs to honor a life</p>
         </a>
 
-        <!-- Banners -->
+        <!-- Graduation & Sports Banners -->
         <a class="collection" href="banners.html">
           <div class="art art-banners" aria-hidden="true">
             <div class="banner">
@@ -199,21 +200,25 @@
           </div>
 
           <div class="label-row">
-            <h3>Banners</h3>
+            <h3>Graduation & Sports Banners</h3>
             <span class="arrow" aria-hidden="true">↗</span>
           </div>
 
-          <p>Graduations, sports & standout celebrations</p>
+          <p>Celebrate your graduate, athlete or team</p>
         </a>
 
       </div>
     </section>
 
-    <!-- Ordering instructions -->
-    <section class="how" id="how-it-works">
+    <!-- How to order -->
+    <section
+      class="how"
+      id="how-it-works"
+      aria-labelledby="ordering-title"
+    >
       <div>
         <div class="eyebrow">From inspiration to print</div>
-        <h2>See something<br>you love?</h2>
+        <h2 id="ordering-title">See something<br>you love?</h2>
       </div>
 
       <div class="steps">
@@ -244,85 +249,93 @@
       </div>
     </section>
 
-<!-- Store information -->
-<section class="store-info" id="visit">
-  <div>
-    <div class="eyebrow">Your local print team</div>
-    <h2>Visit & order.</h2>
-
-    <p>
-      Found a design you love? Bring your design number
-      and event details, or contact us to discuss your prints.
-    </p>
-
-    <h3>The UPS Store — Butler Crossing</h3>
-
-    <address>
-      620 Butler Crossing, Suite 3<br>
-      Butler, PA 16001
-    </address>
-
-    <p class="store-location">
-      Behind Applebee’s, at New Castle Road & Hindman Road.
-    </p>
-
-    <div class="store-contact">
-      <a href="tel:+17244310089">(724) 431-0089</a>
-
-      <a href="mailto:store5097@theupsstore.com">
-        store5097@theupsstore.com
-      </a>
-    </div>
-
-    <div class="store-actions">
-      <a
-        class="store-button"
-        href="https://www.google.com/maps/dir/?api=1&destination=The+UPS+Store+620+Butler+Crossing+Suite+3+Butler+PA+16001"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Get directions ↗
-      </a>
-
-      <a
-        class="store-button store-button-outline"
-        href="mailto:store5097@theupsstore.com"
-      >
-        Email the store
-      </a>
-    </div>
-  </div>
-
-  <div class="store-hours">
-    <div class="eyebrow">Plan your visit</div>
-    <h3>Store hours</h3>
-
-    <dl>
+    <!-- Store information -->
+    <section
+      class="store-info"
+      id="visit"
+      aria-labelledby="visit-title"
+    >
       <div>
-        <dt>Monday–Friday</dt>
-        <dd>8:30 AM–7:00 PM</dd>
+        <div class="eyebrow">Your local print team</div>
+
+        <h2 id="visit-title">Visit & order.</h2>
+
+        <p>
+          Found a design you love? Bring your design number
+          and event details, or contact us to discuss your prints.
+        </p>
+
+        <h3>The UPS Store — Butler Crossing</h3>
+
+        <address>
+          620 Butler Crossing, Suite 3<br>
+          Butler, PA 16001
+        </address>
+
+        <p class="store-location">
+          Behind Applebee’s, at New Castle Road & Hindman Road.
+        </p>
+
+        <div class="store-contact">
+          <a href="tel:+17244310089">
+            (724) 431-0089
+          </a>
+
+          <a href="mailto:store5097@theupsstore.com">
+            store5097@theupsstore.com
+          </a>
+        </div>
+
+        <div class="store-actions">
+          <a
+            class="store-button"
+            href="https://www.google.com/maps/dir/?api=1&destination=The+UPS+Store+620+Butler+Crossing+Suite+3+Butler+PA+16001"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get directions ↗
+          </a>
+
+          <a
+            class="store-button store-button-outline"
+            href="mailto:store5097@theupsstore.com"
+          >
+            Email the store
+          </a>
+        </div>
       </div>
 
-      <div>
-        <dt>Saturday</dt>
-        <dd>9:00 AM–4:00 PM</dd>
-      </div>
+      <div class="store-hours">
+        <div class="eyebrow">Plan your visit</div>
 
-      <div>
-        <dt>Sunday</dt>
-        <dd>10:00 AM–3:00 PM</dd>
-      </div>
-    </dl>
+        <h3>Store hours</h3>
 
-    <p>Holiday hours may vary.</p>
-  </div>
-</section>
-    
+        <dl>
+          <div>
+            <dt>Monday–Friday</dt>
+            <dd>8:30 AM–7:00 PM</dd>
+          </div>
+
+          <div>
+            <dt>Saturday</dt>
+            <dd>9:00 AM–4:00 PM</dd>
+          </div>
+
+          <div>
+            <dt>Sunday</dt>
+            <dd>10:00 AM–3:00 PM</dd>
+          </div>
+        </dl>
+
+        <p>Holiday hours may vary.</p>
+      </div>
+    </section>
+
   </main>
 
   <footer>
-    <span>THE UPS STORE PRINT</span>
-    <span>Illustrative collection · Order in store</span>
+    <span>THE UPS STORE PRINT · BUTLER CROSSING</span>
+    <span>Browse online · Order in store</span>
   </footer>
 
   <script src="script.js"></script>
