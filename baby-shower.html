@@ -4,723 +4,774 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Baby Shower & Gender Reveal | The UPS Store Print</title>
+  <title>Baby Shower | The UPS Store Print</title>
 
-  <meta
-    name="description"
-    content="Explore invitations and matching welcome signs for baby showers, gender reveals and baby sprinkles."
-  >
+  <link rel="stylesheet" href="style.css?v=9">
 
-  <link rel="stylesheet" href="style.css?v=6">
+  <style>
+    .baby-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 56px 32px;
+      margin: 36px 0 72px;
+    }
+
+    .baby-photo-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f7f4ef;
+      cursor: pointer;
+    }
+
+    .baby-photo-button img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      transition: transform .3s ease;
+    }
+
+    @media (hover: hover) {
+      .baby-photo-button:hover img {
+        transform: scale(1.025);
+      }
+    }
+
+    .baby-plus {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: white;
+      color: #351c15;
+      font: 30px Arial, sans-serif;
+      box-shadow: 0 3px 15px #351c1515;
+    }
+
+    .baby-card-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .baby-card h2 {
+      margin: 0;
+      color: #351c15;
+      font-family: Georgia, serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .baby-view {
+      flex-shrink: 0;
+      padding: 6px 0;
+      border: 0;
+      border-bottom: 1px solid #b68b42;
+      background: transparent;
+      color: #351c15;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .baby-code {
+      margin: 12px 0;
+      color: #756b65;
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+
+    .baby-description {
+      margin: 0;
+      color: #756b65;
+      line-height: 1.7;
+    }
+
+    .baby-count {
+      margin-top: 24px;
+      color: #756b65;
+      font-size: 14px;
+    }
+
+    .baby-dialog {
+      width: min(1080px, calc(100% - 32px));
+      max-width: none;
+      max-height: 90dvh;
+      padding: 0;
+      border: 0;
+      border-radius: 12px;
+      background: white;
+      color: #351c15;
+      overflow: auto;
+    }
+
+    .baby-dialog::backdrop {
+      background: rgb(30 20 15 / 65%);
+    }
+
+    body.baby-modal-open {
+      overflow: hidden;
+    }
+
+    .baby-modal-top {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8e0d8;
+    }
+
+    .baby-close {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #faf7f2;
+      color: #351c15;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .baby-modal-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+    }
+
+    .baby-modal-photo {
+      display: flex;
+      align-items: center;
+      background: #f7f4ef;
+    }
+
+    .baby-modal-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .baby-modal-info {
+      padding: 28px;
+    }
+
+    .baby-modal-code {
+      margin: 0 0 12px;
+      color: #8c6b35;
+      font-size: 12px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .baby-modal-info h2 {
+      margin: 0 0 14px;
+      font-family: Georgia, serif;
+      font-size: 38px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .baby-modal-description {
+      color: #756b65;
+      line-height: 1.6;
+    }
+
+    .baby-pricing {
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid #e8e0d8;
+    }
+
+    .baby-pricing h3 {
+      margin: 0 0 14px;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    .baby-sizes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .baby-size {
+      padding: 12px 8px;
+      border: 1px solid #e8e0d8;
+      border-radius: 6px;
+      background: white;
+      color: #351c15;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .baby-size[aria-pressed="true"] {
+      border-color: #ffb500;
+      background: #fff5d9;
+    }
+
+    .baby-price {
+      margin: 18px 0 5px;
+      font-family: Georgia, serif;
+      font-size: 34px;
+    }
+
+    .baby-selected-size {
+      margin: 0;
+      color: #756b65;
+      font-size: 13px;
+    }
+
+    .baby-personalize {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid #e8e0d8;
+      color: #756b65;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .baby-personalize strong {
+      color: #351c15;
+    }
+
+    .baby-prop-note {
+      margin: 12px 0 0;
+      color: #756b65;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .baby-order-link {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 12px 20px;
+      border-radius: 6px;
+      background: #ffb500;
+      color: #351c15;
+      text-decoration: none;
+    }
+
+    .baby-photo-button:focus-visible,
+    .baby-view:focus-visible,
+    .baby-close:focus-visible,
+    .baby-size:focus-visible,
+    .baby-order-link:focus-visible {
+      outline: 3px solid #351c15;
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 700px) {
+      .baby-gallery {
+        grid-template-columns: 1fr;
+        gap: 42px;
+      }
+
+      .baby-card-heading {
+        align-items: flex-start;
+      }
+
+      .baby-view {
+        font-size: 14px;
+      }
+
+      .baby-modal-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .baby-modal-photo img {
+        max-height: 35dvh;
+        object-fit: contain;
+      }
+
+      .baby-modal-info {
+        padding: 22px;
+      }
+
+      .baby-modal-info h2 {
+        font-size: 32px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .baby-photo-button img {
+        transition: none;
+      }
+    }
+  </style>
 </head>
-  
+
 <body class="collection-page">
 
- <header class="site-header">
-  <a class="brand" href="index.html">
-    THE UPS STORE PRINT
-    <small>INVITATIONS & EVENT PRINTING</small>
-  </a>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      THE UPS STORE PRINT
+      <small>INVITATIONS &amp; EVENT PRINTING</small>
+    </a>
 
-  <button
-    class="nav-toggle"
-    type="button"
-    aria-expanded="false"
-    aria-controls="site-navigation"
-  >
-    Menu ☰
-  </button>
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="site-navigation"
+    >
+      ☰
+    </button>
 
-  <nav
-    class="site-nav"
-    id="site-navigation"
-    aria-label="Main navigation"
-  >
-    <a href="index.html">Home</a>
-    <a href="wedding.html">Wedding</a>
-    <a href="baby-shower.html">Baby Shower & Gender Reveal</a>
-    <a href="birthday.html">Birthday</a>
-    <a href="sweet-16.html">Sweet 16</a>
-    <a href="sympathy.html">Sympathy</a>
-    <a href="banners.html">Banners</a>
-  </nav>
-</header>
+    <nav
+      class="site-nav"
+      id="site-navigation"
+      aria-label="Main navigation"
+    >
+      <a href="index.html">Home</a>
+      <a href="wedding.html">Wedding</a>
+      <a href="baby-shower.html" aria-current="page">
+        Baby Shower &amp; Gender Reveal
+      </a>
+      <a href="birthday.html">Birthday</a>
+      <a href="sweet-16.html">Sweet 16</a>
+      <a href="sympathy.html">Sympathy</a>
+      <a href="banners.html">Banners</a>
+    </nav>
+  </header>
 
-  <main>
+  <main class="page">
 
     <section class="intro">
+      <p class="eyebrow">BABY SHOWER COLLECTION</p>
+
+      <h1>A little wonder.<br>A lot of love.</h1>
+
+      <p class="intro-text">
+        Celebrate a new arrival with matching invitations
+        and welcome signs, personalized for your special day.
+      </p>
+
+      <p class="baby-count" id="baby-count"></p>
+    </section>
+
+    <section
+      class="baby-gallery"
+      id="baby-gallery"
+      aria-label="Baby shower designs"
+    ></section>
+
+    <noscript>
+      <p>Please enable JavaScript to browse the baby shower designs.</p>
+    </noscript>
+
+    <section class="order-section" id="how-to-order">
       <div>
-        <div class="eyebrow">Baby Shower & Gender Reveal</div>
+        <p class="eyebrow">MADE PERSONAL, IN STORE</p>
+        <h2>A sweet beginning, made yours.</h2>
+      </div>
 
-        <h1>A little wonder.<br>A lot of love.</h1>
-
+      <div class="order-step">
+        <p class="step-number">01 / BROWSE</p>
+        <h3>Find your favorite</h3>
         <p>
-          Celebrate a new arrival with invitations and welcome
-          signs for baby showers, gender reveals and sprinkles.
+          Explore the designs and open your favorites
+          for a closer look.
         </p>
       </div>
 
-      <div class="count" id="count" aria-live="polite"></div>
-    </section>
-
-    <!-- Collection filters -->
-    <nav class="toolbar" aria-label="Filter baby celebration designs">
-      <button
-        class="filter active"
-        type="button"
-        data-filter="all"
-        aria-pressed="true"
-      >
-        All designs
-      </button>
-
-      <button
-        class="filter"
-        type="button"
-        data-filter="shower"
-        aria-pressed="false"
-      >
-        Baby Shower
-      </button>
-
-      <button
-        class="filter"
-        type="button"
-        data-filter="reveal"
-        aria-pressed="false"
-      >
-        Gender Reveal
-      </button>
-
-      <button
-        class="filter"
-        type="button"
-        data-filter="sprinkle"
-        aria-pressed="false"
-      >
-        Sprinkle
-      </button>
-    </nav>
-
-    <!-- Design cards are added by JavaScript -->
-    <section
-      class="grid"
-      id="baby-grid"
-      aria-label="Baby shower and gender reveal designs"
-    ></section>
-
-    <!-- Ordering information -->
-    <section class="order">
-      <div>
-        <div class="eyebrow">Made personal, in store</div>
-        <h2>A sweet beginning.<br>Your special details.</h2>
+      <div class="order-step">
+        <p class="step-number">02 / CHOOSE</p>
+        <h3>Plan your prints</h3>
+        <p>
+          Note your design number, invitation quantity
+          and poster size.
+        </p>
       </div>
 
-      <div class="steps">
-        <div class="step">
-          <b>01 / BROWSE</b>
-          <h3>Find your favorite</h3>
-          <p>
-            Choose your celebration and explore the designs.
-          </p>
-        </div>
-
-        <div class="step">
-          <b>02 / SAVE</b>
-          <h3>Note the number</h3>
-          <p>
-            Save the design number or screenshot your favorite.
-          </p>
-        </div>
-
-        <div class="step">
-          <b>03 / VISIT</b>
-          <h3>Make it yours</h3>
-          <p>
-            Ask in store about personalization, sizes and pricing.
-          </p>
-        </div>
+      <div class="order-step">
+        <p class="step-number">03 / VISIT</p>
+        <h3>Make it personal</h3>
+        <p>
+          Bring your selection, name and event details
+          to the store.
+        </p>
       </div>
     </section>
 
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <span>THE UPS STORE PRINT</span>
-    <span>Illustrative collection · Order in store</span>
+    <span>Personalized for your celebration.</span>
   </footer>
 
-  <!-- Expanded design preview -->
-  <dialog id="detail" aria-labelledby="modal-title">
-    <div class="modal-head">
-      <span class="eyebrow">A closer look</span>
-
+  <dialog
+    class="baby-dialog"
+    id="baby-detail"
+    aria-labelledby="baby-modal-title"
+  >
+    <div class="baby-modal-top">
       <button
-        class="close"
+        class="baby-close"
+        id="baby-close"
         type="button"
-        aria-label="Close design preview"
+        aria-label="Close design"
       >
         ×
       </button>
     </div>
 
-    <div class="modal-body">
-      <img id="modal-image" alt="">
+    <div class="baby-modal-layout">
+      <div class="baby-modal-photo">
+        <img id="baby-modal-image" alt="">
+      </div>
 
-      <div class="modal-info">
-        <div class="code" id="modal-code"></div>
+      <div class="baby-modal-info">
+        <p class="baby-modal-code" id="baby-modal-code"></p>
 
-        <h2 id="modal-title"></h2>
+        <h2 id="baby-modal-title"></h2>
 
-        <p id="modal-description"></p>
+        <p
+          class="baby-modal-description"
+          id="baby-modal-description"
+        ></p>
 
-        <span class="badge">
-          Invitation + matching welcome sign
-        </span>
+        <section
+          class="baby-pricing"
+          aria-label="Poster board pricing"
+        >
+          <h3>Poster board</h3>
 
-        <h3>Make it your own</h3>
+          <div
+            class="baby-sizes"
+            id="baby-sizes"
+            role="group"
+            aria-label="Choose poster board size"
+          ></div>
 
-        <ul>
-          <li>Names and celebration wording</li>
-          <li>Event date, time and location</li>
-          <li>Your RSVP details</li>
-          <li>Ask in store about sizes and pricing</li>
-        </ul>
+          <p
+            class="baby-price"
+            id="baby-price"
+            aria-live="polite"
+          ></p>
 
-        <h3 id="modal-order"></h3>
+          <p
+            class="baby-selected-size"
+            id="baby-selected-size"
+          ></p>
+        </section>
 
-        <p>
-          Show this design number to the store team
-          to discuss your order.
+        <p class="baby-personalize">
+          <strong>Make it your own</strong><br>
+          Personalized with your name, date and event details.
+          Matching 5×7 invitations are available.
         </p>
+
+        <p class="baby-prop-note">
+          Display props, including the easel, are not included.
+        </p>
+
+        <a
+          class="baby-order-link"
+          id="baby-order-link"
+          href="#how-to-order"
+        >
+          How to order
+        </a>
       </div>
     </div>
   </dialog>
 
-  <script src="script.js"></script>
+  <!-- Shared website navigation -->
+  <script src="script.js?v=9"></script>
 
+  <!-- Baby shower gallery and popup -->
   <script>
-    /*
-      Add designs to this list.
+    (() => {
+      "use strict";
 
-      Filter categories:
-      shower
-      reveal
-      sprinkle
+      /*
+       * BABY SHOWER DESIGNS
+       *
+       * Each image filename begins with the customer design code.
+       * Filenames are case-sensitive.
+       */
+      const designs = [
+        {
+          code: "BS01",
+          name: "Sage Bunny",
+          description:
+            "A sleepy bunny, a golden crescent moon and soft sage greenery.",
+          image: "images/BS01-sage-bunny.png"
+        },
+        {
+          code: "BS02",
+          name: "Vintage Teddy",
+          description:
+            "A cuddly teddy bear, blush balloons and delicate botanical details.",
+          image: "images/BS02-vintage-teddy.png"
+        },
+        {
+          code: "BS03",
+          name: "Little Clothesline",
+          description:
+            "Tiny knitted clothes, soft clouds and sweet sage and yellow accents.",
+          image: "images/BS03-little-clothesline.png"
+        },
+        {
+          code: "BS04",
+          name: "Special Delivery",
+          description:
+            "A watercolor stork, fluffy clouds and a special delivery in soft blue.",
+          image: "images/BS04-special-delivery.png"
+        },
+        {
+          code: "BS05",
+          name: "Sage Carriage",
+          description:
+            "A vintage baby carriage with sage bows, lace and delicate greenery.",
+          image: "images/BS05-sage-carriage.png"
+        },
+        {
+          code: "BS06",
+          name: "Little Lamb",
+          description:
+            "A sweet little lamb, blue ribbon bows and delicate meadow flowers.",
+          image: "images/BS06-little-lamb.png"
+        },
+        {
+          code: "BS07",
+          name: "Baby in Bloom",
+          description:
+            "Pink peonies, lavender ribbons and tiny floral baby booties.",
+          image: "images/BS07-baby-in-bloom.png"
+        },
+        {
+          code: "BS08",
+          name: "Little Swan",
+          description:
+            "A crowned swan, blush bows and soft watercolor lotus flowers.",
+          image: "images/BS08-little-swan.png"
+        }
+      ];
 
-      A design can appear in multiple filters:
-      categories: ["shower", "sprinkle"]
+      const posterSizes = [
+        { label: "16×20", price: 18.50 },
+        { label: "18×24", price: 25.50 },
+        { label: "20×24", price: 28.50 },
+        { label: "24×36", price: 46.00 }
+      ];
 
-      When finished artwork is ready, add:
-      image: "images/your-design.jpg"
-    */
+      const gallery = document.getElementById("baby-gallery");
+      const count = document.getElementById("baby-count");
 
-    const babyDesigns = [
-      {
-        name: "Little Blossom",
-        code: "BS01",
-        categories: ["shower"],
-        description:
-          "Soft blush petals and delicate greenery for a sweet welcome.",
-        background: "#eee2df",
-        paper: "#fffaf7",
-        ink: "#8b625b",
-        accent: "#c79d96",
-        theme: "floral",
-        heading: ["Oh,", "baby!"],
-        signHeading: ["Welcome", "little one"],
-        occasion: "BABY SHOWER",
-        sampleName: "HONORING EMMA"
-      },
-      {
-        name: "Little Explorer",
-        code: "BS02",
-        categories: ["shower"],
-        description:
-          "Warm ivory and sage leaves for a nature-inspired baby shower.",
-        background: "#e4e8df",
-        paper: "#fffdf4",
-        ink: "#59664d",
-        accent: "#a0ad8b",
-        theme: "leaves",
-        heading: ["A little", "adventure"],
-        signHeading: ["The adventure", "begins"],
-        occasion: "BABY SHOWER",
-        sampleName: "HONORING RACHEL"
-      },
-      {
-        name: "Written in the Stars",
-        code: "GR01",
-        categories: ["reveal"],
-        description:
-          "A moon-and-stars design in muted blue, blush and warm gold.",
-        background: "#e9e6e8",
-        paper: "#fffcf8",
-        ink: "#6f6c80",
-        accent: "#b9a474",
-        theme: "stars",
-        heading: ["Twinkle,", "twinkle"],
-        signHeading: ["A little", "surprise"],
-        occasion: "GENDER REVEAL",
-        sampleName: "WHAT WILL BABY BE?"
-      },
-      {
-        name: "A Little Sprinkle",
-        code: "SP01",
-        categories: ["sprinkle"],
-        description:
-          "A soft rainbow and gentle colors for a little sprinkle of love.",
-        background: "#eee8df",
-        paper: "#fffdf8",
-        ink: "#897461",
-        accent: "#baa58b",
-        theme: "rainbow",
-        heading: ["A little", "sprinkle"],
-        signHeading: ["Sprinkled", "with love"],
-        occasion: "BABY SPRINKLE",
-        sampleName: "HONORING OLIVIA"
-      }
-    ];
+      const dialog = document.getElementById("baby-detail");
+      const closeButton = document.getElementById("baby-close");
 
-    const grid = document.querySelector("#baby-grid");
-    const counter = document.querySelector("#count");
-    const previewDialog = document.querySelector("#detail");
+      const modalImage = document.getElementById("baby-modal-image");
+      const modalCode = document.getElementById("baby-modal-code");
+      const modalTitle = document.getElementById("baby-modal-title");
+      const modalDescription = document.getElementById(
+        "baby-modal-description"
+      );
 
-    function escapeText(value) {
-      return String(value).replace(/[&<>"']/g, character => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&apos;"
-      }[character]));
-    }
+      const sizesContainer = document.getElementById("baby-sizes");
+      const priceElement = document.getElementById("baby-price");
+      const sizeElement = document.getElementById(
+        "baby-selected-size"
+      );
 
-    // Decorative elements for the sample artwork.
-    function decoration(design) {
-      if (design.theme === "floral") {
-        return `
-          <g>
-            <path
-              d="M20 80 Q30 35 75 23"
-              fill="none"
-              stroke="#9aa48d"
-              stroke-width="1.4"
-            />
+      const savedSizes = new Map();
 
-            <ellipse
-              cx="35" cy="51" rx="6" ry="13"
-              fill="#a8b29b"
-              transform="rotate(-35 35 51)"
-            />
+      let activeDesign = null;
+      let previousFocus = null;
 
-            <ellipse
-              cx="58" cy="31" rx="6" ry="13"
-              fill="#a8b29b"
-              transform="rotate(40 58 31)"
-            />
+      const currency = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+      });
 
-            <g fill="${design.accent}" opacity="0.65">
-              <circle cx="29" cy="30" r="10"/>
-              <circle cx="43" cy="28" r="10"/>
-              <circle cx="46" cy="42" r="10"/>
-              <circle cx="31" cy="45" r="10"/>
-            </g>
-
-            <circle cx="37" cy="36" r="6" fill="#dfc398"/>
-
-            <g transform="translate(200 250) rotate(180)">
-              <path
-                d="M20 80 Q30 35 75 23"
-                fill="none"
-                stroke="#9aa48d"
-                stroke-width="1.4"
-              />
-
-              <ellipse
-                cx="35" cy="51" rx="6" ry="13"
-                fill="#a8b29b"
-                transform="rotate(-35 35 51)"
-              />
-
-              <g fill="${design.accent}" opacity="0.65">
-                <circle cx="29" cy="30" r="10"/>
-                <circle cx="43" cy="28" r="10"/>
-                <circle cx="46" cy="42" r="10"/>
-                <circle cx="31" cy="45" r="10"/>
-              </g>
-
-              <circle cx="37" cy="36" r="6" fill="#dfc398"/>
-            </g>
-          </g>
-        `;
+      function escapeHTML(value) {
+        return String(value).replace(/[&<>"']/g, character => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[character]);
       }
 
-      if (design.theme === "leaves") {
-        return `
-          <g fill="${design.accent}">
-            <path
-              d="M22 86 Q24 43 65 20"
-              fill="none"
-              stroke="${design.ink}"
-              stroke-width="1"
-            />
+      function buildGallery() {
+        gallery.innerHTML = designs.map((design, index) => `
+          <article class="baby-card">
+            <button
+              class="baby-photo-button"
+              type="button"
+              data-design-index="${index}"
+              aria-label="View ${escapeHTML(design.name)}"
+            >
+              <img
+                src="${escapeHTML(design.image)}"
+                alt="${escapeHTML(design.name)} baby shower invitation and welcome sign"
+                loading="lazy"
+                width="1536"
+                height="1024"
+              >
 
-            <ellipse
-              cx="28" cy="64" rx="7" ry="16"
-              transform="rotate(-30 28 64)"
-            />
+              <span class="baby-plus" aria-hidden="true">+</span>
+            </button>
 
-            <ellipse
-              cx="43" cy="41" rx="7" ry="16"
-              transform="rotate(35 43 41)"
-            />
+            <div class="baby-card-heading">
+              <h2>${escapeHTML(design.name)}</h2>
 
-            <path
-              d="M178 164 Q175 205 138 228"
-              fill="none"
-              stroke="${design.ink}"
-              stroke-width="1"
-            />
-
-            <ellipse
-              cx="169" cy="188" rx="7" ry="16"
-              transform="rotate(30 169 188)"
-            />
-
-            <ellipse
-              cx="151" cy="211" rx="7" ry="16"
-              transform="rotate(-35 151 211)"
-            />
-          </g>
-        `;
-      }
-
-      if (design.theme === "stars") {
-        return `
-          <g fill="${design.accent}">
-            <path d="M33 28 L36 37 L45 40 L36 43
-                     L33 52 L30 43 L21 40 L30 37 Z"/>
-
-            <path d="M163 189 L166 198 L175 201 L166 204
-                     L163 213 L160 204 L151 201 L160 198 Z"/>
-
-            <circle cx="154" cy="30" r="2"/>
-            <circle cx="46" cy="207" r="2"/>
-            <circle cx="174" cy="76" r="2"/>
-          </g>
-
-          <circle cx="100" cy="39" r="15" fill="#d8caa8"/>
-          <circle cx="107" cy="34" r="13" fill="${design.paper}"/>
-
-          <circle cx="25" cy="140" r="3" fill="#bdcbd8"/>
-          <circle cx="174" cy="137" r="3" fill="#dfc1c4"/>
-        `;
-      }
-
-      return `
-        <g fill="none" stroke-width="5">
-          <path
-            d="M74 48 A26 26 0 0 1 126 48"
-            stroke="#c6a38f"
-          />
-          <path
-            d="M82 48 A18 18 0 0 1 118 48"
-            stroke="#c4b79a"
-          />
-          <path
-            d="M90 48 A10 10 0 0 1 110 48"
-            stroke="#a6b3a3"
-          />
-        </g>
-
-        <g fill="#c6b8a4">
-          <circle cx="35" cy="185" r="2"/>
-          <circle cx="43" cy="202" r="2"/>
-          <circle cx="165" cy="180" r="2"/>
-          <circle cx="156" cy="203" r="2"/>
-        </g>
-      `;
-    }
-
-    function stationery(design, isSign) {
-      const heading = isSign
-        ? design.signHeading
-        : design.heading;
-
-      const fontSize = isSign ? 22 : 27;
-
-      return `
-        <rect width="200" height="250"
-              fill="${design.paper}"/>
-
-        <rect
-          x="10" y="10" width="180" height="230"
-          fill="none"
-          stroke="${design.accent}"
-          stroke-width="0.7"
-          opacity="0.6"
-        />
-
-        ${decoration(design)}
-
-        <g fill="${design.ink}" text-anchor="middle">
-
-          <text
-            x="100" y="78"
-            font-family="Arial, sans-serif"
-            font-size="6.5"
-            letter-spacing="1.3"
-          >
-            ${escapeText(design.occasion)}
-          </text>
-
-          <text
-            x="100" y="116"
-            font-family="Georgia, serif"
-            font-style="italic"
-            font-size="${fontSize}"
-          >
-            ${escapeText(heading[0])}
-          </text>
-
-          <text
-            x="100" y="147"
-            font-family="Georgia, serif"
-            font-style="italic"
-            font-size="${fontSize}"
-          >
-            ${escapeText(heading[1])}
-          </text>
-
-          <text
-            x="100" y="179"
-            font-family="Arial, sans-serif"
-            font-size="6.5"
-            letter-spacing="0.8"
-          >
-            ${escapeText(design.sampleName)}
-          </text>
-
-          <line
-            x1="79" y1="194" x2="121" y2="194"
-            stroke="${design.accent}"
-          />
-
-          <text
-            x="100" y="213"
-            font-family="Arial, sans-serif"
-            font-size="5.5"
-            letter-spacing="0.9"
-          >
-            A LITTLE WONDER, A LOT OF LOVE
-          </text>
-
-        </g>
-      `;
-    }
-
-    function makePreview(design) {
-      if (design.image) return design.image;
-
-      const svg = `
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="900"
-          height="620"
-          viewBox="0 0 900 620"
-        >
-          <rect
-            width="900"
-            height="620"
-            fill="${design.background}"
-          />
-
-          <ellipse
-            cx="450" cy="548" rx="330" ry="22"
-            fill="#000000"
-            opacity="0.05"
-          />
-
-          <!-- Welcome sign easel -->
-          <path
-            d="M568 130 L485 560 M568 130 L681 560"
-            fill="none"
-            stroke="${design.accent}"
-            stroke-width="8"
-            stroke-linecap="round"
-          />
-
-          <!-- Welcome sign shadow -->
-          <rect
-            x="403" y="77" width="310" height="388"
-            fill="#000000"
-            opacity="0.07"
-          />
-
-          <!-- Welcome sign -->
-          <g transform="translate(395 68) scale(1.55)">
-            ${stationery(design, true)}
-          </g>
-
-          <!-- Matching invitation -->
-          <g transform="translate(157 225) rotate(-6 100 125)">
-            <rect
-              x="8" y="10" width="200" height="250"
-              fill="#000000"
-              opacity="0.08"
-            />
-
-            ${stationery(design, false)}
-          </g>
-        </svg>
-      `;
-
-      return "data:image/svg+xml;charset=utf-8," +
-        encodeURIComponent(svg);
-    }
-
-    // Create the design cards.
-    babyDesigns.forEach((design, index) => {
-      design.preview = makePreview(design);
-
-      const card = document.createElement("article");
-      card.className = "card";
-      card.dataset.categories = design.categories.join(" ");
-
-      card.innerHTML = `
-        <button
-          class="image-button"
-          type="button"
-          data-design-index="${index}"
-          aria-label="View ${design.name}, design ${design.code}"
-        >
-          <img
-            src="${design.preview}"
-            alt="${design.name} sample invitation and matching welcome sign"
-            ${index > 1 ? 'loading="lazy"' : ""}
-          >
-
-          <span class="zoom" aria-hidden="true">+</span>
-        </button>
-
-        <div class="details">
-          <div>
-            <h2>${design.name}</h2>
-
-            <div class="code">
-              Design ${design.code} · Invitation & welcome sign
+              <button
+                class="baby-view"
+                type="button"
+                data-design-index="${index}"
+                aria-label="View ${escapeHTML(design.name)} details"
+              >
+                View design ↗
+              </button>
             </div>
 
-            <p class="description">
-              ${design.description}
+            <p class="baby-code">
+              Design ${escapeHTML(design.code)}
+              · Invitation &amp; welcome sign
             </p>
-          </div>
 
+            <p class="baby-description">
+              ${escapeHTML(design.description)}
+            </p>
+          </article>
+        `).join("");
+
+        count.textContent =
+          `${String(designs.length).padStart(2, "0")} coordinated designs`;
+      }
+
+      function selectSize(index) {
+        const size = posterSizes[index];
+
+        if (!activeDesign || !size) {
+          return;
+        }
+
+        savedSizes.set(activeDesign.code, index);
+
+        sizesContainer.querySelectorAll("button").forEach(button => {
+          button.setAttribute(
+            "aria-pressed",
+            String(Number(button.dataset.sizeIndex) === index)
+          );
+        });
+
+        priceElement.textContent = currency.format(size.price);
+        sizeElement.textContent = `${size.label} inch poster board`;
+      }
+
+      function openDesign(index, trigger) {
+        const design = designs[index];
+
+        if (!design) {
+          return;
+        }
+
+        activeDesign = design;
+        previousFocus = trigger;
+
+        modalImage.src = design.image;
+        modalImage.alt =
+          `${design.name} baby shower invitation and welcome sign`;
+
+        modalCode.textContent = `DESIGN ${design.code}`;
+        modalTitle.textContent = design.name;
+        modalDescription.textContent = design.description;
+
+        sizesContainer.innerHTML = posterSizes.map((size, index) => `
           <button
-            class="view"
+            class="baby-size"
             type="button"
-            data-design-index="${index}"
-            aria-label="View ${design.name} details"
+            data-size-index="${index}"
+            aria-pressed="false"
           >
-            View design ↗
+            ${size.label}
           </button>
-        </div>
-      `;
+        `).join("");
 
-      grid.appendChild(card);
-    });
+        selectSize(savedSizes.get(design.code) ?? 0);
 
-    function updateCount(number) {
-      counter.textContent =
-        String(number).padStart(2, "0") +
-        " coordinated design" +
-        (number === 1 ? "" : "s");
-    }
+        dialog.showModal();
+        document.body.classList.add("baby-modal-open");
+        closeButton.focus();
+      }
 
-    updateCount(babyDesigns.length);
+      function closeDesign() {
+        dialog.close();
+      }
 
-    // Filter the designs.
-    const filters = document.querySelectorAll("[data-filter]");
+      gallery.addEventListener("click", event => {
+        const trigger = event.target.closest("[data-design-index]");
 
-    filters.forEach(button => {
-      button.addEventListener("click", () => {
-        const category = button.dataset.filter;
-        let visibleCount = 0;
+        if (!trigger) {
+          return;
+        }
 
-        filters.forEach(filter => {
-          const selected = filter === button;
-
-          filter.classList.toggle("active", selected);
-          filter.setAttribute("aria-pressed", String(selected));
-        });
-
-        grid.querySelectorAll(".card").forEach(card => {
-          const categories = card.dataset.categories.split(" ");
-
-          const matches =
-            category === "all" ||
-            categories.includes(category);
-
-          card.hidden = !matches;
-
-          if (matches) visibleCount++;
-        });
-
-        updateCount(visibleCount);
+        openDesign(Number(trigger.dataset.designIndex), trigger);
       });
-    });
 
-    // Open a larger preview.
-    grid.addEventListener("click", event => {
-      const button = event.target.closest("[data-design-index]");
+      sizesContainer.addEventListener("click", event => {
+        const button = event.target.closest("[data-size-index]");
 
-      if (!button) return;
+        if (!button) {
+          return;
+        }
 
-      const design = babyDesigns[button.dataset.designIndex];
+        selectSize(Number(button.dataset.sizeIndex));
+      });
 
-      document.querySelector("#modal-title").textContent =
-        design.name;
+      closeButton.addEventListener("click", closeDesign);
 
-      document.querySelector("#modal-code").textContent =
-        "DESIGN " + design.code;
+      document.getElementById("baby-order-link")
+        .addEventListener("click", closeDesign);
 
-      document.querySelector("#modal-description").textContent =
-        design.description;
+      dialog.addEventListener("click", event => {
+        if (event.target !== dialog) {
+          return;
+        }
 
-      document.querySelector("#modal-order").textContent =
-        "Ask for " + design.code + " in store";
+        const bounds = dialog.getBoundingClientRect();
 
-      const image = document.querySelector("#modal-image");
+        const clickedOutside =
+          event.clientX < bounds.left ||
+          event.clientX > bounds.right ||
+          event.clientY < bounds.top ||
+          event.clientY > bounds.bottom;
 
-      image.src = design.preview;
-      image.alt =
-        design.name + " invitation and matching welcome sign";
+        if (clickedOutside) {
+          closeDesign();
+        }
+      });
 
-      previewDialog.showModal();
-    });
+      dialog.addEventListener("close", () => {
+        document.body.classList.remove("baby-modal-open");
 
-    // Close the preview.
-    previewDialog.querySelector(".close").addEventListener(
-      "click",
-      () => previewDialog.close()
-    );
+        if (previousFocus) {
+          previousFocus.focus();
+        }
+      });
 
-    previewDialog.addEventListener("click", event => {
-      if (event.target !== previewDialog) return;
-
-      const bounds = previewDialog.getBoundingClientRect();
-
-      const clickedOutside =
-        event.clientX < bounds.left ||
-        event.clientX > bounds.right ||
-        event.clientY < bounds.top ||
-        event.clientY > bounds.bottom;
-
-      if (clickedOutside) previewDialog.close();
-    });
+      buildGallery();
+    })();
   </script>
 
-  <script src="script.js?v=6"></script>
 </body>
 </html>
